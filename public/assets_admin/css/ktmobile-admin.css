@@ -1,0 +1,97 @@
+/*header title*/
+.breadcrumb {
+    background-color: transparent;
+    font-size: 15px;
+    font-weight: 700
+  }
+/*icon KTMobile*/
+.sidebar-light .sidebar-brand {
+    color: #fafafa;
+    background-color: #4c60da
+}
+
+.sidebar-light hr.sidebar-divider {
+    border-top: 2px solid #d4d4d4;
+}
+
+/*heading in sidebar*/
+.sidebar-light .sidebar-heading {
+    color: #4c60da
+}
+
+/*color text sidebar*/
+.sidebar-light .nav-item .nav-link {
+    color: #474747;
+}
+
+/*color icon & icon size in sidebar*/
+.sidebar-light .nav-item .nav-link i {
+    color: #474747;
+    font-size: 17px;
+
+}
+
+/*hover button sidebar*/
+.sidebar-light .nav-item .nav-link:active,
+.sidebar-light .nav-item .nav-link:focus,
+.sidebar-light .nav-item .nav-link:hover {
+    color: #ffffff;
+    background-color: #6eb7ff;
+    font-weight: bold;
+}
+
+/*color icon button sidebar*/
+.sidebar-light .nav-item .nav-link:active i,
+.sidebar-light .nav-item .nav-link:focus i,
+.sidebar-light .nav-item .nav-link:hover i {
+    color: #0400ff;
+
+}
+ /*color arrow button sidebar*/
+.sidebar-light .nav-item .nav-link[data-toggle=collapse]::after {
+    color: #6b6b6b
+}
+
+/*custom color active button sidebar*/
+.sidebar-light .nav-item.active .nav-link {
+    color: white;
+    background-color: #6eb7ff;
+}
+
+/*custom color active icon sidebar*/
+.sidebar-light .nav-item.active .nav-link i {
+    color: #0400ff;
+}
+
+.sidebar-light #sidebarToggle {
+    background-color: #f4f0ea
+}
+
+.sidebar-light #sidebarToggle::after {
+    color: #ccbeb7
+}
+
+.sidebar-light #sidebarToggle:hover {
+    background-color: #ebe4dd
+}
+
+
+.sidebar .nav-item .collapse .collapse-inner .collapse-item:hover,
+.sidebar .nav-item .collapsing .collapse-inner .collapse-item:hover {
+    background-color: #6eb7ff;
+    color: white;
+    font-weight: bold;
+    transition: all .05s ease-in-out;
+    -webkit-transition: all .05s ease-in-out
+}
+
+.sidebar .nav-item .collapse .collapse-inner .collapse-item:active,
+.sidebar .nav-item .collapsing .collapse-inner .collapse-item:active {
+    background-color: #ebddde
+}
+
+.sidebar .nav-item .collapse .collapse-inner .collapse-item.active,
+.sidebar .nav-item .collapsing .collapse-inner .collapse-item.active {
+    color: #3a3b45;
+    font-weight: 800
+}
