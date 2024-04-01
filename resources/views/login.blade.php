@@ -35,6 +35,7 @@
                                             <h1 class="h4 text-gray-900 mb-4">ĐĂNG NHẬP</h1>
                                         </div>
                                         <div class="form-group">
+                                            <label>E-mail</label><br>
                                             <input type="email" name="email" class="form-control"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="Nhập e-mail...">
@@ -46,6 +47,7 @@
                                         </div>
 
                                         <div class="form-group">
+                                            <label>Mật khẩu</label><br>
                                             <input type="password" name="password" class="form-control"
                                                 id="exampleInputPassword" placeholder="Nhập mật khẩu...">
                                             <div style="color: red">
@@ -92,7 +94,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Login Content -->
     <script src="../assets_admin/vendor/jquery/jquery.min.js"></script>
     <script src="../assets_admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>

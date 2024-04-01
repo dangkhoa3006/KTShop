@@ -20,7 +20,7 @@
     <div id="wrapper">
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('dashboard')}}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('dashboard.index')}}">
                 <div class="sidebar-brand-icon">
                     <img src="../assets_admin/img/logo/smartphone.png" style="filter: invert(100%); width: 40px">
                 </div>
@@ -28,7 +28,7 @@
             </a>
             {{-- Trang Dashboard --}}
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('dashboard') }}">
+                <a class="nav-link" href="{{ route('dashboard.index') }}">
                 {{-- <a class="nav-link" href="#"> --}}
 
                     <i class="fas fa-fw fa-tachometer-alt"></i>
@@ -264,7 +264,7 @@
                         <ol class="breadcrumb">
                             @section('header-route')
 
-                                <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Home</a></li>
+                                <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Home</a></li>
                                 {{-- <li class="breadcrumb-item"><a href="#">Home</a></li> --}}
 
                                 {{-- <li class="breadcrumb-item active" aria-current="page">Báo cáo thống kê</li> --}}

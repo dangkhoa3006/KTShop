@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,20 +14,22 @@ use App\Http\Controllers\LoginController;
 | be assigned to the "web" middleware group. Make something great!
 |
  */
-Route::middleware("auth")->group(function () {
+Route::middleware(["auth", "preventbackbutton"])->group(function () {
     Route::post("logout", [LoginController::class, "logout"])->name("logout");
 
     Route::prefix("admin")->group(function () {
-        Route::get("dashboard", function () {
-            return view("admin.dashboard");
-        })->name("dashboard");
+        // Route::get("dashboard", function () {
+        //     return view("admin.dashboard");
+        // })->name("dashboard");
+        Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard.index");
     });
 });
 
 // Route::get('/', function () {
 //     return view('admin.app');
 // });
-
 //user khong can dang nhap
-Route::get("/login", [LoginController::class, "showForm"])->name("login");
-Route::post("/login", [LoginController::class, "authenticate"])->name("login");
+Route::middleware("guest", "preventbackbutton")->group(function () {
+    Route::get("login", [LoginController::class, "showForm"])->name("login");
+    Route::post("login", [LoginController::class, "authenticate"])->name("login");
+});
