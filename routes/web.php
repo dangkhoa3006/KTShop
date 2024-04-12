@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,7 +23,10 @@ Route::middleware(["auth", "preventbackbutton"])->group(function () {
         //     return view("admin.dashboard");
         // })->name("dashboard");
         Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard.index");
+        Route::resource('/accounts', UserController::class);
+
     });
+
 });
 
 // Route::get('/', function () {

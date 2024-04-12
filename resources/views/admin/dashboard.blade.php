@@ -3,6 +3,7 @@
 @section('header-route')
     @parent <li class="breadcrumb-item active" aria-current="page">Báo cáo thống kê</li>
 @endsection
+@section('dashboard-active','active')
 @section('content-pages')
     <div class="row mb-3">
         <!-- Earnings (Monthly) Card Example -->

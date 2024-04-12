@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="../assets_admin/img/logo/icon_dashboard.png" rel="icon">
+    <link href="../../assets_admin/img/logo/icon_dashboard.png" rel="icon">
     <title>@yield('title')</title>
-    <link href="../assets_admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="../assets_admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="../assets_admin/css/ruang-admin.css" rel="stylesheet">
-    <link href="../assets_admin/css/ktmobile-admin.css" rel="stylesheet">
+    <link href="../../assets_admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../../assets_admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../../assets_admin/css/ruang-admin.css" rel="stylesheet">
+    <link href="../../assets_admin/css/ktmobile-admin.css" rel="stylesheet">
+    <link href="../../assets_admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>
 
@@ -22,12 +23,12 @@
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('dashboard.index')}}">
                 <div class="sidebar-brand-icon">
-                    <img src="../assets_admin/img/logo/smartphone.png" style="filter: invert(100%); width: 40px">
+                    <img src="../../assets_admin/img/logo/smartphone.png" style="filter: invert(100%); width: 40px">
                 </div>
                 <div class="sidebar-brand-text mx-1" style="font-size: 25px">KTMobile</div>
             </a>
             {{-- Trang Dashboard --}}
-            <li class="nav-item active">
+            <li class="nav-item @yield('dashboard-active')">
                 <a class="nav-link" href="{{ route('dashboard.index') }}">
                 {{-- <a class="nav-link" href="#"> --}}
 
@@ -67,8 +68,8 @@
             <div class="sidebar-heading">
                 Tài khoản
             </div>
-            <li class="nav-item">
-                <a class="nav-link" href="ui-colors.html">
+            <li class="nav-item @yield('account-active')">
+                <a class="nav-link" href="{{route('accounts.index')}}">
                     <i class="fas fa-fw fa-palette"></i>
                     <span>Quản lý tài khoản</span>
                 </a>
@@ -227,7 +228,7 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img class="img-profile rounded-circle" src="../assets_admin/img/boy.png"
+                                    <img class="img-profile rounded-circle" src="../../assets_admin/img/boy.png"
                                         style="max-width: 60px">
                                     <span class="ml-2 d-none d-lg-inline text-white small">{{ Auth::user()->name }}</span>
                                 </a>
@@ -250,17 +251,12 @@
                                 </div>
                             </li>
                         @endauth
-                       
-                           
-
                     </ul>
                 </nav>
-                <!-- Topbar -->
-
                 <!-- Container Fluid-->
                 <!-- content -->
                 <div class="container-fluid" id="container-wrapper">
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <div class="d-sm-flex align-items-center justify-content-between">
                         <ol class="breadcrumb">
                             @section('header-route')
 
@@ -333,12 +329,23 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <script src="../assets_admin/vendor/jquery/jquery.min.js"></script>
-    <script src="../assets_admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets_admin/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="../assets_admin/js/ruang-admin.min.js"></script>
-    <script src="../assets_admin/vendor/chart.js/Chart.min.js"></script>
-    <script src="../assets_admin/js/demo/chart-area-demo.js"></script>
+    <script src="../../assets_admin/vendor/jquery/jquery.min.js"></script>
+    <script src="../../assets_admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../assets_admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../../assets_admin/js/ruang-admin.min.js"></script>
+    <script src="../../assets_admin/vendor/chart.js/Chart.min.js"></script>
+    <script src="../../assets_admin/js/demo/chart-area-demo.js"></script>
+    <!-- Page level plugins -->
+    <script src="../../assets_admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../assets_admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+  
+    <!-- Page level custom scripts -->
+    <script>
+      $(document).ready(function () {
+        $('#dataTable').DataTable(); // ID From dataTable 
+        $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+      });
+    </script>
 </body>
 
 </html>
