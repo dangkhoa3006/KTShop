@@ -7,30 +7,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="../../assets_admin/img/logo/icon_dashboard.png" rel="icon">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link href="../../../assets_admin/img/logo/icon_dashboard.png" rel="icon">
     <title>@yield('title')</title>
-    <link href="../../assets_admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="../../assets_admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    <link href="../../assets_admin/css/ruang-admin.css" rel="stylesheet">
-    <link href="../../assets_admin/css/ktmobile-admin.css" rel="stylesheet">
-    <link href="../../assets_admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="../../../assets_admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets_admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../../../assets_admin/css/ruang-admin.css" rel="stylesheet">
+    <link href="../../../assets_admin/css/ktmobile-admin.css" rel="stylesheet">
+    <link href="../../../assets_admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+    <!-- Select2 -->
+    <link href="../../../assets_admin/vendor/select2/dist/css/select2.min.css" rel="stylesheet" type="text/css">
+    <!-- Bootstrap DatePicker -->
+    <link href="../../../assets_admin/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet">
+    <!-- Bootstrap Touchspin -->
+    <link href="../../../assets_admin/vendor/bootstrap-touchspin/css/jquery.bootstrap-touchspin.css" rel="stylesheet">
+    <!-- ClockPicker -->
+    <link href="../../../assets_admin/vendor/clock-picker/clockpicker.css" rel="stylesheet">
+    
 </head>
 
 <body id="page-top">
     <div id="wrapper">
         <!-- Sidebar -->
         <ul class="navbar-nav sidebar sidebar-light accordion" id="accordionSidebar">
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{route('dashboard.index')}}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center"
+                href="{{ route('dashboard.index') }}">
                 <div class="sidebar-brand-icon">
-                    <img src="../../assets_admin/img/logo/smartphone.png" style="filter: invert(100%); width: 40px">
+                    <img src="../../../assets_admin/img/logo/smartphone.png" style="filter: invert(100%); width: 40px">
                 </div>
                 <div class="sidebar-brand-text mx-1" style="font-size: 25px">KTMobile</div>
             </a>
             {{-- Trang Dashboard --}}
             <li class="nav-item @yield('dashboard-active')">
                 <a class="nav-link" href="{{ route('dashboard.index') }}">
-                {{-- <a class="nav-link" href="#"> --}}
+                    {{-- <a class="nav-link" href="#"> --}}
 
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Báo cáo thống kê</span></a>
@@ -53,6 +64,34 @@
                 </a>
             </li>
             <hr class="sidebar-divider">
+            {{-- Trang nhà cung cấp --}}
+            <div class="sidebar-heading">
+                Nhà cung cấp
+            </div>
+            <li class="nav-item">
+                <a class="nav-link" href="ui-colors.html">
+                    <i class="fas fa-fw fa-palette"></i>
+                    <span>Quản lý nhà cung cấp</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider">
+            {{-- Trang nhà cung cấp --}}
+            <div class="sidebar-heading">
+                Slider, banner, logo
+            </div>
+            <li class="nav-item">
+                <a class="nav-link" href="ui-colors.html">
+                    <i class="fas fa-fw fa-palette"></i>
+                    <span>Quản lý slider</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="ui-colors.html">
+                    <i class="fas fa-fw fa-palette"></i>
+                    <span>Quản lý logo</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider">
             {{-- Trang hóa đơn --}}
             <div class="sidebar-heading">
                 Hóa đơn
@@ -69,15 +108,37 @@
                 Tài khoản
             </div>
             <li class="nav-item @yield('account-active')">
-                <a class="nav-link" href="{{route('accounts.index')}}">
+                <a class="nav-link" href="{{ route('accounts.index') }}">
                     <i class="fas fa-fw fa-palette"></i>
                     <span>Quản lý tài khoản</span>
                 </a>
             </li>
+            <li class="nav-item @yield('member-active')">
+                <a class="nav-link" href="{{ route('members.index') }}">
+                    <i class="fas fa-fw fa-palette"></i>
+                    <span>Quản lý thành viên</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider">
+            {{-- Bài viết --}}
+            <div class="sidebar-heading">
+                Bài viết sản phẩm
+            </div>
             <li class="nav-item">
                 <a class="nav-link" href="ui-colors.html">
                     <i class="fas fa-fw fa-palette"></i>
-                    <span>Quản lý khách hàng</span>
+                    <span>Quản lý bài viết</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider">
+            {{-- Tin tức --}}
+            <div class="sidebar-heading">
+                Tin tức
+            </div>
+            <li class="nav-item">
+                <a class="nav-link" href="ui-colors.html">
+                    <i class="fas fa-fw fa-palette"></i>
+                    <span>Quản lý tin tức</span>
                 </a>
             </li>
             <hr class="sidebar-divider">
@@ -105,7 +166,7 @@
         </ul>
         <!-- Sidebar -->
         <div id="content-wrapper" class="d-flex flex-column">
-            <div id="content">
+            <div id="content" style="background-color: 	#F0F0F0">
                 <!-- TopBar -->
                 <nav class="navbar navbar-expand navbar-light bg-navbar topbar mb-4 static-top">
                     <button id="sidebarToggleTop" class="btn btn-link rounded-circle mr-3">
@@ -228,7 +289,7 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img class="img-profile rounded-circle" src="../../assets_admin/img/boy.png"
+                                    <img class="img-profile rounded-circle" src="../../../assets_admin/img/boy.png"
                                         style="max-width: 60px">
                                     <span class="ml-2 d-none d-lg-inline text-white small">{{ Auth::user()->name }}</span>
                                 </a>
@@ -270,6 +331,7 @@
                     </div>
                     <!--content page-->
                     <div class="container-pages">
+
                         @yield('content-pages')
                     </div>
 
@@ -329,22 +391,106 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <script src="../../assets_admin/vendor/jquery/jquery.min.js"></script>
-    <script src="../../assets_admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="../../assets_admin/vendor/jquery-easing/jquery.easing.min.js"></script>
-    <script src="../../assets_admin/js/ruang-admin.min.js"></script>
-    <script src="../../assets_admin/vendor/chart.js/Chart.min.js"></script>
-    <script src="../../assets_admin/js/demo/chart-area-demo.js"></script>
+    <script src="../../../assets_admin/vendor/jquery/jquery.js"></script>
+    <script src="../../../assets_admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../../../assets_admin/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../../../assets_admin/js/ruang-admin.js"></script>
+    <script src="../../../assets_admin/vendor/chart.js/Chart.min.js"></script>
+    <script src="../../../assets_admin/js/demo/chart-area-demo.js"></script>
     <!-- Page level plugins -->
-    <script src="../../assets_admin/vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="../../assets_admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-  
+    <script src="../../../assets_admin/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../../../assets_admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+
+
+
+    <!-- Select2 -->
+    <script src="../../../assets_admin/vendor/select2/dist/js/select2.min.js"></script>
+    <!-- Bootstrap Datepicker -->
+    <script src="../../../assets_admin/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+    <!-- Bootstrap Touchspin -->
+    <script src="../../../assets_admin/vendor/bootstrap-touchspin/js/jquery.bootstrap-touchspin.js"></script>
+    <!-- ClockPicker -->
+    <script src="../../../assets_admin/vendor/clock-picker/clockpicker.js"></script>
+
     <!-- Page level custom scripts -->
     <script>
-      $(document).ready(function () {
-        $('#dataTable').DataTable(); // ID From dataTable 
-        $('#dataTableHover').DataTable(); // ID From dataTable with Hover
-      });
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).ready(function() {
+            $('#dataTable').DataTable(); // ID From dataTable 
+            $('#dataTableHover').DataTable(); // ID From dataTable with Hover
+            //choose datetime of staff
+            $('#simple-date3 .input-group.date').datepicker({
+                startView: 2,
+                format: 'dd/mm/yyyy',
+                autoclose: true,
+                todayHighlight: true,
+                todayBtn: 'linked',
+            });
+            //select districts from provinces
+            $("#selectProvinces").change(function() {
+                var province_id = $(this).val();
+                if (province_id == "") {
+                    var province_id = 0;
+                }
+                $.ajax({
+                    url: '{{ url('/admin/fetch-districts/') }}/' + province_id,
+                    type: 'post',
+                    dataType: "json",
+                    success: function(response) {
+                        //console.log(response['districts'].length);
+
+                        //console.log(response['districts'].length);
+                        $('#selectDistricts').find('option:not(:first)').remove();
+                        $('#selectWards').find('option:not(:first)').remove();
+
+                        if (response['districts'].length > 0) {
+                            $.each(response['districts'], function(key, value) {
+                                $("#selectDistricts").append("<option value='" + value[
+                                    'id'] + "'>" + value['name'] + "</option>");
+                            });
+                        }
+                    }
+                });
+            });
+
+            $("#selectDistricts").change(function() {
+                var district_id = $(this).val();
+                if (district_id == "") {
+                    var district_id = 0;
+                }
+                $.ajax({
+                    url: '{{ url('/admin/fetch-wards/') }}/' + district_id,
+                    type: 'post',
+                    dataType: "json",
+                    success: function(response) {
+                        //console.log(response['districts'].length);
+
+                        //console.log(response['districts'].length);
+                        $('#selectWards').find('option:not(:first)').remove();
+                        if (response['wards'].length > 0) {
+                            $.each(response['wards'], function(key, value) {
+                                $("#selectWards").append("<option value='" + value[
+                                    'id'] + "'>" + value['name'] + "</option>");
+                            });
+                        }
+                    }
+                });
+            });
+            //set thời gian thông báo
+            setTimeout(function() {
+                $("#success-alert").alert('close'); // Đóng alert sau 2 giây
+            }, 2000);
+            setTimeout(function() {
+                $("#stop-alert").alert('close'); // Đóng alert sau 2 giây
+            }, 2000);
+
+        });
     </script>
 </body>
 

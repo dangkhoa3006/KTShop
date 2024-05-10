@@ -80,6 +80,11 @@ $('.popover-dismiss').popover({
 
 // Version in Sidebar
 
-var version = document.getElementById('version-ruangadmin');
-
-version.innerHTML = "Version 1.1";
+document.addEventListener('DOMContentLoaded', function() {
+  var version = document.getElementById('version');
+  if (version) {
+      version.innerHTML = "Version 1.1";
+  } else {
+      console.error("Element with id 'version' not found in the DOM.");
+  }
+});

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="../assets_admin/img/logo/icon_dashboard.png" rel="icon">
-    <title>Login</title>
+    <title>ĐĂNG NHẬP - KTMOBILE SHOP</title>
     <link href="../assets_admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="../assets_admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     {{-- <link href="css/ruang-admin.min.css" rel="stylesheet"> --}}
@@ -19,15 +19,36 @@
 </head>
 
 <body class="bg-gradient-login">
+
     <!-- Login Content -->
+
     <div class="container-login">
         <div class="row justify-content-center">
             <div class="col-xl-6 col-lg-12 col-md-9">
                 <div class="card shadow-sm my-5">
+                    @if (session('success'))
+                        <div id="success-alert" class="alert alert-success alert-dismissible" role="alert"
+                            style="position: fixed; top: 80px; left: 63%; width: 35%;">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h6><i class="fas fa-check"></i><b> Thành công!</b></h6>
+                            {{ session('success') }}
+                        </div>
+                    @endif
+                    @if (session('error'))
+                        <div id="stop-alert" class="alert alert-danger alert-dismissible" role="alert"
+                            style="position: fixed; top: 80px; left: 63%; width: 35%;">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h6><i class="fas fa-ban"></i><b> Không thành công!</b></h6>
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     <div class="card-body p-0">
                         <div class="row">
                             <div class="col-lg-12">
-
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
                                     <div class="login-form">
@@ -65,22 +86,21 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        {{-- <input type="submit"> --}}
-
                                         <div class="form-group">
-                                            {{-- <a href="{{ route('dashboard') }}" >ĐĂNG NHẬP</a> --}}
                                             <button type="submit" class="btn btn-primary btn-block">ĐĂNG NHẬP</button>
                                         </div>
                                         <hr>
                                         <a href="index.html" class="btn btn-google btn-block">
-                                            <i class="fab fa-google fa-fw"></i> Đăng nhập bằng Google
+                                            <img src="../image/icon_google.png" alt="Login Google"
+                                                style="height: 20px; margin-right: 8px;"> Đăng nhập bằng Google
                                         </a>
                                         <a href="index.html" class="btn btn-facebook btn-block">
                                             <i class="fab fa-facebook-f fa-fw"></i> Đăng nhập bằng Facebook
                                         </a>
                                         <hr>
                                         <div class="text-center">
-                                            <a class="font-weight-bold small" href="register.html">Tạo tài khoản</a>
+                                            <a class="font-weight-bold medium" href="{{ route('register') }}">Tạo tài
+                                                khoản</a>
                                         </div>
                                         <div class="text-center">
                                         </div>
@@ -100,6 +120,17 @@
     <script src="../assets_admin/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="../assets_admin/vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="../assets_admin/js/ruang-admin.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            //set thời gian thông báo
+            setTimeout(function() {
+                $("#success-alert").alert('close'); // Đóng alert sau 2 giây
+            }, 2000);
+            setTimeout(function() {
+                $("#stop-alert").alert('close'); // Đóng alert sau 2 giây
+            }, 2000);
+        })
+    </script>
 </body>
 
 </html>

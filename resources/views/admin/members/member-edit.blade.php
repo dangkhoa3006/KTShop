@@ -2,13 +2,13 @@
     use Carbon\Carbon;
 @endphp
 @extends('admin.app')
-@section('title', 'Admin - Cập nhật tài khoản')
+@section('title', 'Admin - Thông tin thành viên')
 @section('header-route')
     @parent
-    <li class="breadcrumb-item"><a href="{{ route('accounts.index') }}">Quản lý tài khoản</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Cập nhật tài khoản</li>
+    <li class="breadcrumb-item"><a href="{{ route('members.index') }}">Quản lý thành viên</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Thông tin thành viên</li>
 @endsection
-@section('account-active', 'active')
+@section('member-active', 'active')
 @section('content-pages')
     <h5 class="h4 mb-2 text-gray-800">Cập nhật tài khoản</h5>
     <div class="row">
@@ -18,7 +18,7 @@
                     <h6 class="m-0 font-weight-bold text-primary">Nhập thông tin tài khoản</h6>
                 </div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('accounts.update', ['account' => $acc]) }}"
+                    <form method="POST" action="{{ route('members.update', ['member' => $member]) }}"
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
@@ -27,7 +27,7 @@
                             <div class="frame">
                                 <div class="center">
                                     <div class=" dropzone">
-                                        <img id="preview" src="{{ $acc->avatar }}" class="upload-icon" />
+                                        <img id="preview" src="{{ $member->user->avatar }}" class="upload-icon" />
                                         <input type="file" accept="image/*" name="avatar" id="avatar"
                                             class="upload-input" onchange="previewImage()" />
 
@@ -46,7 +46,7 @@
                             <label for="name" class="col-sm-2 col-form-label">Họ tên</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="name" name="name"
-                                    value="{{ old('name', $acc->name) }}" placeholder="Họ tên...">
+                                    value="{{ old('name', $member->user->name) }}" placeholder="Họ tên...">
                                 <div style="color: red">
                                     @if ($errors->has('name'))
                                         {{ $errors->first('name') }}<br>
@@ -62,14 +62,14 @@
                                 <div class="custom-control custom-radio">
                                     <input type="radio" id="customRadio1" name="gender" value="male"
                                         class="custom-control-input"
-                                        {{ old('gender', $acc->gender) == 'male' ? 'checked' : '' }}>
+                                        {{ old('gender', $member->user->gender) == 'male' ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="customRadio1">Nam</label>
                                 </div>
                                 <span style="margin-right: 10px;"></span>
                                 <div class="custom-control custom-radio">
                                     <input type="radio" id="customRadio2" name="gender" value="female"
                                         class="custom-control-input"
-                                        {{ old('gender', $acc->gender) == 'female' ? 'checked' : '' }}>
+                                        {{ old('gender', $member->user->gender) == 'female' ? 'checked' : '' }}>
                                     <label class="custom-control-label" for="customRadio2">Nữ</label><br>
                                 </div>
                                 <div style="color: red; margin-left: 20px;">
@@ -88,7 +88,7 @@
                                     <span class="input-group-text"><i class="fas fa-calendar"></i></span>
                                 </div>
                                 <input type="text" class="form-control"
-                                    value="{{ old('birthday', Carbon::parse($acc->birthday)->format('d/m/Y')) }}"
+                                    value="{{ old('birthday', Carbon::parse($member->user->birthday)->format('d/m/Y')) }}"
                                     id="decadeView" name="birthday">
                                 <br>
 
@@ -103,7 +103,7 @@
                             <label for="phone" class="col-sm-2 col-form-label">Số điện thoại</label>
                             <div class="col-sm-8">
                                 <input type="tel" class="form-control" name="phone" id="phone"
-                                    value="{{ old('phone', $acc->phone) }}">
+                                    value="{{ old('phone', $member->user->phone) }}">
                                 <div style="color: red;">
                                     @if ($errors->has('phone'))
                                         {{ $errors->first('phone') }}<br>
@@ -120,7 +120,7 @@
                                     @if (!@empty($provinces))
                                         @foreach ($provinces as $province)
                                             <option value="{{ $province->id }}"
-                                                {{ old('province_id', $acc->province_id) == $province->id ? 'selected' : '' }}>
+                                                {{ old('province_id', $member->user->province_id) == $province->id ? 'selected' : '' }}>
                                                 {{ $province->name }}</option>
                                         @endforeach
                                     @endif
@@ -140,7 +140,7 @@
                                     @if (!@empty($districts))
                                         @foreach ($districts as $district)
                                             <option value="{{ $district->id }}"
-                                                {{ old('district_id', $acc->district_id) == $district->id ? 'selected' : '' }}>
+                                                {{ old('district_id', $member->user->district_id) == $district->id ? 'selected' : '' }}>
                                                 {{ $district->name }}
                                             </option>
                                         @endforeach
@@ -161,7 +161,7 @@
                                     @if (!@empty($wards))
                                         @foreach ($wards as $ward)
                                             <option value="{{ $ward->id }}"
-                                                {{ old('ward_id', $acc->ward_id) == $ward->id ? 'selected' : '' }}>
+                                                {{ old('ward_id', $member->user->ward_id) == $ward->id ? 'selected' : '' }}>
                                                 {{ $ward->name }}
                                             </option>
                                         @endforeach
@@ -179,7 +179,7 @@
                             <label for="exampleFormControlTextarea1" class="col-sm-2 col-form-label">Địa chỉ</label>
                             <div class="col-sm-8">
                                 <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="5"
-                                    placeholder="Địa chỉ...">{{ old('address', $acc->address) }}</textarea>
+                                    placeholder="Địa chỉ...">{{ old('address', $member->user->address) }}</textarea>
                             </div>
                             <div style="color: red; margin-left: 18%;">
                                 @if ($errors->has('address'))
@@ -187,13 +187,14 @@
                                 @endif
                             </div>
                         </div>
+                        
                         <div class="form-group row">
                             <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">Trạng thái</label>
                             <div class="col-sm-8">
                                 <select class="form-control" name="status" id="exampleFormControlSelect1">
                                     <option value="">----Trạng thái----</option>
-                                    <option value="1" {{ old('status', $acc->status) == 1 ? 'selected' : '' }}>Hoạt động</option>
-                                    <option value="0" {{ old('status', $acc->status) == 0 ? 'selected' : '' }}>Không hoạt động</option>
+                                    <option value="1" {{ old('status', $member->user->status) == 1 ? 'selected' : '' }}>Hoạt động</option>
+                                    <option value="0" {{ old('status', $member->user->status) == 0 ? 'selected' : '' }}>Không hoạt động</option>
                                 </select>
                                 <div style="color: red;">
                                     @if ($errors->has('status'))

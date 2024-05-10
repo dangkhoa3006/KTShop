@@ -32,7 +32,15 @@ class LoginController extends Controller
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
 
-            return redirect()->intended('/admin/dashboard');
+            // Lấy đối tượng người dùng đã đăng nhập
+            $user = Auth::user();
+
+            // Kiểm tra role của người dùng
+            if ($user->role == 2) { 
+                return redirect()->intended('/');
+            } elseif (in_array($user->role, [0, 1])) { 
+                return redirect()->intended('/admin/dashboard');
+            }
         }
 
         return back()->withErrors([
@@ -45,11 +53,19 @@ class LoginController extends Controller
      */
     public function logout(Request $request): RedirectResponse
     {
+        $user = Auth::user();
+
         Auth::logout();
 
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
+        //Nếu là người dùng khi đăng xuất sẽ trở về trang home, còn admin với nhân viên khi đăng xuất sẽ về trang login
+        if ($user->role == 2) {
+            return redirect('/');
+        } elseif (in_array($user->role, [0, 1])) {
+            return redirect('/login');
+        }
         return redirect('/login');
     }
 }

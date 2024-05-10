@@ -1,9 +1,12 @@
+@php
+    use Carbon\Carbon;
+@endphp
 @extends('admin.app')
-@section('title', 'Admin - Quản lý tài khoản')
+@section('title', 'Admin - Quản lý thành viên')
 @section('header-route')
-    @parent <li class="breadcrumb-item active" aria-current="page">Quản lý tài khoản</li>
+    @parent <li class="breadcrumb-item active" aria-current="page">Quản lý thành viên</li>
 @endsection
-@section('account-active', 'active')
+@section('member-active', 'active')
 @section('content-pages')
     <!--Xuất thông báo sau khi tạo tài khoản-->
     @if (session('success'))
@@ -27,53 +30,40 @@
         </div>
     @endif
 
-    <h5 class="h4 mb-2 text-gray-800">Danh sách tài khoản nhân viên</h5>
+    <h5 class="h4 mb-2 text-gray-800">Danh sách thành viên</h5>
 
     <div class="row">
         <!-- DataTable with Hover -->
         <div class="col-lg-12">
             <div class="card mb-4">
-                <div class="card-body">
-                    <a href="{{ route('accounts.create') }}" class="btn btn-primary btn-icon-split float-right">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-plus"></i>
-                        </span>
-                        <span class="text">Thêm tài khoản</span>
-                    </a>
-                    <div class="clearfix"></div> <!--  này giúp clear float -->
-                </div>
                 <div class="table-responsive p-3">
                     <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                         <thead class="thead-light">
                             <tr>
+                                <th>Mã thành viên</th>
                                 <th>Họ tên</th>
-                                <th>Email</th>
                                 <th>Số điện thoại</th>
-                                <th>Chức vụ</th>
+                                <th>Điểm</th>
+                                <th>Thời hạn thẻ</th>
                                 <th>Trạng thái</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($lst as $acc)
+                            @foreach ($members as $member)
                                 <tr>
-                                    <td>{{ $acc->name }}</td>
-                                    <td>{{ $acc->email }}</td>
-                                    <td>{{ $acc->phone }}</td>
+                                    <td>{{ $member->code }}</td>
+                                    <td>{{ $member->user->name }}</td>
+                                    <td>{{ $member->user->phone }}</td>
+                                    <td>{{ $member->score }}</td>
+                                    <td>{{ Carbon::parse($member->end_day)->format('d/m/Y') }}</td>
                                     <td>
-                                        @if ($acc->role == 0)
-                                            <span class="badge badge-warning" style="font-size: 14px">Nhân viên</span>
-                                        @elseif($acc->role == 1)
-                                            <span class="badge badge-danger" style="font-size: 14px">Admin</span>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        @if ($acc->status == 1)
+                                        @if ($member->user->status == 1)
                                             <span class="badge badge-success" style="font-size: 14px">Hoạt động</span>
                                         @endif
                                     </td>
                                     <td>
-                                        <a href="{{route('accounts.show',$acc)}}" class="btn btn-sm btn-primary" style="font-size: 14px">Chi
+                                        <a href="{{route('members.show', $member)}}" class="btn btn-sm btn-primary" style="font-size: 14px">Chi
                                             tiết</a>
                                     </td>
                                 </tr>
@@ -81,7 +71,7 @@
                         </tbody>
                     </table>
                 </div>
-                
+
             </div>
         </div>
     </div>

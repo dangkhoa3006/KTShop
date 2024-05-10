@@ -95,3 +95,39 @@
     color: #3a3b45;
     font-weight: 800
 }
+/* CSS avatar */
+.dropzone {
+	width: 60%;
+	height: 150px;
+	border: 2px dashed #999;
+	border-radius: 3px;
+	text-align: center;
+}
+
+.upload-icon {
+	margin: 15px 2px 2px 2px;
+    width: 60%;
+    height: 80%;
+}
+
+.upload-input {
+	position: relative;
+	top: -62px;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	opacity: 0;
+}
+
+.btnupload {
+	display: block;
+	width: 50%;
+	height: 60%;
+	background: darkmagenta;
+	color: #fff;
+	border-radius: 3px;
+	border: 0;
+	box-shadow: 0 3px 0 0 hotpink;
+	transition: all 0.3s ease-in-out;
+	font-size: 14px;
+}
