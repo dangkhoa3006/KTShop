@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="../assets_admin/img/logo/icon_dashboard.png" rel="icon">
-    <title>ĐĂNG NHẬP - KTMOBILE SHOP</title>
+    <title>QUÊN MẬT KHẨU - KTMOBILE SHOP</title>
     <link href="../assets_admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="../assets_admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
     {{-- <link href="css/ruang-admin.min.css" rel="stylesheet"> --}}
@@ -22,7 +22,7 @@
 
     <!-- Login Content -->
 
-    <div class="container-login">
+    <div class="container-login" style="margin-top: 5%">
         <div class="row justify-content-center">
             <div class="col-xl-6 col-lg-12 col-md-9">
                 <div class="card shadow-sm my-5">
@@ -36,6 +36,16 @@
                             {{ session('success') }}
                         </div>
                     @endif
+                    @if (session('warning'))
+                    <div id="warning-alert" class="alert alert-warning alert-dismissible" role="alert"
+                        style="position: fixed; top: 80px; left: 63%; width: 35%;">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <h6><i class="fas fa-exclamation-triangle"></i><b> Chú ý!</b></h6>
+                        {{ session('warning') }}
+                    </div>
+                @endif
                     @if (session('error'))
                         <div id="stop-alert" class="alert alert-danger alert-dismissible" role="alert"
                             style="position: fixed; top: 80px; left: 63%; width: 35%;">
@@ -46,14 +56,14 @@
                             {{ session('error') }}
                         </div>
                     @endif
-                    <div class="card-body p-0">
+                    <div class="card-body p-0" >
                         <div class="row">
                             <div class="col-lg-12">
-                                <form method="POST" action="{{ route('login') }}">
+                                <form method="POST" action="{{route('getPasswordForm.post')}}">
                                     @csrf
                                     <div class="login-form">
                                         <div class="text-center">
-                                            <h1 class="h4 text-gray-900 mb-4">ĐĂNG NHẬP</h1>
+                                            <h1 class="h4 text-gray-900 mb-4">QUÊN MẬT KHẨU</h1>
                                         </div>
                                         <div class="form-group">
                                             <label>E-mail</label><br>
@@ -66,48 +76,10 @@
                                                 @endif
                                             </div>
                                         </div>
-
                                         <div class="form-group">
-                                            <label>Mật khẩu</label><br>
-                                            <input type="password" name="password" class="form-control"
-                                                id="exampleInputPassword" placeholder="Nhập mật khẩu...">
-                                            <div style="color: red">
-                                                @if ($errors->has('password'))
-                                                    {{ $errors->first('password') }} <br>
-                                                @endif
-                                            </div>
+                                            <button type="submit" class="btn btn-primary btn-block">XÁC THỰC E-MAIL</button>
                                         </div>
 
-                                        {{-- <div class="form-group">
-                                            <div class="custom-control custom-checkbox small"
-                                                style="line-height: 1.5rem;">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
-                                            </div>
-                                        </div> --}}
-                                        
-                                        <div class="text-right" style="top: 0;margin-bottom:10px">
-                                            <a class="font-weight-bold medium" href="{{ route('forgetPassword') }}">Quên mật khẩu?</a>
-                                        </div>
-                                        <div class="form-group">
-                                            <button type="submit" class="btn btn-primary btn-block">ĐĂNG NHẬP</button>
-                                        </div>
-                                        <hr>
-                                        <a href="{{route('authGoogle')}}" class="btn btn-google btn-block">
-                                            <img src="../image/icon_google.png" alt="Login Google"
-                                                style="height: 20px; margin-right: 8px;"> Đăng nhập bằng Google
-                                        </a>
-                                        <a href="index.html" class="btn btn-facebook btn-block">
-                                            <i class="fab fa-facebook-f fa-fw"></i> Đăng nhập bằng Facebook
-                                        </a>
-                                        <hr>
-                                        <div class="text-center">
-                                            <a class="font-weight-bold medium" href="{{ route('register') }}">Tạo tài
-                                                khoản</a>
-                                        </div>
-                                        <div class="text-center">
-                                        </div>
                                     </div>
                                 </form>
 
@@ -125,14 +97,17 @@
     <script src="../assets_admin/vendor/jquery-easing/jquery.easing.min.js"></script>
     <script src="../assets_admin/js/ruang-admin.min.js"></script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             //set thời gian thông báo
             setTimeout(function() {
                 $("#success-alert").alert('close'); // Đóng alert sau 2 giây
-            }, 3000);
+            }, 2000);
             setTimeout(function() {
                 $("#stop-alert").alert('close'); // Đóng alert sau 2 giây
-            }, 3000);
+            }, 2000);
+            setTimeout(function() {
+                $("#warning-alert").alert('close'); // Đóng alert sau 2 giây
+            }, 4000);
         })
     </script>
 </body>

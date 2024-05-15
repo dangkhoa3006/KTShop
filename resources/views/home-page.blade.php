@@ -47,7 +47,22 @@
                     <div class="col-lg-4 col-md-4 col-12" style="margin-left: 70%">
                         <div class="top-end">
                             <div class="user">
-                                <i class="lni lni-user"></i>
+                                @auth
+                                    @if (Auth::user()->avatar)
+                                        {{-- dd({{Auth::user()->avatar}}) --}}
+                                        <img style="width: 30px; border-radius: 20px;"
+                                            src="../../storage/{{ Auth::user()->avatar }}" alt="">
+
+                                        <img style="width: 30px; border-radius: 20px; margin-right: 5px" src="{{ Auth::user()->avatar }}"
+                                            alt="">
+                                    @else
+                                        <i class="lni lni-user"></i>
+                                    @endif
+                                @else
+                                    <i class="lni lni-user"></i>
+
+                                @endauth
+                                
                                 @auth
                                     @if (Auth::user()->name)
                                         {{ Auth::user()->name }}
@@ -60,9 +75,6 @@
                                     Xin chào!
                                 @endauth
                             </div>
-                            {{-- <a href="{{route('login')}}" type="button" class="btn btn-primary mb-1">Đăng nhập</a>
-                            <a href="{{route('register')}}" type="button" class="btn btn-outline-primary mb-1">Đăng ký</a> --}}
-                            {{-- <a href="{{route('logoutAccount')}}" type="button" class="btn btn-outline-danger mb-1">Đăng xuất</a> --}}
 
                             @auth
                                 <form method="POST" action="{{ route('logout') }}">
@@ -152,8 +164,8 @@
                                         </div>
                                         <ul class="shopping-list">
                                             <li>
-                                                <a href="javascript:void(0)" class="remove" title="Remove this item"><i
-                                                        class="lni lni-close"></i></a>
+                                                <a href="javascript:void(0)" class="remove"
+                                                    title="Remove this item"><i class="lni lni-close"></i></a>
                                                 <div class="cart-img-head">
                                                     <a class="cart-img" href="product-details.html"><img
                                                             src="../../assets_client/images/header/cart-items/item1.jpg"

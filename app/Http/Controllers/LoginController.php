@@ -37,9 +37,9 @@ class LoginController extends Controller
 
             // Kiểm tra role của người dùng
             if ($user->role == 2) { 
-                return redirect()->intended('/');
+                return redirect('/');
             } elseif (in_array($user->role, [0, 1])) { 
-                return redirect()->intended('/admin/dashboard');
+                return redirect('/admin/dashboard');
             }
         }
 
