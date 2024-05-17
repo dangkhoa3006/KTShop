@@ -53,8 +53,8 @@
                                         <img style="width: 30px; border-radius: 20px;"
                                             src="../../storage/{{ Auth::user()->avatar }}" alt="">
 
-                                        <img style="width: 30px; border-radius: 20px; margin-right: 5px" src="{{ Auth::user()->avatar }}"
-                                            alt="">
+                                        <img style="width: 30px; border-radius: 20px; margin-right: 5px"
+                                            src="{{ Auth::user()->avatar }}" alt="">
                                     @else
                                         <i class="lni lni-user"></i>
                                     @endif
@@ -62,7 +62,7 @@
                                     <i class="lni lni-user"></i>
 
                                 @endauth
-                                
+
                                 @auth
                                     @if (Auth::user()->name)
                                         {{ Auth::user()->name }}
@@ -218,56 +218,86 @@
         <!-- Start Header Bottom -->
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-8 col-md-6 col-12">
+                <div class="col-lg-12 col-md-6 col-12">
                     <div class="nav-inner">
                         <!-- DAN MỤC SẢN PHẨM -->
                         <div class="mega-category-menu">
                             <span class="cat-button"><i class="lni lni-menu"></i>Danh mục sản phẩm</span>
                             <ul class="sub-category">
-                                <li><a href="product-grids.html">Electronics <i class="lni lni-chevron-right"></i></a>
+                                {{-- @foreach ($list as $cate)
+                                    <li><a href="#">$cate->name<i class="lni lni-chevron-right"></i></a></li>
+                                @endforeach --}}
+                                {{-- @php
+                                    use App\Models\Category;
+                                    $list = Category::all();
+                                @endphp
+
+                                @foreach ($list as $cate)
+                                    <li>{{ $cate->name }}<i class="lni lni-chevron-right"></i></li>
+                                @endforeach --}}
+                                {{-- <li><a href="product-grids.html">Iphone<i class="lni lni-chevron-right"></i></a>
                                     <ul class="inner-sub-category">
                                         <li><a href="product-grids.html">Digital Cameras</a></li>
                                         <li><a href="product-grids.html">Camcorders</a></li>
                                         <li><a href="product-grids.html">Camera Drones</a></li>
                                         <li><a href="product-grids.html">Smart Watches</a></li>
                                         <li><a href="product-grids.html">Headphones</a></li>
-                                        <li><a href="product-grids.html">MP3 Players</a></li>
-                                        <li><a href="product-grids.html">Microphones</a></li>
-                                        <li><a href="product-grids.html">Chargers</a></li>
-                                        <li><a href="product-grids.html">Batteries</a></li>
-                                        <li><a href="product-grids.html">Cables & Adapters</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="product-grids.html">accessories <i class="lni lni-chevron-right"></i></a>
+                                <li><a href="product-grids.html">Samsung<i class="lni lni-chevron-right"></i></a>
                                     <ul class="inner-sub-category">
                                         <li><a href="product-grids.html">Digital Cameras</a></li>
                                         <li><a href="product-grids.html">Camcorders</a></li>
                                         <li><a href="product-grids.html">Camera Drones</a></li>
                                         <li><a href="product-grids.html">Smart Watches</a></li>
                                         <li><a href="product-grids.html">Headphones</a></li>
-                                        <li><a href="product-grids.html">MP3 Players</a></li>
-                                        <li><a href="product-grids.html">Microphones</a></li>
-                                        <li><a href="product-grids.html">Chargers</a></li>
-                                        <li><a href="product-grids.html">Batteries</a></li>
-                                        <li><a href="product-grids.html">Cables & Adapters</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="product-grids.html">Televisions</a></li>
-                                <li><a href="product-grids.html">best selling</a></li>
-                                <li><a href="product-grids.html">top 100 offer</a></li>
-                                <li><a href="product-grids.html">sunglass</a></li>
-                                <li><a href="product-grids.html">watch</a></li>
-                                <li><a href="product-grids.html">man’s product</a></li>
-                                <li><a href="product-grids.html">Home Audio & Theater</a></li>
-                                <li><a href="product-grids.html">Computers & Tablets </a></li>
-                                <li><a href="product-grids.html">Video Games </a></li>
-                                <li><a href="product-grids.html">Home Appliances </a></li>
+                                <li><a href="product-grids.html">Điện thoại khác<i class="lni lni-chevron-right"></i></a>
+                                    <ul class="inner-sub-category">
+                                        <li><a href="product-grids.html">Digital Cameras</a></li>
+                                        <li><a href="product-grids.html">Camcorders</a></li>
+                                        <li><a href="product-grids.html">Camera Drones</a></li>
+                                        <li><a href="product-grids.html">Smart Watches</a></li>
+                                        <li><a href="product-grids.html">Headphones</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="product-grids.html">Smartwatch<i class="lni lni-chevron-right"></i></a>
+                                    <ul class="inner-sub-category">
+                                        <li><a href="product-grids.html">Digital Cameras</a></li>
+                                        <li><a href="product-grids.html">Camcorders</a></li>
+                                        <li><a href="product-grids.html">Camera Drones</a></li>
+                                        <li><a href="product-grids.html">Smart Watches</a></li>
+                                        <li><a href="product-grids.html">Headphones</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="product-grids.html">Ipad<i class="lni lni-chevron-right"></i></a>
+                                    <ul class="inner-sub-category">
+                                        <li><a href="product-grids.html">Digital Cameras</a></li>
+                                        <li><a href="product-grids.html">Camcorders</a></li>
+                                        <li><a href="product-grids.html">Camera Drones</a></li>
+                                        <li><a href="product-grids.html">Smart Watches</a></li>
+                                        <li><a href="product-grids.html">Headphones</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="product-grids.html">Phụ kiện<i class="lni lni-chevron-right"></i></a>
+                                    <ul class="inner-sub-category">
+                                        <li><a href="product-grids.html">Digital Cameras</a></li>
+                                        <li><a href="product-grids.html">Camcorders</a></li>
+                                        <li><a href="product-grids.html">Camera Drones</a></li>
+                                        <li><a href="product-grids.html">Smart Watches</a></li>
+                                        <li><a href="product-grids.html">Headphones</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="product-grids.html">Khuyến mãi</a></li>
+                                <li><a href="product-grids.html">Thu cũ đổi mới</a></li>
+                                <li><a href="product-grids.html">Tin công nghệ</a></li> --}}
                             </ul>
                         </div>
                         <!-- End Mega Category Menu -->
                         <!-- Start Navbar -->
                         <nav class="navbar navbar-expand-lg">
-                            <span style="margin-right: 20px"><b>Sản phẩm bán chạy: </b></span>
+                            <span style="margin-right: 20px"><b>Sản phẩm hot: </b></span>
                             <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
                                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                                 aria-expanded="false" aria-label="Toggle navigation">
@@ -277,20 +307,24 @@
                             </button>
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                 <ul id="nav" class="navbar-nav ms-auto">
-                                    {{-- <li class="nav-item">
-                                        <a href="index.html" class="active" aria-label="Toggle navigation">Home</a>
-                                    </li> --}}
                                     <li class="nav-item">
-                                        <a href="index.html" aria-label="Toggle navigation">Home</a>
+                                        <a href="index.html" class="active" aria-label="Toggle navigation">Iphone 15
+                                            Pro Max</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="index.html" aria-label="Toggle navigation">Home</a>
+                                        <a href="index.html" aria-label="Toggle navigation">Iphone 15 Plus</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a href="index.html" aria-label="Toggle navigation">Home</a>
+                                        <a href="index.html" aria-label="Toggle navigation">Galaxy S24 Ultra</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="index.html" aria-label="Toggle navigation">Galaxy S23 Ultra</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="index.html" aria-label="Toggle navigation">Xiaomi giá rẻ</a>
                                     </li>
 
-                                    <li class="nav-item">
+                                    {{-- <li class="nav-item">
                                         <a class="dd-menu collapsed" href="javascript:void(0)"
                                             data-bs-toggle="collapse" data-bs-target="#submenu-1-3"
                                             aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -302,7 +336,7 @@
                                             <li class="nav-item"><a href="cart.html">Cart</a></li>
                                             <li class="nav-item"><a href="checkout.html">Checkout</a></li>
                                         </ul>
-                                    </li>
+                                    </li> --}}
 
                                 </ul>
                             </div> <!-- navbar collapse -->
@@ -311,7 +345,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-4 col-md-6 col-12">
+                {{-- <div class="col-lg-2 col-md-6 col-12">
                     <!-- Start Nav Social -->
                     <div class="nav-social">
                         <h5 class="title">Theo dõi:</h5>
@@ -325,13 +359,10 @@
                             <li>
                                 <a href="javascript:void(0)"><i class="lni lni-instagram"></i></a>
                             </li>
-                            <li>
-                                <a href="javascript:void(0)"><i class="lni lni-skype"></i></a>
-                            </li>
                         </ul>
                     </div>
                     <!-- End Nav Social -->
-                </div>
+                </div> --}}
             </div>
         </div>
         <!-- End Header Bottom -->

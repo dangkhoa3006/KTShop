@@ -2148,7 +2148,7 @@ ol {
   }
 
   .header .navbar-nav .nav-item .sub-menu .nav-item a {
-    padding: 12px 12px;
+    padding: 5px 5px;
   }
 
   .header .navbar-nav .nav-item .sub-menu .nav-item a:hover {
@@ -2181,7 +2181,7 @@ ol {
   }
 
   .header .navbar-nav .nav-item .sub-menu .nav-item a {
-    padding: 10px 12px !important;
+    padding: 20px 12px !important;
   }
 
   .header .navbar-nav .nav-item .sub-menu li:hover {
@@ -2331,14 +2331,14 @@ ol {
   display: -ms-flexbox;
   display: flex;
   border-right: 1px solid #eee;
-  margin-right: 40px;
-  padding-right: 112px;
+  margin-right: 20px;
+  padding-right: 65px;
   cursor: pointer;
 }
 
-@media only screen and (min-width: 992px) and (max-width: 1199px) {
+@media only screen and (min-width: 792px) and (max-width: 1000px) {
   .header .mega-category-menu {
-    padding-right: 35px;
+    padding-right: 25px;
   }
 }
 
@@ -2372,7 +2372,7 @@ ol {
 .header .mega-category-menu:hover .sub-category {
   opacity: 1;
   visibility: visible;
-  top: 61px;
+  top: 40px;
 }
 
 .header .mega-category-menu .sub-category {
@@ -2381,25 +2381,27 @@ ol {
   top: 68px;
   width: 241px;
   height: auto;
-  border: 1px solid #eee;
+  border: 2px solid #eee;
   background-color: #fff;
   opacity: 0;
   visibility: hidden;
   border-radius: 0;
-  -webkit-transition: all 0.4s ease;
-  transition: all 0.4s ease;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
   padding: 15px 0;
 }
 
-.header .mega-category-menu .sub-category li {
+.header .mega-category-menu .sub-category li:hover {
   display: block;
   position: relative;
+  background-color: #0077B5;
 }
 
 .header .mega-category-menu .sub-category li:hover .inner-sub-category {
   opacity: 1;
   visibility: visible;
   top: 0;
+  color: white;
 }
 
 .header .mega-category-menu .sub-category li .inner-sub-category {
@@ -2437,7 +2439,8 @@ ol {
 }
 
 .header .mega-category-menu .sub-category li .inner-sub-category li a:hover {
-  color: #0167F3;
+  color: white;
+  font-weight: bold;
 }
 
 .header .mega-category-menu .sub-category li:last-child {
@@ -2461,7 +2464,8 @@ ol {
 }
 
 .header .mega-category-menu .sub-category li a:hover {
-  color: #0167F3;
+  color: white;
+  font-weight: bold;
 }
 
 .header .nav-social {
@@ -2697,7 +2701,7 @@ ol {
   -webkit-transition: all 0.3s ease-out 0s;
   transition: all 0.3s ease-out 0s;
   position: relative;
-  padding: 20px 0;
+  padding: 10px 0;
   display: -webkit-inline-box;
   display: -ms-inline-flexbox;
   display: inline-flex;

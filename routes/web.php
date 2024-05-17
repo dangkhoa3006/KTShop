@@ -1,11 +1,14 @@
 <?php
 
 use App\Http\Controllers\AuthGoogleController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgetPasswordController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MembersController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,7 +36,6 @@ Route::group(['middleware' => 'auth.users'], function () {
         Route::post("register", [RegisterController::class, "registerAccount"])->name("registerAccount");
         Route::get('auth/google', [AuthGoogleController::class, 'redirectGoogle'])->name('authGoogle');
         Route::get('auth/google/call-back', [AuthGoogleController::class, 'callbackGoogle']);
-
         //Chuyển đến trang forgot password
         Route::get('forget-password', [ForgetPasswordController::class, 'forgetPasswordForm'])->name('forgetPassword');
         //Xác thực email và gửi thông báo đến mail
@@ -43,6 +45,7 @@ Route::group(['middleware' => 'auth.users'], function () {
         //Submit và thực hiện chức năng update password
         Route::post('reset-password', [ForgetPasswordController::class, 'changePassword'])->name('changePassword');
 
+        //Route::get('', [HomeController::class, 'showCategory']);
     });
 
     Route::middleware("auth")->group(function () {
@@ -52,6 +55,8 @@ Route::group(['middleware' => 'auth.users'], function () {
             Route::post('/fetch-districts/{id}', [UserController::class, 'fetchDistricts']);
             Route::post('/fetch-wards/{id}', [UserController::class, 'fetchWards']);
             Route::resource("/members", MembersController::class);
+            Route::resource('/categories',CategoryController::class);
+            Route::resource('/subcategories', SubCategoryController::class);
         });
     });
 });

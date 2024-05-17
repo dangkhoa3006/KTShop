@@ -57,21 +57,21 @@
                     <span>Quản lý sản phẩm</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="ui-colors.html">
+            <li class="nav-item @yield('subcategory-active')">
+                <a class="nav-link" href="{{route('subcategories.index')}}">
                     <i class="fas fa-fw fa-palette"></i>
                     <span>Quản lý loại sản phẩm</span>
                 </a>
             </li>
             <hr class="sidebar-divider">
-            {{-- Trang nhà cung cấp --}}
+            {{-- Trang danh mục --}}
             <div class="sidebar-heading">
-                Nhà cung cấp
+                Danh mục sản phẩm
             </div>
-            <li class="nav-item">
-                <a class="nav-link" href="ui-colors.html">
+            <li class="nav-item @yield('category-active')">
+                <a class="nav-link" href="{{route('categories.index')}}">
                     <i class="fas fa-fw fa-palette"></i>
-                    <span>Quản lý nhà cung cấp</span>
+                    <span>Quản lý danh mục</span>
                 </a>
             </li>
             <hr class="sidebar-divider">
@@ -337,7 +337,7 @@
 
                     <!--Row-->
 
-                    <!-- Thông báo đăng xuất -->
+                    <!-- Thông báo đăng xuất - Alert dialog-->
                     @auth
                         <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalLabelLogout" aria-hidden="true">
