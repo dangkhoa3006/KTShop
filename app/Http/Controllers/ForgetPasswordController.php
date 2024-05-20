@@ -58,7 +58,12 @@ class ForgetPasswordController extends Controller
     }
     public function resetPassword($token)
     {
-        return view('reset-password', compact('token'));
+        $getToken = DB::table('password_reset_tokens')->where('token', $token)->first();
+        if($getToken)
+        {
+            return view('reset-password', compact('token'));
+        }
+        return redirect()->route('forgetPassword')->with('warning', 'Yêu cầu đã hết hạn.');
     }
     public function changePassword(Request $request)
     {
