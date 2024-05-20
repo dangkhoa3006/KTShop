@@ -53,12 +53,12 @@
                             @foreach ($members as $member)
                                 <tr>
                                     <td>{{ $member->code }}</td>
-                                    <td>{{ $member->user->name }}</td>
-                                    <td>{{ $member->user->phone }}</td>
+                                    <td>{{ optional($member->user)->name }}</td>
+                                    <td>{{ optional($member->user)->phone }}</td>
                                     <td>{{ $member->score }}</td>
                                     <td>{{ Carbon::parse($member->end_day)->format('d/m/Y') }}</td>
                                     <td>
-                                        @if ($member->user->status == 1)
+                                        @if (optional($member->user)->status == 1)
                                             <span class="badge badge-success" style="font-size: 14px">Hoạt động</span>
                                         @endif
                                     </td>

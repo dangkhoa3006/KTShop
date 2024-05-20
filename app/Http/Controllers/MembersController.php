@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMembersRequest;
-use App\Http\Requests\UpdateMembersRequest;
 use App\Models\Members;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\Request;
 
 class MembersController extends Controller
 {
@@ -25,9 +24,10 @@ class MembersController extends Controller
     }
     public function index()
     {
-        $listMembers = Members::with(['user' => function ($query) {
+        // Điều kiện 'whereHas' chỉ lấy những 'member' có 'user' với 'status' là 1
+        $listMembers = Members::whereHas('user', function ($query) {
             $query->where('status', 1);
-        }])->get(); // Điều kiện chỉ lấy những 'User' có 'status' là 1
+        })->with('user')->get();
         return view('admin.members.member-index', ['members' => $listMembers]);
     }
 
@@ -100,7 +100,7 @@ class MembersController extends Controller
         $wards = DB::table('wards')->where('district_id', $member->user->district_id)->orderBy('name', 'ASC')->get();
         $data['provinces'] = $provinces;
 
-        return view('admin.members.member-edit', ['member' => $member, 'user' => $user, 'provinces'=>$provinces, 'districts'=>$districts, 'wards'=>$wards]);
+        return view('admin.members.member-edit', ['member' => $member, 'user' => $user, 'provinces' => $provinces, 'districts' => $districts, 'wards' => $wards]);
     }
 
     /**
@@ -117,7 +117,7 @@ class MembersController extends Controller
                 $path = $request->avatar->store('upload/member/' . $member->id, 'public');
             }
             $member->user->update([
-                'avatar'=>$path,
+                'avatar' => $path,
                 'name' => $request->name,
                 'gender' => $request->gender,
                 'birthday' => \DateTime::createFromFormat('d/m/Y', $request->birthday)->format('Y-m-d'),
@@ -130,10 +130,10 @@ class MembersController extends Controller
             ]);
             $member->user->save();
             //Thành công
-            return redirect()->route('accounts.index')->with('success', 'Cập nhật tài khoản thành công!');
+            return redirect()->route('members.index')->with('success', 'Cập nhật tài khoản thành công!');
         } catch (\Exception $e) {
             //Thất bại
-            return redirect()->route('accounts.index')->with('error', 'Cập nhật tài khoản không thành công!');
+            return redirect()->route('members.index')->with('error', 'Cập nhật tài khoản không thành công!');
         }
     }
 

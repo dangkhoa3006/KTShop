@@ -51,7 +51,7 @@ class ForgetPasswordController extends Controller
         //Gửi mail với template là "send-mail.blade.php"
         Mail::send("send-mail", ['token' => $token], function ($message) use ($request) {
             $message->to($request->email);
-            $message->subject("Đổi mật khẩu");
+            $message->subject("Đổi mật khẩu - KTMobile Shop");
         });
         return redirect()->route('forgetPassword')->with('success', 'Vui lòng kiểm tra email của bạn!');
 

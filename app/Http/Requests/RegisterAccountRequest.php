@@ -35,7 +35,7 @@ class RegisterAccountRequest extends FormRequest
             'email.required' => 'Bắt buộc nhập email.',
             'email.email' => 'Email không hợp lệ.',
             'email.regex' => 'Email phải đúng định dạng @gmail.com',
-            'email.unique' => 'Email đã tồn tại.',
+            'email.unique' => 'Email đã tồn tại. Vui lòng nhập email khác',
             'password.required' => 'Bắt buộc nhập mật khẩu.',
             'password.confirmed' => 'Mật khẩu không khớp.',
             'password.min' => 'Mật khẩu phải có ít nhất 8 ký tự.',

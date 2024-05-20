@@ -6,11 +6,10 @@ use App\Http\Requests\RegisterAccountRequest;
 use App\Models\Members;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class RegisterController extends Controller
 {
@@ -28,6 +27,7 @@ class RegisterController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role' => 2,
+                'status' => 0,
             ]);
             // Save the account
             $acc->save();
@@ -42,12 +42,44 @@ class RegisterController extends Controller
                 ]);
                 $member->save();
             }
+
+            // Tạo token xác thực
+            $token = Str::random(60);
+            DB::table('user_verifications')->insert([
+                'user_id' => $acc->id,
+                'token' => $token,
+                'created_at' => Carbon::now(),
+            ]);
+            //Gửi mail với template là "mail-verify-account.blade.php"
+            Mail::send("mail-verify-account", ['token' => $token], function ($message) use ($request) {
+                $message->to($request->email);
+                $message->subject("Kích hoạt tài khoản - KTMobile Shop");
+            });
+            
             // Thành cônng -> Redirect sang trang login
-            return redirect()->route('login')->with('success', 'Đăng ký tài khoản thành công!');
+            return redirect()->route('login')->with('success', 'Đăng ký tài khoản thành công. Vui lòng kiểm tra email để kích hoạt tài khoản.');
         } catch (\Exception $e) {
             // Thất bại -> Redirect sang trang login
             return redirect()->route('login')->with('error', 'Đăng ký tài khoản không thành công!');
         }
+    }
+
+    public function verifyAccount($token)
+    {
+        $verify = DB::table('user_verifications')->where('token', $token)->first();
+
+        if ($verify) {
+            $user = User::find($verify->user_id);
+            $user->status = 1; // Kích hoạt tài khoản
+            $user->save();
+
+            // Xóa token xác thực sau khi đã xác thực
+            DB::table('user_verifications')->where('token', $token)->delete();
+
+            return redirect()->route('login')->with('success', 'Tài khoản của bạn đã được xác thực thành công!');
+        }
+
+        return redirect()->route('login')->with('error', 'Token xác thực không hợp lệ hoặc đã hết hạn.');
     }
 
 }

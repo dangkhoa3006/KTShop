@@ -36,6 +36,16 @@
                             {{ session('success') }}
                         </div>
                     @endif
+                    @if (session('warning'))
+                        <div id="warning-alert" class="alert alert-warning alert-dismissible" role="alert"
+                            style="position: fixed; top: 80px; left: 63%; width: 35%;">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            <h6><i class="fas fa-exclamation-triangle"></i><b> Chưa kích hoạt tài khoản!</b></h6>
+                            {{ session('warning') }}
+                        </div>
+                    @endif
                     @if (session('error'))
                         <div id="stop-alert" class="alert alert-danger alert-dismissible" role="alert"
                             style="position: fixed; top: 80px; left: 63%; width: 35%;">

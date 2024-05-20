@@ -34,13 +34,17 @@ class LoginController extends Controller
 
             // Lấy đối tượng người dùng đã đăng nhập
             $user = Auth::user();
-
-            // Kiểm tra role của người dùng
-            if ($user->role == 2) { 
-                return redirect('/');
-            } elseif (in_array($user->role, [0, 1])) { 
-                return redirect('/admin/dashboard');
+            //Kiểm tra trạng thái người dùng
+            if ($user->status == 0) {
+                Auth::logout();
+                return redirect()->route('login')->with('warning', 'Vui lòng kiểm tra email của bạn.');
             }
+            // Kiểm tra role của người dùng
+            if ($user->role == 2) {
+                return redirect('/');
+            } elseif (in_array($user->role, [0, 1])) {
+                return redirect('/admin/dashboard');
+            } 
         }
 
         return back()->withErrors([

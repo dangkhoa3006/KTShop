@@ -34,6 +34,8 @@ Route::group(['middleware' => 'auth.users'], function () {
         Route::post("login", [LoginController::class, "authenticate"])->name("login");
         Route::get("register", [RegisterController::class, "showForm"])->name("register");
         Route::post("register", [RegisterController::class, "registerAccount"])->name("registerAccount");
+        Route::get('/verify-account/{token}', [RegisterController::class, 'verifyAccount'])->name('verifyAccount');
+
         Route::get('auth/google', [AuthGoogleController::class, 'redirectGoogle'])->name('authGoogle');
         Route::get('auth/google/call-back', [AuthGoogleController::class, 'callbackGoogle']);
         //Chuyển đến trang forgot password
