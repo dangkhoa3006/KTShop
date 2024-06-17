@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -12,16 +10,11 @@
     <title>ĐĂNG NHẬP - KTMOBILE SHOP</title>
     <link href="../assets_admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link href="../assets_admin/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css">
-    {{-- <link href="css/ruang-admin.min.css" rel="stylesheet"> --}}
     <link href="../assets_admin/css/ruang-admin.css" rel="stylesheet">
     <link href="../assets_admin/css/ktmobile-admin.css" rel="stylesheet">
-
 </head>
 
 <body class="bg-gradient-login">
-
-    <!-- Login Content -->
-
     <div class="container-login">
         <div class="row justify-content-center">
             <div class="col-xl-6 col-lg-12 col-md-9">
@@ -87,16 +80,6 @@
                                                 @endif
                                             </div>
                                         </div>
-
-                                        {{-- <div class="form-group">
-                                            <div class="custom-control custom-checkbox small"
-                                                style="line-height: 1.5rem;">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
-                                            </div>
-                                        </div> --}}
-                                        
                                         <div class="text-right" style="top: 0;margin-bottom:10px">
                                             <a class="font-weight-bold medium" href="{{ route('forgetPassword') }}">Quên mật khẩu?</a>
                                         </div>
@@ -108,7 +91,7 @@
                                             <img src="../image/icon_google.png" alt="Login Google"
                                                 style="height: 20px; margin-right: 8px;"> Đăng nhập bằng Google
                                         </a>
-                                        <a href="index.html" class="btn btn-facebook btn-block">
+                                        <a href="{{route('authFacebook')}}" class="btn btn-facebook btn-block">
                                             <i class="fab fa-facebook-f fa-fw"></i> Đăng nhập bằng Facebook
                                         </a>
                                         <hr>
@@ -120,7 +103,6 @@
                                         </div>
                                     </div>
                                 </form>
-
                             </div>
                         </div>
                     </div>

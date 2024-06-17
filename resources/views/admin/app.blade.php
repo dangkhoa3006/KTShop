@@ -24,7 +24,10 @@
     <link href="../../../assets_admin/vendor/bootstrap-touchspin/css/jquery.bootstrap-touchspin.css" rel="stylesheet">
     <!-- ClockPicker -->
     <link href="../../../assets_admin/vendor/clock-picker/clockpicker.css" rel="stylesheet">
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body id="page-top">
@@ -51,14 +54,14 @@
             <div class="sidebar-heading">
                 Sản phẩm
             </div>
-            <li class="nav-item">
-                <a class="nav-link" href="ui-colors.html">
+            <li class="nav-item @yield('product-active')">
+                <a class="nav-link" href="{{ route('products.index') }}">
                     <i class="fas fa-fw fa-palette"></i>
                     <span>Quản lý sản phẩm</span>
                 </a>
             </li>
             <li class="nav-item @yield('subcategory-active')">
-                <a class="nav-link" href="{{route('subcategories.index')}}">
+                <a class="nav-link" href="{{ route('subcategories.index') }}">
                     <i class="fas fa-fw fa-palette"></i>
                     <span>Quản lý loại sản phẩm</span>
                 </a>
@@ -69,7 +72,7 @@
                 Danh mục sản phẩm
             </div>
             <li class="nav-item @yield('category-active')">
-                <a class="nav-link" href="{{route('categories.index')}}">
+                <a class="nav-link" href="{{ route('categories.index') }}">
                     <i class="fas fa-fw fa-palette"></i>
                     <span>Quản lý danh mục</span>
                 </a>
@@ -432,6 +435,28 @@
                 todayHighlight: true,
                 todayBtn: 'linked',
             });
+            $('#touchSpin1').TouchSpin({
+                min: 0,
+                max: 100,
+                boostat: 5,
+                maxboostedstep: 10,
+                initval: 0
+            });
+            // Kiểm tra giá trị nhập vào và giới hạn nếu vượt quá max
+            $('#touchSpin3').on('input', function() {
+                var max = parseInt($(this).attr('max'));
+                if ($(this).val() > max) {
+                    $(this).val(max);
+                }
+            });
+            // $('#touchSpin3').TouchSpin({
+            //     min: 0,
+            //     max: 10000000000,
+            //     initval: 0,
+            //     boostat: 5,
+            //     maxboostedstep: 10,
+            //     verticalbuttons: true,
+            // });
             //select districts from provinces
             $("#selectProvinces").change(function() {
                 var province_id = $(this).val();
@@ -490,7 +515,37 @@
                 $("#stop-alert").alert('close'); // Đóng alert sau 2 giây
             }, 2000);
 
+            //select subcategories from categories
+            $("#selectCategories").change(function() {
+                var category_id = $(this).val();
+                if (category_id == "") {
+                    var category_id = 0;
+                }
+                $.ajax({
+                    url: '{{ url('/admin/fetch-subcategories/') }}/' + category_id,
+                    type: 'post',
+                    dataType: "json",
+                    success: function(response) {
+                        //console.log(response['districts'].length);
+
+                        //console.log(response['districts'].length);
+                        $('#selectSubCategories').find('option:not(:first)').remove();
+
+                        if (response['subcategories'].length > 0) {
+                            $.each(response['subcategories'], function(key, value) {
+                                $("#selectSubCategories").append("<option value='" +
+                                    value[
+                                        'id'] + "'>" + value['name'] + "</option>");
+                            });
+                        }
+                    }
+                });
+            });
         });
+        CKEDITOR.replace('editor1', {
+            height: 300 // Đặt chiều cao mong muốn ở đây (đơn vị px)
+        });
+        CKEDITOR.replace('editor2');
     </script>
 </body>
 

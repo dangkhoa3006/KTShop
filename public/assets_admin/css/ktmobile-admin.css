@@ -131,3 +131,50 @@
 	transition: all 0.3s ease-in-out;
 	font-size: 14px;
 }
+/* css Upload product image */
+/* CSS để thiết lập giao diện */
+.form-group-pd {
+    margin: 15px 2px 2px 2px;
+}
+
+.row-pd {
+    display: flex;
+    align-items: center;
+}
+
+.col-form-label-pd {
+    margin-right: 15px;
+}
+
+.frame-pd {
+    border: 2px dashed #ccc;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.center-pd {
+    text-align: center;
+}
+
+.dropzone-product {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.upload-icon-product {
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.upload-input-product {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+

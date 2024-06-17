@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Category;
 
 class HomeController extends Controller
 {
-    // public function showCategory()
-    // {
-    //     $list = Category::where('status', 1)->get();
-    //     return view('home-page', ['list' => $list]);
-    // }
+    public function Homepage()
+    {
+        // Lấy tất cả categories để hiển thị danh sách
+        $list = Category::with(['subcategories' => function ($query) {
+            $query->where('status', 1);
+        }])->where('status', 1)->get();
+
+        return view('clients.home-page', compact('list'));
+    }
 }

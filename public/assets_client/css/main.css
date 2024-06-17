@@ -2405,7 +2405,7 @@ ol {
 }
 
 .header .mega-category-menu .sub-category li .inner-sub-category {
-  padding: 15px 0;
+  padding: 10px 0;
   position: absolute;
   top: 8px;
   width: 240px;
@@ -2959,7 +2959,7 @@ ol {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 500px;
+  height: 350px;
   position: relative;
 }
 
@@ -3610,8 +3610,10 @@ ol {
   display: -ms-grid;
   display: grid;
   Grid-template-columns: repeat(5, 1fr);
-  Grid-gap: 1em 1em;
+  /* Grid-gap: 1em 1em; */
   Margin-top: 1em;
+  /* overflow: hidden; */
+  overflow-y: auto;
 }
 
 @media (max-width: 767px) {
@@ -3927,21 +3929,23 @@ ol {
 .item-details .product-info .wish-button .btn {
   display: inline-block;
   margin-right: 7px;
-  border: 1px solid #eee;
+  border: 1px solid #fda400;
   border-radius: 4px;
   color: #555;
-  padding: 10px 18px;
-  font-size: 13px;
+  padding: 8px 16px;
+  font-size: 14px;
+  /* Tăng kích thước chữ nếu cần */
   font-weight: 600;
   -webkit-transition: all 0.4s ease;
   transition: all 0.4s ease;
   height: 46px;
+  /* Đặt chiều cao cố định lớn hơn cho nút */
   width: 100%;
 }
 
 .item-details .product-info .wish-button .btn:hover {
   color: #fff;
-  background-color: #0167F3;
+  background-color: #ffc401;
   border-color: transparent;
 }
 
@@ -4912,3 +4916,86 @@ ol {
     display: none;
   }
 }
+
+/* nut xem them */
+/* CSS */
+.product-description {
+  max-height: 500px;
+  /* Số dòng tối đa hiển thị ban đầu */
+  overflow: hidden;
+}
+
+.expanded {
+  max-height: none !important;
+  /* Hiển thị toàn bộ nội dung */
+}
+
+
+.specifications ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.specifications li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.specifications li strong {
+  font-weight: bold;
+  margin-left: 10px;
+}
+
+/* upload multi image product */
+
+
+/* them bien thuoc tinh */
+/* .item-variant-container {
+  display: flex;
+}
+
+.item-variant-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  
+}
+
+.item-variant {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+.item-variant a {
+  text-decoration: none;
+  display: flex; 
+  align-items: center; 
+}
+
+.product-image-detail {
+  width: 50px; 
+  height: 50px;
+  overflow: hidden; 
+}
+
+.product-image-detail img {
+  width: 100%; 
+  height: auto; 
+  object-fit: cover;
+}
+
+.product-info {
+  flex-grow: 1;
+}
+
+.item-variant-name,
+.product-price {
+  margin: 0;
+} */

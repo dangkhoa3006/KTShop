@@ -1,9 +1,9 @@
 @extends('admin.app')
-@section('title', 'Admin - Quản lý danh mục sản phẩm')
+@section('title', 'Admin - Quản lý sản phẩm')
 @section('header-route')
-    @parent <li class="breadcrumb-item active" aria-current="page">Quản lý danh mục sản phẩm</li>
+    @parent <li class="breadcrumb-item active" aria-current="page">Quản lý sản phẩm</li>
 @endsection
-@section('category-active', 'active')
+@section('product-active', 'active')
 @section('content-pages')
     <!--Xuất thông báo sau khi tạo tài khoản-->
     @if (session('success'))
@@ -27,18 +27,18 @@
         </div>
     @endif
 
-    <h5 class="h4 mb-2 text-gray-800">Danh sách danh mục sản phẩm</h5>
+    <h5 class="h4 mb-2 text-gray-800">Danh sách sản phẩm</h5>
 
     <div class="row">
         <!-- DataTable with Hover -->
         <div class="col-lg-12">
             <div class="card mb-4">
                 <div class="card-body">
-                    <a href="{{ route('categories.create') }}" class="btn btn-primary btn-icon-split float-right">
+                    <a href="{{ route('products.create') }}" class="btn btn-primary btn-icon-split float-right">
                         <span class="icon text-white-50">
                             <i class="fas fa-plus"></i>
                         </span>
-                        <span class="text">Thêm danh mục</span>
+                        <span class="text">Thêm sản phẩm</span>
                     </a>
                     <div class="clearfix"></div> <!--  này giúp clear float -->
                 </div>
@@ -46,36 +46,50 @@
                     <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                         <thead class="thead-light">
                             <tr>
-                                <th>Tên danh mục</th>
-                                <th>Slug</th>
-                                <th>Tổng loại sản phẩm</th>
-                                <th>Tổng sản phẩm</th>
-                                <th>Trạng thái</th>
+                                <th>Ảnh sản phẩm</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Loại sản phẩm</th>
+                                <th>Giá bán</th>
+                                <th>Giá khuyến mãi</th>
+                                <th>Số lượng</th>
+                                <th>Tình trạng</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($lst as $cate)
+                            @foreach ($listProduct as $p)
                                 <tr>
-                                    <td>{{ $cate->name }}</td>
-                                    <td>{{ $cate->slug }}</td>
-                                    <td>{{$cate->subcategory_count}} loại</td>
-                                    <td>0</td>
                                     <td>
-                                        @if ($cate->status == 1)
-                                            <span class="badge badge-success" style="font-size: 14px">Hoạt động</span>
+                                        <img style="width:100px; max-height:100px; object-fit:contain"
+                                            src="{{ $p->image }}">
+                                    </td>
+                                    <td>{{ $p->name }}</td>
+                                    <td>{{ $p->subcategory->name }}</td>
+                                    <td>{{ number_format($p->price, 0, ',', '.') }} đ</td>
+                                    <td>{{ number_format($p->sale_price, 0, ',', '.') }} đ</td>
+                                    <td>{{ $p->quantity }}</td>
+                                    
+                                    <td>
+                                        @if ($p->quantity > 0)
+                                            <span class="badge badge-success" style="font-size: 14px">Còn hàng</span>
+                                        @elseif ($p->quantity == 0)
+                                            <span class="badge badge-warning" style="font-size: 14px">Hết hàng</span>
                                         @endif
                                     </td>
                                     <td style="display: flex; justify-content: center;">
-                                        <a href="{{route('categories.edit', $cate)}}" class="btn btn-sm btn-primary" style="font-size: 14px; ">Cập nhật</a>
+                                        <a href="{{ route('products.edit', $p) }}" class="btn btn-sm btn-primary"
+                                            style="font-size: 14px; ">Cập nhật</a>
                                     </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
                 </div>
-                
+
             </div>
         </div>
     </div>
 @endsection
+
+
+

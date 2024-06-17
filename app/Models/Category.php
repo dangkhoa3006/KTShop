@@ -12,4 +12,12 @@ class Category extends Model
     use HasFactory;
     use SoftDeletes;
     protected $fillable = ['name','slug','subcategory_count','product_count','status'];
+    public function subCategories()
+    {
+        return $this->hasMany(SubCategory::class);
+    }
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

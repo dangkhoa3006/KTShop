@@ -21,7 +21,7 @@ class AuthGoogleController extends Controller
         {
             //Lấy thông tin người dùng từ Google
             $googleUser = Socialite::driver('google')->user();
-            //Lấy ra người dùng có google_id tương ứng với id của người dùng từ Google
+            //Lấy ra người dùng có email tương ứng với email của người dùng từ Google
             $getUser = User::where('email', $googleUser->getEmail())->first();
             //Trường hợp không có dữ liệu thì insert tài khoản mới
             if (!$getUser) {

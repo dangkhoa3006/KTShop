@@ -64,6 +64,8 @@
                                     <td>
                                         @if ($subcate->status == 1)
                                             <span class="badge badge-success" style="font-size: 14px">Hoạt động</span>
+                                        @elseif ($subcate->status == 0)
+                                            <span class="badge badge-warning" style="font-size: 14px">Không hoạt động</span>
                                         @endif
                                     </td>
                                     <td style="display: flex; justify-content: center;">
