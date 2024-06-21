@@ -37,18 +37,27 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-12 col-12">
-                        <div class="product-info">
-                            <h2 class="title">{{ $product->name }}</h2>
-                            <p class="category"><i class="lni lni-tag"></i>{{ $product->subcategory->name }}</p>
-                            <h3 class="price" style="color: darkblue">
-                                {{ number_format($product->sale_price, 0, ',', '.') }}
-                                đ
-                                @if ($product->price && $product->price != 0)
-                                    <span style="font-size: 15px">{{ number_format($product->price, 0, ',', '.') }}
-                                        đ</span>
-                                @endif
-                            </h3>
-                            {{-- <div class="row">
+                        <div class="single-product" style="border: none;">
+                            <div class="product-info">
+                                <h2 class="title">{{ $product->name }}</h2>
+                                <p class="category"><i class="lni lni-tag"></i>{{ $product->subcategory->name }}</p>
+                                <ul class="review">
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><span>(4.6/5) đánh giá</span></li>
+                                </ul>
+                                <h3 class="price" style="color: darkblue">
+                                    {{ number_format($product->sale_price, 0, ',', '.') }}
+                                    đ
+                                    @if ($product->price && $product->price != 0)
+                                        <span style="font-size: 15px">{{ number_format($product->price, 0, ',', '.') }}
+                                            đ</span>
+                                    @endif
+                                </h3>
+                                {{-- <div class="row">
                                 <div class="col-lg-4 col-md-4 col-12">
                                     <div class="form-group color-option">
                                         <label class="title-label" for="size">Màu sắc</label>
@@ -102,23 +111,71 @@
                                     </div>
                                 </div>
                             </div> --}}
-                            <div class="bottom-content">
-                                <div class="row align-items-end">
-                                    <div class="col-lg-10 col-md-4 col-12">
-                                        <div class="button cart-button" style="margin-bottom: 10px">
-                                            <button class="btn" style="width: 100%;">Mua ngay</button>
+                                <div class="bottom-content">
+                                    <div class="row align-items-end">
+                                        <div class="col-lg-10 col-md-4 col-12">
+                                            <div class="button cart-button" style="margin-bottom: 10px">
+                                                <button class="btn" style="width: 100%;">Mua ngay</button>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-10 col-md-4 col-12">
-                                        <div class="wish-button">
-                                            <button class="btn"><i class="lni lni-cart"></i> Thêm vào giỏ hàng</button>
+                                        <div class="col-lg-10 col-md-4 col-12">
+                                            <div class="wish-button">
+                                                <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
+                                                    @csrf
+                                                    <input type="hidden" name="id" value="{{ $product->id }}">
+                                                    <input type="hidden" name="name" value="{{ $product->name }}">
+                                                    <input type="hidden" name="price"
+                                                        value="{{ $product->sale_price }}">
+                                                    <input type="hidden" name="qty" value="1">
+                                                    <!-- Mặc định là 1, bạn có thể tùy chỉnh -->
+                                                    <input type="hidden" name="image" value="{{ $product->image }}">
+                                                    <button type="submit" class="btn"><i class="lni lni-cart"></i>
+                                                        Thêm vào giỏ hàng</button>
+                                                </form>
+                                            </div>
                                         </div>
-                                    </div>
 
+                                    </div>
+                                </div>
+
+                                <div class="bottom-content">
+                                    <div class="row align-items-end">
+                                        <hr>
+                                        <div class="col-lg-10 col-md-4 col-12">
+                                            <i class="lni lni-mobile" style="font-size: 20px;"></i>
+                                            <span style="margin-left: 10px; font-size: 17px">Sản phẩm là máy mới 100% , đầy
+                                                đủ phụ kiện.</span>
+                                        </div>
+                                        <div class="col-lg-10 col-md-4 col-12" style="margin-top: 10px">
+                                            <i class="lni lni-delivery" style="font-size: 20px;"></i>
+                                            <span style="margin-left: 10px; font-size: 17px">Giao hàng miễn phí nội thành
+                                                TP.HCM</span>
+                                        </div>
+                                        <div class="col-lg-12 col-md-4 col-12" style="margin-top: 10px">
+                                            <i class="lni lni-dropbox" style="font-size: 20px;"></i>
+                                            <span style="margin-left: 10px; font-size: 17px">Bộ sản phẩm: Hộp, máy, cáp,
+                                                sách hướng dẫn</span>
+                                        </div>
+                                        <div class="col-lg-12 col-md-4 col-12" style="margin-top: 10px">
+                                            <i class="lni lni-protection" style="font-size: 20px;"></i>
+                                            <span style="margin-left: 10px; font-size: 17px">Bảo hành 12 tháng tại trung tâm
+                                                bảo hành chính hãng</span>
+                                        </div>
+                                        <div class="col-lg-12 col-md-4 col-12" style="margin-top: 10px">
+                                            <i class="lni lni-money-protection" style="font-size: 20px;"></i>
+                                            <span style="margin-left: 10px; font-size: 17px">Thanh toán trực tiếp hoặc qua
+                                                thẻ tín dụng Visa, Master, JCB.</span>
+                                        </div>
+                                        <div class="col-lg-12 col-md-4 col-12" style="margin-top: 10px">
+                                            <i class="lni lni-tag" style="font-size: 20px;"></i>
+                                            <span style="margin-left: 10px; font-size: 17px">Giá bán đã bao gồm thuế (Xuất
+                                                V.A.T) </span>
+                                        </div>
+
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -151,7 +208,7 @@
                                     <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                                         <thead class="thead-light">
                                             <tr>
-                                                <th>Cấu hình</th>
+                                                <th style="width: 100px">Cấu hình</th>
                                                 <th>Thông số</th>
                                             </tr>
                                         </thead>
@@ -179,6 +236,56 @@
                                         <span class="text">Thu gọn</span>
                                     </button>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-20 col-12 custom-padding-right">
+                        <!-- Start Single Product -->
+                        <div class="single-product">
+                            <h5 style="font-weight: bold">Hỏi đáp {{ $product->name }}</h5><br>
+                            <div class="col-sm-20">
+                                <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="5"
+                                    placeholder="Mời bạn thảo luận, vui lòng nhập tiếng việt có dấu"></textarea>
+                            </div>
+                            <h6 style="margin-top: 20px;margin-bottom: 5px;">Nhập thông tin của bạn</h6>
+                            <div class="col-sm-20">
+                                <input type="text" class="form-control" id="name" name="name"
+                                    value="{{ old('name') }}" placeholder="Họ tên...">
+                            </div>
+                            <div class="col-sm-20" style="margin-top: 10px">
+                                <input type="text" class="form-control" id="email" name="email"
+                                    value="{{ old('email') }}" placeholder="Email...">
+                            </div>
+                            <div class="text-right mt-4 b" style="text-align: right ">
+                                <button class="btn btn-warning"> <i class="lni lni-telegram-plane"></i> Gửi bình luận
+                                </button>
+                            </div><br>
+                        </div>
+                    </div>
+                    {{-- Hiển thị danh sách người bình luận --}}
+                    <div class="col-lg-20 col-12 custom-padding-right">
+                        <!-- Start Single Product -->
+                        <div class="single-product">
+                            <div class="user" style="font-size: 15px; font-weight: bold">
+                                <div style="display: flex; align-items: center;">
+                                    <img class="img-profile rounded-circle" src="../../../assets_admin/img/boy.png"
+                                        style="max-width: 40px;border: 1px solid black;">
+                                    <h6 style="margin:10px">Nguyen Van A</h6>
+                                </div>
+                                <p style="margin-top: 10px">KTmobile chi nhánh ở quận 10 có sẵn ip15 pm 256gb màu Titan
+                                    trắng k
+                                    ạ</p>
+                            </div>
+                            Ngày gửi: 04/06/2024
+                            <div class="user"
+                                style="font-size: 15px; font-weight: bold; margin-top: 10px;margin-left: 60px; background-color:rgb(224, 224, 224); border-radius: 10px;">
+                                <div style="display: flex; align-items: center;">
+                                    <img class="img-profile rounded-circle" src="../../../assets_admin/img/boy.png"
+                                        style="max-width: 40px;border: 1px solid black; margin-left: 10px;margin-top: 10px;">
+                                    <h6 style="margin-top:10px;margin-left:10px;">Quản trị viên</h6>
+
+                                </div>
+                                <p style="margin-top: 10px; margin-left: 10px">Còn hàng bạn nha</p>
                             </div>
                         </div>
                     </div>

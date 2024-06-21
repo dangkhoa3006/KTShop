@@ -68,7 +68,16 @@
                                         src="{{ $p->image }}" alt="#">
                                 </a>
                                 <div class="button">
-                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Thêm </a>
+                                    <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $p->id }}">
+                                        <input type="hidden" name="name" value="{{ $p->name }}">
+                                        <input type="hidden" name="price" value="{{ $p->sale_price }}">
+                                        <input type="hidden" name="qty" value="1">
+                                        <!-- Mặc định là 1, bạn có thể tùy chỉnh -->
+                                        <input type="hidden" name="image" value="{{ $p->image }}">
+                                        <button type="submit" class="btn"><i class="lni lni-cart"></i> Thêm</button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="product-info">
@@ -78,7 +87,7 @@
                                 <div class="price">
                                     <span>{{ number_format($p->sale_price, 0, ',', '.') }} đ</span>
                                     @if ($p->price && $p->price != 0)
-                                        <span class="discount-price">{{ number_format($p->price, 0, ',', '.') }}</span>
+                                        <span class="discount-price">{{ number_format($p->price, 0, ',', '.') }} đ</span>
                                     @endif
                                 </div>
                                 <ul class="review">

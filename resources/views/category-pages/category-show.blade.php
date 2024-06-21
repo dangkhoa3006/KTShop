@@ -46,7 +46,6 @@
                 </div>
             </div><br>
             <h5>Lọc sản phẩm theo giá: từ cao đến thấp, từ thấp đến cao, khuyến mãi</h5>
-
         </div>
     </section>
 
@@ -66,7 +65,16 @@
                                         src="{{ $p->image }}" alt="#">
                                 </a>
                                 <div class="button">
-                                    <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Thêm </a>
+                                    <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $p->id }}">
+                                        <input type="hidden" name="name" value="{{ $p->name }}">
+                                        <input type="hidden" name="price" value="{{ $p->sale_price }}">
+                                        <input type="hidden" name="qty" value="1">
+                                        <!-- Mặc định là 1, bạn có thể tùy chỉnh -->
+                                        <input type="hidden" name="image" value="{{ $p->image }}">
+                                        <button type="submit" class="btn"><i class="lni lni-cart"></i> Thêm</button>
+                                    </form>
                                 </div>
                             </div>
                             <div class="product-info">
@@ -76,7 +84,7 @@
                                 <div class="price">
                                     <span>{{ number_format($p->sale_price, 0, ',', '.') }} đ</span>
                                     @if ($p->price && $p->price != 0)
-                                        <span class="discount-price">{{ number_format($p->price, 0, ',', '.') }}</span>
+                                        <span class="discount-price">{{ number_format($p->price, 0, ',', '.') }} đ</span>
                                     @endif
                                 </div>
                                 <ul class="review">
@@ -189,19 +197,19 @@
                 <div class="col-lg-3 col-md-6 col-12">
                     <!-- Start Single Product -->
                     <div class="single-product">
-                        <div class="product-image">
+                        {{-- <div class="product-image">
                             <img src="../../assets_client/images/products/product-4.jpg" alt="#">
                             <span class="new-tag">New</span>
                             <div class="button">
                                 <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
                                     Cart</a>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="product-info">
-                            <span class="category">Phones</span>
+                            {{-- <span class="category">Phones</span>
                             <h4 class="title">
                                 <a href="product-grids.html">iphone 6x plus</a>
-                            </h4>
+                            </h4> --}}
                             <ul class="review">
                                 <li><i class="lni lni-star-filled"></i></li>
                                 <li><i class="lni lni-star-filled"></i></li>
@@ -210,9 +218,9 @@
                                 <li><i class="lni lni-star-filled"></i></li>
                                 <li><span>5.0 Review(s)</span></li>
                             </ul>
-                            <div class="price">
+                            {{-- <div class="price">
                                 <span>$400.00</span>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                     <!-- End Single Product -->
@@ -325,30 +333,14 @@
                             <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="5"
                                 placeholder="Mời bạn thảo luận, vui lòng nhập tiếng việt có dấu"></textarea>
                         </div>
-                        {{-- <div style="color: red; margin-left: 18%;">
-                            @if ($errors->has('address'))
-                                {{ $errors->first('address') }}<br>
-                            @endif
-                        </div> --}}
-
                         <h6 style="margin-top: 20px;margin-bottom: 5px;">Nhập thông tin của bạn</h6>
                         <div class="col-sm-20">
                             <input type="text" class="form-control" id="name" name="name"
                                 value="{{ old('name') }}" placeholder="Họ tên...">
-                            {{-- <div style="color: red">
-                                @if ($errors->has('name'))
-                                    {{ $errors->first('name') }}<br>
-                                @endif
-                            </div> --}}
                         </div>
                         <div class="col-sm-20" style="margin-top: 10px">
                             <input type="text" class="form-control" id="email" name="email"
                                 value="{{ old('email') }}" placeholder="Email...">
-                            {{-- <div style="color: red">
-                                @if ($errors->has('name'))
-                                    {{ $errors->first('name') }}<br>
-                                @endif
-                            </div> --}}
                         </div>
                         <div class="text-right mt-4 b" style="text-align: right; ">
                             <button class="btn btn-warning"> <i class="lni lni-telegram-plane"></i> Gửi bình luận
@@ -433,4 +425,35 @@
         </div>
     </section>
     <!-- End Shipping Info -->
+    {{-- <script>
+         $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        $(document).ready(function() {
+            $('.add-to-cart-form').on('submit', function(e) {
+                e.preventDefault(); // Ngăn chặn hành vi submit mặc định
+    
+                var form = $(this);
+                var url = form.attr('action');
+                var formData = form.serialize(); // Lấy tất cả dữ liệu từ form
+    
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        if(response.success) {
+                            alert(response.success); // Hiển thị thông báo thành công
+                            $('.total-items-cart').text(response.totalItems); // Cập nhật số lượng sản phẩm trong giỏ hàng
+                        }
+                    },
+                    error: function(xhr) {
+                        console.log(xhr.responseText); // Xử lý lỗi
+                    }
+                });
+            });
+        });
+    </script> --}}
 @endsection

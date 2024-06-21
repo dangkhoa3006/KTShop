@@ -107,22 +107,24 @@
             </li>
             <hr class="sidebar-divider">
             {{-- Trang tài khoản người dùng --}}
-            <div class="sidebar-heading">
-                Tài khoản
-            </div>
-            <li class="nav-item @yield('account-active')">
-                <a class="nav-link" href="{{ route('accounts.index') }}">
-                    <i class="fas fa-fw fa-palette"></i>
-                    <span>Quản lý tài khoản</span>
-                </a>
-            </li>
-            <li class="nav-item @yield('member-active')">
-                <a class="nav-link" href="{{ route('members.index') }}">
-                    <i class="fas fa-fw fa-palette"></i>
-                    <span>Quản lý thành viên</span>
-                </a>
-            </li>
-            <hr class="sidebar-divider">
+            @if (Auth::check() && Auth::user()->role == 1)
+                <div class="sidebar-heading">
+                    Tài khoản
+                </div>
+                <li class="nav-item @yield('account-active')">
+                    <a class="nav-link" href="{{ route('accounts.index') }}">
+                        <i class="fas fa-fw fa-palette"></i>
+                        <span>Quản lý tài khoản</span>
+                    </a>
+                </li>
+                <li class="nav-item @yield('member-active')">
+                    <a class="nav-link" href="{{ route('members.index') }}">
+                        <i class="fas fa-fw fa-palette"></i>
+                        <span>Quản lý thành viên</span>
+                    </a>
+                </li>
+                <hr class="sidebar-divider">
+            @endif
             {{-- Bài viết --}}
             <div class="sidebar-heading">
                 Bài viết sản phẩm

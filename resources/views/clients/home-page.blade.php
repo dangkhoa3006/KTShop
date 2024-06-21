@@ -976,4 +976,35 @@
             </div>
         </div>
     </section><br><br>
+    <script>
+        $.ajaxSetup({
+           headers: {
+               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+           }
+       });
+       $(document).ready(function() {
+           $('.add-to-cart-form').on('submit', function(e) {
+               e.preventDefault(); // Ngăn chặn hành vi submit mặc định
+   
+               var form = $(this);
+               var url = form.attr('action');
+               var formData = form.serialize(); // Lấy tất cả dữ liệu từ form
+   
+               $.ajax({
+                   url: url,
+                   method: 'POST',
+                   data: formData,
+                   success: function(response) {
+                       if(response.success) {
+                           alert(response.success); // Hiển thị thông báo thành công
+                           $('.total-items-cart').text(response.totalItems); // Cập nhật số lượng sản phẩm trong giỏ hàng
+                       }
+                   },
+                   error: function(xhr) {
+                       console.log(xhr.responseText); // Xử lý lỗi
+                   }
+               });
+           });
+       });
+   </script>
 @endsection

@@ -6,6 +6,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>@yield('title')</title>
     <meta name="description" content="" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" type="image/x-icon" href="../../../assets_admin/img/logo/icon_dashboard.png" />
     <link rel="stylesheet" href="../../assets_client/css/bootstrap.min.css" />
@@ -78,6 +79,10 @@
                             </div>
 
                             @auth
+                                <a href="{{ route('showProfile') }}" class="btn btn-outline-light mb-1"
+                                    style="margin-right: 5px">
+                                    <span class="text">Thông tin cá nhân</span>
+                                </a>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit" class="btn btn-outline-danger mb-1 logout-button">Đăng
@@ -147,64 +152,17 @@
                             </div>
                             <div class="navbar-cart">
                                 <div class="wishlist">
-                                    <a href="javascript:void(0)">
+                                    <a href="#">
                                         <i class="lni lni-heart"></i>
-                                        <span class="total-items">0</span>
+                                        <span class="total-items-wishlist">0</span>
                                     </a>
                                 </div>
+                                {{-- Shopping cart --}}
                                 <div class="cart-items">
-                                    <a href="javascript:void(0)" class="main-btn">
+                                    <a href="{{ route('indexCart') }}" class="main-btn">
                                         <i class="lni lni-cart"></i>
-                                        <span class="total-items">2</span>
+                                        <span class="total-items-cart">{{ session('cartItemsCount', 0) }}</span>
                                     </a>
-                                    <!-- Shopping Item -->
-                                    <div class="shopping-item">
-                                        <div class="dropdown-cart-header">
-                                            <span>2 Items</span>
-                                            <a href="cart.html">View Cart</a>
-                                        </div>
-                                        <ul class="shopping-list">
-                                            <li>
-                                                <a href="javascript:void(0)" class="remove"
-                                                    title="Remove this item"><i class="lni lni-close"></i></a>
-                                                <div class="cart-img-head">
-                                                    <a class="cart-img" href="product-details.html"><img
-                                                            src="../../assets_client/images/header/cart-items/item1.jpg"
-                                                            alt="#"></a>
-                                                </div>
-
-                                                <div class="content">
-                                                    <h4><a href="product-details.html">
-                                                            Apple Watch Series 6</a></h4>
-                                                    <p class="quantity">1x - <span class="amount">$99.00</span></p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)" class="remove"
-                                                    title="Remove this item"><i class="lni lni-close"></i></a>
-                                                <div class="cart-img-head">
-                                                    <a class="cart-img" href="product-details.html"><img
-                                                            src="../../assets_client/images/header/cart-items/item2.jpg"
-                                                            alt="#"></a>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="product-details.html">Wi-Fi Smart Camera</a></h4>
-                                                    <p class="quantity">1x - <span class="amount">$35.00</span></p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div class="bottom">
-                                            <div class="total">
-                                                <span>Total</span>
-                                                <span class="total-amount">$134.00</span>
-                                            </div>
-                                            <div class="button">
-                                                <a href="checkout.html" class="btn animate">Checkout</a>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--/ End Shopping Item -->
                                 </div>
 
                             </div>
@@ -217,6 +175,7 @@
         </div>
         <!-- End Header Middle -->
         <!-- Start Header Bottom -->
+
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-lg-12 col-md-6 col-12">
@@ -293,18 +252,43 @@
     <br>
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-12 col-md-6 col-12">
+            <div class="col-lg-6 col-md-6 col-12">
                 <div class="nav-inner" style="display: flex;justify-content: flex-start;align-items: center;">
                     @section('header-route')
                     @show
                 </div>
             </div>
+            {{-- Success --}}
+            @if (session('success'))
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert"
+                        style="background-color: #74E291; font-size: 17px; color: #059212">
+                        <b>Thành công</b>
+                        <br><span>{{ session('success') }}</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
+            @endif
+            {{-- Error --}}
+            @if (session('error'))
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div id="error-alert" class="alert alert-danger alert-dismissible fade show" role="alert"
+                        style="background-color: #FF6969; font-size: 17px; color: #910909">
+                        <b>Không thành công</b>
+                        <br><span>{{ session('error') }}</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 
     <div class="container-pages">
         @yield('client-content-pages')
     </div>
+
 
 
     <!-- Start Banner Area -->
@@ -467,6 +451,11 @@
         });
     </script>
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
         $(document).ready(function() {
             $(window).scroll(function() {
                 if ($(this).scrollTop() > 0) { // Kiểm tra nếu đã cuộn
@@ -492,7 +481,68 @@
                         items: 5
                     }
                 }
-            })
+            });
+            $('.add-to-cart-form').on('submit', function(e) {
+                e.preventDefault(); // Ngăn chặn hành vi submit mặc định
+
+                var form = $(this);
+                var url = form.attr('action');
+                var formData = form.serialize(); // Lấy tất cả dữ liệu từ form
+
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        if (response.success) {
+                            // Xóa các thông báo cũ nếu có
+                            $('.notification').remove();
+
+                            // Hiển thị thông báo thành công
+                            var successAlert = `
+                    <div id="success-alert" class="notification alert alert-success alert-dismissible fade show" role="alert"
+                        style="position: fixed; top: 20px; right: 20px; z-index: 9999; background-color: #74E291; 
+                        font-size: 17px; color: #059212">
+                        <b>Thành công</b>
+                        <br><span>${response.success}</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`;
+                            $('body').append(successAlert); // Thêm thông báo vào body của trang
+
+                            // Cập nhật số lượng sản phẩm trong giỏ hàng
+                            $('.total-items-cart').text(response.cartItemsCount);
+
+                            // Đóng thông báo sau 3 giây
+                            setTimeout(function() {
+                                $("#success-alert").alert('close');
+                            }, 3000); // 3000 milliseconds = 3 giây
+                        }
+                    },
+                    error: function(xhr) {
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.error) {
+                            // Xóa các thông báo cũ nếu có
+                            $('.notification').remove();
+
+                            // Hiển thị thông báo lỗi
+                            var errorAlert = `
+                <div id="error-alert" class="notification alert alert-danger alert-dismissible fade show" role="alert"
+                    style="position: fixed; top: 20px; right: 20px; z-index: 9999; background-color: #F8D7DA; 
+                    font-size: 17px; color: #842029">
+                    <b>Không thành công</b>
+                    <br><span>${response.error}</span>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>`;
+                            $('body').append(errorAlert); // Thêm thông báo vào body của trang
+
+                            // Đóng thông báo sau 3 giây
+                            setTimeout(function() {
+                                $("#error-alert").alert('close');
+                            }, 3000); // 3000 milliseconds = 3 giây
+                        }
+                    }
+                });
+            });
         });
     </script>
 </body>
