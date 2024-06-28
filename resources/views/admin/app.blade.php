@@ -459,6 +459,7 @@
             //     maxboostedstep: 10,
             //     verticalbuttons: true,
             // });
+            
             //select districts from provinces
             $("#selectProvinces").change(function() {
                 var province_id = $(this).val();

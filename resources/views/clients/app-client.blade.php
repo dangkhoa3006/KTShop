@@ -252,7 +252,7 @@
     <br>
     <div class="container">
         <div class="row align-items-center">
-            <div class="col-lg-6 col-md-6 col-12">
+            <div class="col-lg-9 col-md-6 col-12">
                 <div class="nav-inner" style="display: flex;justify-content: flex-start;align-items: center;">
                     @section('header-route')
                     @show
@@ -270,6 +270,31 @@
                     </div>
                 </div>
             @endif
+            @if (session('payment-success'))
+                <div class="col-lg-6 col-md-6 col-12"></div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert"
+                        style="background-color: #74E291; font-size: 17px; color: #059212">
+                        <b>Thành công</b>
+                        <br><span>{{ session('payment-success') }}</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
+            @endif
+            @if (session('payment-check'))
+                <div class="col-lg-6 col-md-6 col-12"></div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div id="success-alert" class="alert alert-success alert-dismissible fade show" role="alert"
+                        style="background-color: #fff9a3; font-size: 17px; color: #d27605">
+                        <b>Đặt hàng thành công</b>
+                        <br><span>{{ session('payment-check') }}</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
+            @endif
+
             {{-- Error --}}
             @if (session('error'))
                 <div class="col-lg-6 col-md-6 col-12">
@@ -482,6 +507,13 @@
                     }
                 }
             });
+            //set thời gian thông báo
+            setTimeout(function() {
+                $("#success-alert").alert('close'); // Đóng alert sau 3 giây
+            }, 3000);
+            setTimeout(function() {
+                $("#error-alert").alert('close'); // Đóng alert sau 3 giây
+            }, 3000);
             $('.add-to-cart-form').on('submit', function(e) {
                 e.preventDefault(); // Ngăn chặn hành vi submit mặc định
 
@@ -512,6 +544,10 @@
                             // Cập nhật số lượng sản phẩm trong giỏ hàng
                             $('.total-items-cart').text(response.cartItemsCount);
 
+                            // Cập nhật số lượng sản phẩm thanh toán
+                            $('.total-items-order').text('Tổng cộng ' + response
+                                .cartItemsCount + ' sản phẩm');
+
                             // Đóng thông báo sau 3 giây
                             setTimeout(function() {
                                 $("#success-alert").alert('close');
@@ -540,6 +576,32 @@
                                 $("#error-alert").alert('close');
                             }, 3000); // 3000 milliseconds = 3 giây
                         }
+                    }
+                });
+            });
+            $('#buy-now-btn').on('click', function(e) {
+                e.preventDefault(); // Ngăn chặn hành vi mặc định
+
+                var form = $('.add-to-cart-form');
+                var url = form.attr('action');
+                var formData = form.serialize(); // Lấy tất cả dữ liệu từ form
+
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        if (response.success) {
+                            window.location.href =
+                                '{{ route('indexCart') }}'; // Chuyển hướng đến trang indexCart
+                        } else {
+                            // Hiển thị thông báo lỗi nếu cần
+                            alert('Có lỗi xảy ra. Vui lòng thử lại.');
+                        }
+                    },
+                    error: function(xhr) {
+                        // Hiển thị thông báo lỗi nếu cần
+                        alert('Có lỗi xảy ra. Vui lòng thử lại.');
                     }
                 });
             });

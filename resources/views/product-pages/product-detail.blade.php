@@ -115,12 +115,14 @@
                                     <div class="row align-items-end">
                                         <div class="col-lg-10 col-md-4 col-12">
                                             <div class="button cart-button" style="margin-bottom: 10px">
-                                                <button class="btn" style="width: 100%;">Mua ngay</button>
+                                                <button class="btn" id="buy-now-btn" style="width: 100%;">Mua
+                                                    ngay</button>
                                             </div>
                                         </div>
                                         <div class="col-lg-10 col-md-4 col-12">
                                             <div class="wish-button">
-                                                <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
+                                                <form action="{{ route('cart.add') }}" method="POST"
+                                                    class="add-to-cart-form">
                                                     @csrf
                                                     <input type="hidden" name="id" value="{{ $product->id }}">
                                                     <input type="hidden" name="name" value="{{ $product->name }}">
@@ -352,6 +354,34 @@
                 hideMoreSpecsBtn.classList.add('d-none'); // Ẩn nút thu gọn
                 viewMoreSpecsBtn.style.display = 'block'; // Hiển thị nút xem chi tiết
             });
+        });
+
+        document.getElementById('buy-now-btn').addEventListener('click', function() {
+            var form = document.getElementById('add-to-cart-form');
+            var formData = new FormData(form);
+
+            // Gửi AJAX request
+            fetch(form.action, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // Chuyển hướng đến trang indexCart sau khi thêm thành công
+                        window.location.href = '{{ route('indexCart') }}';
+                    } else {
+                        // Xử lý khi thêm vào giỏ hàng thất bại (nếu cần)
+                        alert('Có lỗi xảy ra. Vui lòng thử lại.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Có lỗi xảy ra. Vui lòng thử lại.');
+                });
         });
     </script>
 

@@ -36,7 +36,6 @@
                                     @endif
                                 </div>
                             </div>
-                            
                         </div>
                         <fieldset class="form-group">
                             <div class="row">

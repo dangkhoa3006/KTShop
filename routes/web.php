@@ -9,6 +9,8 @@ use App\Http\Controllers\ForgetPasswordController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MembersController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RegisterController;
@@ -87,6 +89,27 @@ Route::group(['middleware' => 'auth.users'], function () {
         Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
         Route::post('/cart/remove/{rowId}', [CartController::class, 'removeFromCart'])->name('cart.remove');
         Route::post('/cart/update/{rowId}', [CartController::class, 'updateQuantity'])->name('cart.update');
+        Route::post('/fetch-districts/{id}', [CartController::class, 'fetchDistricts']);
+        Route::post('/fetch-wards/{id}', [CartController::class, 'fetchWards']);
+
+        //Tạo đơn hàng
+        Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+        //Thanh toán
+        Route::get('/payment/{orderId}', [PaymentController::class, 'viewPayment'])->name('viewPayment');
+        Route::get('/payment-fail/{orderId}', [PaymentController::class, 'viewPaymentFail'])->name('viewPaymentFail');
+        
+        //Thanh toán MoMo QR code
+        Route::post('/payment/momo', [PaymentController::class, 'MoMo'])->name('momoPayment');
+        Route::match(['get', 'post'], '/momo/callback', [PaymentController::class, 'handleMoMoCallback'])->name('callbackMoMo');
+        //Thanh toán VNPay banking
+        Route::post('/payment/vnpay', [PaymentController::class, 'Vnpay'])->name('vnpayPayment');
+        Route::get('/vnpay-return', [PaymentController::class, 'vnpayReturn'])->name('vnpayReturn');
+
+        Route::get('/payment', [PaymentController::class, 'showQRCode'])->name('showQRCode');
+        Route::get('/updateOrderStatus/{orderId}', [PaymentController::class, 'updateOrderStatus'])->name('updateOrderStatus');
+
+        Route::post('/payment/cash-money', [PaymentController::class, 'CashMoney'])->name('cashMoneyPayment');
+
         //Trang chi tiết sản phẩm
         Route::get('/sanpham/{productSlug}', [ProductController::class, 'show'])->name('showProduct');
         //Hiển thị tất cả sản phẩm trong danh mục

@@ -159,7 +159,7 @@
                                         <i class="lni lni-cart"></i>
                                         <span class="total-items-cart">{{ session('cartItemsCount', 0) }}</span>
                                     </a>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -209,133 +209,267 @@
     </div>
 
     <div class="container">
-        <div class="row align-items-center" style="display: flex;flex-direction: column;min-height: 60vh;">
-            <!-- DataTable with Hover -->
-            <div class="col-lg-20 col-12 custom-padding-right">
-                <div class="card mb-4" style="margin-left: 9%; margin-right: 9%; margin-top: 20px">
-                    <div class="table-responsive p-3">
-                        <table class="table align-items-center table-flush table-hover" id="dataTableHover">
-                            <thead class="thead-light">
-                                <tr>
-                                    <th>Ảnh sản phẩm</th>
-                                    <th>Tên sản phẩm</th>
-                                    <th>Số lượng</th>
-                                    <th>Giá</th>
-                                    <th>Tổng cộng</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody id="cart-items">
-                                @foreach (Cart::content() as $item)
-                                    <tr data-rowid="{{ $item->rowId }}">
-                                        <td><img src="{{ $item->options->image }}"
-                                                style="width: 50px; height: 50px; object-fit: contain;"></td>
-                                        <td>{{ $item->name }}</td>
-                                        <td>
-                                            <div class="quantity-input">
-                                                <span class="minus">-</span>
-                                                <input type="number" name="quantity" value="{{ $item->qty }}"
-                                                    min="1" class="quantity" max="5"
-                                                    style="width: 60px; text-align:center;" readonly>
-                                                <span class="plus">+</span>
-                                            </div>
-                                        </td>
-                                        <td>{{ number_format($item->price, 0, ',', '.') }} đ</td>
-                                        <td class="subtotal">{{ number_format($item->subtotal, 0, ',', '.') }} đ</td>
-                                        <td>
-                                            <button class="btn btn-danger btn-sm remove-from-cart"
-                                                data-rowid="{{ $item->rowId }}">Xóa</button>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td id="total" class="text-danger"><strong>{{ Cart::subtotal(0, ',', '.') }}
-                                            đ</strong></td>
-                                    <td></td>
-                                </tr>
-                            </tfoot>
-                        </table>
+        <div class="text-left" style="margin-top: 10px; margin-left: 120px;">
+            <a href="{{ route('homepage') }}" style="font-size: 16px;">&larr; Mua thêm sản phẩm khác</a>
+        </div>
+        <div class="top-area">
 
+            <form action="{{ route('order.store') }}" method="POST">
+                @csrf
+                <div class="row align-items-center">
+                    <!-- DataTable with Hover -->
+                    <div class="col-lg-20 col-12 custom-padding-right">
+                        <div class="card mb-4" style="margin-left: 9%; margin-right: 9%; margin-top: 20px">
+                            <div class="table-responsive p-3">
+                                <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                                    <thead class="thead-light">
+                                        <tr>
+                                            <th style="width: 12%;">Ảnh sản phẩm</th>
+                                            <th style="width: 30%;">Tên sản phẩm</th>
+                                            <th style="width: 15%;">Số lượng</th>
+                                            <th style="width: 13%;">Giá</th>
+                                            <th style="width: 13%;">Tổng cộng</th>
+                                            <th style="width: 25%;"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="cart-items">
+                                        @foreach (Cart::content() as $item)
+                                            <tr data-rowid="{{ $item->rowId }}">
+                                                <td><img src="{{ $item->options->image }}"
+                                                        style="width: 50px; height: 50px; object-fit: contain;"></td>
+                                                <td>{{ $item->name }}</td>
+                                                <td>
+                                                    <div class="quantity-input">
+                                                        <span class="minus">-</span>
+                                                        <input type="number" name="quantity"
+                                                            value="{{ $item->qty }}" min="1"
+                                                            class="quantity" max="5"
+                                                            style="width: 60px; text-align:center;" readonly>
+                                                        <span class="plus">+</span>
+                                                    </div>
+                                                </td>
+                                                <td>{{ number_format($item->price, 0, ',', '.') }} đ</td>
+                                                <td class="subtotal">{{ number_format($item->subtotal, 0, ',', '.') }}
+                                                    đ
+                                                </td>
+                                                <td class="text-center">
+                                                    <button class="btn btn-danger btn-sm remove-from-cart"
+                                                        data-rowid="{{ $item->rowId }}">Xóa</button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
 
+                    <div class="product-details-info" style="margin-bottom: 100px">
+                        <div class="row">
+                            <div class="col-lg-6 col-12" style="margin-left: 9%; ">
+                                <div class="single-block">
+                                    <div class="info-body custom-responsive-margin">
+                                        <h4>Thông tin khách hàng</h4>
+
+                                        <div style="margin-top: 5px; color: #333;">
+                                            <b for="name" class="col-sm-1 col-form-label">Họ tên</b>
+                                            <div class="col-sm-15">
+                                                <input type="text" class="form-control" id="name"
+                                                    name="username" value="{{ old('username') }}"
+                                                    placeholder="Họ tên...">
+                                                <div style="color: red">
+                                                    @if ($errors->has('username'))
+                                                        {{ $errors->first('username') }}<br>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="margin-top: 5px; color: #333;">
+                                            <b for="phone" class="col-sm-1 col-form-label">Số điện thoại</b>
+                                            <div class="col-sm-15">
+                                                <input type="text" class="form-control" id="phone"
+                                                    name="phone" value="{{ old('phone') }}"
+                                                    placeholder="Số điện thoại...">
+                                                <div style="color: red">
+                                                    @if ($errors->has('phone'))
+                                                        {{ $errors->first('phone') }}<br>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div style="margin-top: 5px; color: #333;">
+                                            <b for="email" class="col-sm-1 col-form-label">Email</b>
+                                            <div class="col-sm-15">
+                                                <input type="text" class="form-control" id="email"
+                                                    name="email" value="{{ old('email') }}"
+                                                    placeholder="Email...">
+                                                <div style="color: red">
+                                                    @if ($errors->has('email'))
+                                                        {{ $errors->first('email') }}<br>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <fieldset class="form-group" style="margin-top: 5px">
+                                            <div class="d-flex align-items-center" style="color: #333">
+                                                <b style="margin-right: 10px; font-size: 15px;">Cách thức nhận hàng</b>
+                                                <div class="custom-control custom-radio" style="margin-right: 10px;">
+                                                    <input type="radio" id="customRadio1" name="delivery"
+                                                        value="home" class="custom-control-input"
+                                                        {{ old('delivery') == 'home' ? 'checked' : '' }}>
+                                                    <label class="custom-control-label" for="customRadio1">Giao hàng
+                                                        tận
+                                                        nơi</label>
+                                                </div>
+                                                <div class="custom-control custom-radio">
+                                                    <input type="radio" id="customRadio2" name="delivery"
+                                                        value="shop" class="custom-control-input"
+                                                        {{ old('delivery') == 'shop' ? 'checked' : '' }}>
+                                                    <label class="custom-control-label" for="customRadio2">Nhận tại
+                                                        cửa
+                                                        hàng</label>
+                                                </div>
+                                            </div>
+                                            <div style="color: red; margin-left: 20px;">
+                                                @if ($errors->has('gender'))
+                                                    {{ $errors->first('gender') }}<br>
+                                                @endif
+                                            </div>
+                                        </fieldset>
+
+                                        <div id="delivery-details" style="display: none;">
+                                            <div style="margin-top: 5px; color: #333">
+                                                <b for="exampleFormControlSelect1"
+                                                    class="col-sm-2 col-form-label">Tỉnh/thành
+                                                    phố</b>
+                                                <div class="col-sm-15">
+                                                    <select class="form-control" name="province_id"
+                                                        id="selectProvinces">
+                                                        <option value="">----Chọn tỉnh/thành phố----</option>
+                                                        @if (!@empty($provinces))
+                                                            @foreach ($provinces as $province)
+                                                                <option value="{{ $province->id }}">
+                                                                    {{ $province->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                    <div style="color: red;">
+                                                        @if ($errors->has('province_id'))
+                                                            {{ $errors->first('province_id') }}<br>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div style="margin-top: 5px; color: #333">
+                                                <b for="exampleFormControlSelect1"
+                                                    class="col-sm-2 col-form-label">Quận/huyện</b>
+                                                <div class="col-sm-15">
+                                                    <select class="form-control" name="district_id"
+                                                        id="selectDistricts">
+                                                        <option value="">----Chọn quận/huyện----</option>
+                                                        @if (!@empty($districts))
+                                                            @foreach ($districts as $district)
+                                                                <option value="{{ $district->id }}"
+                                                                    {{ old('district_id', $user->district_id) == $district->id ? 'selected' : '' }}>
+                                                                    {{ $district->name }}
+                                                                </option>
+                                                            @endforeach
+                                                        @endif
+                                                    </select>
+                                                    <div style="color: red;">
+                                                        @if ($errors->has('district_id'))
+                                                            {{ $errors->first('district_id') }}<br>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div style="margin-top: 5px; color: #333">
+                                                <b for="exampleFormControlSelect1"
+                                                    class="col-sm-2 col-form-label">Phường/xã</b>
+                                                <div class="col-sm-15">
+                                                    <select class="form-control" name="ward_id" id="selectWards">
+                                                        <option value="">----Chọn phường/xã----</option>
+                                                        @if (!@empty($wards))
+                                                            @foreach ($wards as $ward)
+                                                                <option value="{{ $ward->id }}"
+                                                                    {{ old('ward_id', $user->ward_id) == $ward->id ? 'selected' : '' }}>
+                                                                    {{ $ward->name }}
+                                                                </option>
+                                                            @endforeach
+
+                                                        @endif
+                                                    </select>
+                                                    <div style="color: red;">
+                                                        @if ($errors->has('ward_id'))
+                                                            {{ $errors->first('ward_id') }}<br>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div style="margin-top: 5px; color: #333">
+                                                <b for="exampleFormControlTextarea1"
+                                                    class="col-sm-2 col-form-label">Địa
+                                                    chỉ</b>
+                                                <div class="col-sm-15">
+                                                    <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="3"
+                                                        placeholder="Địa chỉ...">{{ old('address') }}</textarea>
+                                                </div>
+                                                <div style="color: red; margin-left: 18%;">
+                                                    @if ($errors->has('address'))
+                                                        {{ $errors->first('address') }}<br>
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-12">
+                                <div class="single-block">
+                                    <div class="info-body">
+                                        <h6 class="total-items-order">Tổng cộng {{ session('cartItemsCount', 0) }} sản
+                                            phẩm</h6>
+                                        <div class="table-responsive">
+                                            <table class="table align-items-center table-flush table-hover"
+                                                id="dataTableHover">
+                                                <thead class="thead-light">
+                                                    <tr>
+                                                        <th>THÀNH TIỀN: </th>
+                                                        <th id="total"><strong
+                                                                style="font-size: 20px">{{ Cart::subtotal(0, ',', '.') }}
+                                                                đ</strong></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td></td>
+                                                        <td style="font-style: italic;">
+                                                            (Đã bao gồm VAT)
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                            <button type="submit"
+                                                id="view-more-specs-btn"class="btn btn-primary btn-icon-split"
+                                                style="width: 100%; margin-top: 20px; border-radius: 10px;">
+                                                <span class="icon text-white-100">
+                                                    <i class="lni lni-cart-full"></i>
+                                                </span>
+                                                <span class="text">Đặt hàng</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
-    <footer class="footer">
-        <div class="footer-middle">
-            <div class="container">
-                <div class="bottom-inner">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-6 col-12">
-                            <div class="single-footer f-contact">
-                                <h3>TỔNG ĐÀI HỖ TRỢ</h3>
-                                <p class="phone">Điện thoại: 088.99999.33</p>
-                                <ul>
-                                    <li><span>Thời gian làm việc </span>Thứ 2 - Thứ 7: 08h30 - 21h00</li>
-                                    <li><span>Thời gian làm việc</span> Chủ Nhật: 08h30 - 12h00</li>
-                                </ul>
-                                <p class="mail">
-                                    <a href="mailto:support@shopgrids.com">supports@ktmobile.com</a>
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-12">
-                            <div class="single-footer f-link">
-                                <h3>HỖ TRỢ KHÁCH HÀNG</h3>
-                                <ul>
-                                    <li><a href="javascript:void(0)">Mua hàng trả góp</a></li>
-                                    <li><a href="javascript:void(0)">Chính sách kiểm hàng</a></li>
-                                    <li><a href="javascript:void(0)">Mua hàng online</a></li>
-                                    <li><a href="javascript:void(0)">Chính sách kiểm hàng</a></li>
-                                    <li><a href="javascript:void(0)">Chính sách đổi trả</a></li>
-                                    <li><a href="javascript:void(0)">Dịch vụ bảo hành</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-12">
-                            <div class="single-footer f-link">
-                                <h3>KTMOBILE</h3>
-                                <ul>
-                                    <li><a href="javascript:void(0)">Giới thiệu về KTMobile</a></li>
-                                    <li><a href="javascript:void(0)">Liên hệ hợp tác</a></li>
-                                    <li><a href="javascript:void(0)">Hệ thống cửa hàng</a></li>
-                                    <li><a href="javascript:void(0)">Về trang chủ</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 col-12">
-                            <div class="single-footer f-link">
-                                <h3>KINH DOANH SẢN PHẨM</h3>
-                                <ul>
-                                    <li><a href="javascript:void(0)">Máy tính bảng</a></li>
-                                    <li><a href="javascript:void(0)">Điện thoại thông minh</a></li>
-                                    <li><a href="javascript:void(0)">Phụ kiện, tai nghe</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="container">
-                <div class="inner-content">
-                    <div class="row align-items-center">
-                        <p style="text-align: center">
-                            Copyright © 2024 KTMobile. Giấy chứng nhận ĐKKD số 41J8021261 do UBND Quận 1 cấp ngày
-                            04/05/2024. Bản quyền ktmobile.vn Địa chỉ: 65 đường Huỳnh Thúc Kháng, Phường Bến Nghé, Quận
-                            1, TP. Hồ Chí Minh, Việt Nam.
-                            Điện thoại liên hệ: 0779621333. Email: lecongthinh24062002@gmail.com.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
     <!-- ========================= scroll-top ========================= -->
     <a href="#" class="scroll-top">
         <i class="lni lni-chevron-up"></i>
@@ -354,7 +488,21 @@
             }
         });
         $(document).ready(function() {
+            function toggleDeliveryDetails() {
+                if ($("input[name='delivery']:checked").val() == 'home') {
+                    $("#delivery-details").show();
+                } else {
+                    $("#delivery-details").hide();
+                }
+            }
 
+            // Gọi hàm khi trang được tải lần đầu
+            toggleDeliveryDetails();
+
+            // Gọi hàm khi người dùng thay đổi lựa chọn
+            $("input[name='delivery']").change(function() {
+                toggleDeliveryDetails();
+            });
 
             //select districts from provinces
             $("#selectProvinces").change(function() {
@@ -363,7 +511,7 @@
                     var province_id = 0;
                 }
                 $.ajax({
-                    url: '{{ url('fetch-districts/') }}/' + province_id,
+                    url: '{{ url('/fetch-districts/') }}/' + province_id,
                     type: 'post',
                     dataType: "json",
                     success: function(response) {
@@ -389,7 +537,7 @@
                     var district_id = 0;
                 }
                 $.ajax({
-                    url: '{{ url('fetch-wards/') }}/' + district_id,
+                    url: '{{ url('/fetch-wards/') }}/' + district_id,
                     type: 'post',
                     dataType: "json",
                     success: function(response) {
@@ -410,6 +558,24 @@
             setTimeout(function() {
                 $("#error-alert").alert('close'); // Đóng alert sau 2 giây
             }, 2000);
+
+
+            // Hàm cập nhật tổng tiền
+            function updateTotal() {
+                var subtotalText = $("#total strong").text().replace(' đ', '').replace(/\./g, '');
+                var subtotal = parseFloat(subtotalText);
+                var vatRate = 0.08;
+                var shippingFee = 50000;
+
+                var vatAmount = subtotal * vatRate;
+                var total = subtotal + vatAmount + shippingFee;
+
+                var formattedTotal = new Intl.NumberFormat('vi-VN').format(total) + ' đ';
+                $("#sum strong").text(formattedTotal);
+            }
+
+            // Gọi hàm cập nhật tổng tiền khi trang tải lần đầu
+            updateTotal();
 
             // Cập nhật số lượng sản phẩm trong giỏ hàng bằng AJAX
             $(document).on('change', '.quantity', function() {
@@ -446,6 +612,7 @@
                     $input.val(value - 1);
                     updateQuantity($input);
                     $('.total-items-cart').text(response.cartItemsCount);
+                    $('.total-items-order').text('Tổng cộng ' + response.cartItemsCount + ' sản phẩm');
                 }
             });
 
@@ -458,6 +625,7 @@
                     $input.val(value + 1);
                     updateQuantity($input);
                     $('.total-items-cart').text(response.cartItemsCount);
+                    $('.total-items-order').text('Tổng cộng ' + response.cartItemsCount + ' sản phẩm');
                 }
             });
 
@@ -478,11 +646,13 @@
                         updateCartItem(rowId, response.updatedItem);
                         updateCartTotal(response.total);
                         $('.total-items-cart').text(response.cartItemsCount);
+                        $('.total-items-order').text('Tổng cộng ' + response.cartItemsCount +
+                            ' sản phẩm');
                     },
                     error: function(xhr) {
                         $('#cart-message').html(
                             '<div class="alert alert-danger">Error updating product quantity.</div>'
-                            );
+                        );
                     }
                 });
             }
@@ -504,6 +674,8 @@
                         removeCartItem(rowId);
                         updateCartTotal(response.total);
                         $('.total-items-cart').text(response.cartItemsCount);
+                        $('.total-items-order').text('Tổng cộng ' + response.cartItemsCount +
+                            ' sản phẩm');
                     },
                     error: function(xhr) {
                         $('#cart-message').html(
@@ -566,7 +738,7 @@
                 }).format(total);
 
                 // Cập nhật nội dung của phần tổng giá trị giỏ hàng
-                $('#total').html('<strong>' + formattedTotal + '</strong>');
+                $('#total').html('<strong style="font-size: 20px">' + formattedTotal + '</strong>');
             }
 
             // Xóa sản phẩm khỏi giỏ hàng

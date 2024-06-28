@@ -6,7 +6,7 @@
     <section class="hero-area">
         <div class="container">
             <div class="row">
-                <div class="col-lg-8 col-12 custom-padding-right">
+                <div class="col-lg-15 col-12 custom-padding-right">
                     <div class="slider-head">
                         <div class="hero-slider">
                             <!-- Slider sản phẩm -->
@@ -61,7 +61,7 @@
                 </div>
                 <!-- small banner -->
 
-                <div class="col-lg-4 col-12">
+                {{-- <div class="col-lg-4 col-12">
                     <div class="row">
                         <div class="col-lg-12 col-md-6 col-12 md-custom-padding">
                             <!-- Start Small Banner -->
@@ -93,7 +93,7 @@
                         </div>
 
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>

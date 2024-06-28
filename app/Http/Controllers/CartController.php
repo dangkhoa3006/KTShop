@@ -4,20 +4,39 @@ namespace App\Http\Controllers;
 
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
     public function index()
     {
-        return view('shopping-cart.cart-index', ['cartItems' => Cart::content()]);
+        // Kiểm tra nếu giỏ hàng trống
+        if (Cart::count() == 0) {
+            return view('shopping-cart.blank-cart');
+        }
+        $provinces = DB::table('provinces')->orderBy('name', 'ASC')->get();
+        return view('shopping-cart.cart-index', ['cartItems' => Cart::content(), 'provinces' => $provinces]);
     }
+    public function fetchDistricts($province_id = null)
+    {
+        $districts = DB::table('districts')->where("province_id", $province_id)->get();
 
+        return response()->json(['districts' => $districts]);
+    }
+    public function fetchWards($district_id = null)
+    {
+        $wards = DB::table('wards')->where("district_id", $district_id)->get();
+
+        return response()->json(['wards' => $wards]);
+    }
     public function addToCart(Request $request)
     {
+        //Thêm sản phẩm vào giỏ hàng
         $productId = $request->input('id');
         $cartItem = Cart::content()->where('id', $productId)->first();
-    
+
+        //Mỗi sản phẩm thêm tối đa là 5 sản phẩm
         if ($cartItem && $cartItem->qty >= 5) {
             return response()->json(['error' => 'Số lượng mỗi sản phẩm có thể thêm tối đa là 5.'], 400);
         }
