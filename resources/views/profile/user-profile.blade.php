@@ -109,7 +109,7 @@
 <body>
     <header class="header navbar-area">
         <div class="topbar">
-            <div class="container">
+            <div class="container" >
                 <div class="row align-items-center">
                     <div class="col-lg-4 col-md-4 col-12" style="margin-left: 70%">
                         <div class="top-end">
@@ -164,7 +164,7 @@
             </div>
         </div>
         <div class="header-middle">
-            <div class="container">
+            <div class="container" >
                 <div class="row align-items-center">
                     <div class="col-lg-3 col-md-3 col-7">
                         <a class="navbar-brand" href="{{ route('homepage') }}">
@@ -309,10 +309,10 @@
     </div>
 
 
-    <div class="container-pages">
+    <div class="container-pages" >
         <section class="item-details section">
-            <div class="container">
-                <div class="top-area">
+            <div class="container" >
+                <div class="top-area" style="border: 1px solid #cacaca;">
                     {{-- Menu tab --}}
                     <div class="row align-items-center">
                         <div class="col-lg-3 col-md-12 col-12">

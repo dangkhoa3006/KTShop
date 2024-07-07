@@ -18,7 +18,7 @@ class Product extends Model
     }
     public function subcategory()
     {
-        return $this->belongsTo(SubCategory::class);
+        return $this->belongsTo(SubCategory::class, 'subcategory_id');
     }
     public function specifications()
     {
@@ -32,4 +32,9 @@ class Product extends Model
     {
         return $this->hasMany(OrderDetail::class);
     }
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+    
 }

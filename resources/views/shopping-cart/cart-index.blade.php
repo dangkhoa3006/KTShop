@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>KTMobile.vn - Profile</title>
+    <title>KTMobile.vn - Chi tiết giỏ hàng</title>
     <meta name="description" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -116,28 +116,22 @@
                         </a>
                     </div>
                     <div class="col-lg-5 col-md-7 d-xs-none">
-                        <div class="main-menu-search">
-                            <div class="navbar-search search-style-5">
-                                <div class="search-select">
-                                    <div class="select-position">
-                                        <select id="select1">
-                                            <option selected>All</option>
-                                            <option value="1">option 01</option>
-                                            <option value="2">option 02</option>
-                                            <option value="3">option 03</option>
-                                            <option value="4">option 04</option>
-                                            <option value="5">option 05</option>
-                                        </select>
+                        <form action="" method="GET" id="search-form">
+                            <div class="col-lg-5 col-md-7 d-xs-none" style="width: 100%;">
+                                {{-- Tìm kiếm sản phẩm --}}
+                                <div class="main-menu-search">
+                                    <div class="navbar-search search-style-5">
+                                        <div class="search-input">
+                                            <input type="text" id="search-input" name="query"
+                                                placeholder="Bạn muốn tìm gì ?" oninput="updateFormAction()">
+                                        </div>
+                                        <div class="search-btn">
+                                            <button type="submit"><i class="lni lni-search-alt"></i></button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="search-input">
-                                    <input type="text" placeholder="Search">
-                                </div>
-                                <div class="search-btn">
-                                    <button><i class="lni lni-search-alt"></i></button>
-                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="col-lg-4 col-md-8 col-2">
                         <div class="middle-right-area">
@@ -216,11 +210,11 @@
 
             <form action="{{ route('order.store') }}" method="POST">
                 @csrf
-                <div class="row align-items-center">
+                <div class="row align-items-center" >
                     <!-- DataTable with Hover -->
-                    <div class="col-lg-20 col-12 custom-padding-right">
+                    <div class="col-lg-20 col-12 custom-padding-right" >
                         <div class="card mb-4" style="margin-left: 9%; margin-right: 9%; margin-top: 20px">
-                            <div class="table-responsive p-3">
+                            <div class="table-responsive p-3" style="border: 1px solid #cacaca;">
                                 <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                                     <thead class="thead-light">
                                         <tr>
@@ -235,8 +229,16 @@
                                     <tbody id="cart-items">
                                         @foreach (Cart::content() as $item)
                                             <tr data-rowid="{{ $item->rowId }}">
-                                                <td><img src="{{ $item->options->image }}"
-                                                        style="width: 50px; height: 50px; object-fit: contain;"></td>
+
+                                                <td>
+                                                    @if ($item->options->image && File::exists(public_path('storage/' . $item->options->image)))
+                                                        <img src="{{ asset('storage/' . $item->options->image) }}"
+                                                            style="width: 50px; height: 50px; object-fit: contain;">
+                                                    @else
+                                                        <img src="{{ $item->options->image }}"
+                                                            style="width: 50px; height: 50px; object-fit: contain;">
+                                                    @endif
+                                                </td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>
                                                     <div class="quantity-input">
@@ -264,10 +266,10 @@
                         </div>
                     </div>
 
-                    <div class="product-details-info" style="margin-bottom: 100px">
+                    <div class="product-details-info" style="margin-bottom: 100px;">
                         <div class="row">
-                            <div class="col-lg-6 col-12" style="margin-left: 9%; ">
-                                <div class="single-block">
+                            <div class="col-lg-6 col-12" style="margin-left: 9%;">
+                                <div class="single-block" style="border: 1px solid #cacaca;">
                                     <div class="info-body custom-responsive-margin">
                                         <h4>Thông tin khách hàng</h4>
 
@@ -275,7 +277,7 @@
                                             <b for="name" class="col-sm-1 col-form-label">Họ tên</b>
                                             <div class="col-sm-15">
                                                 <input type="text" class="form-control" id="name"
-                                                    name="username" value="{{ old('username') }}"
+                                                    name="username" value="{{ old('username', Auth::user()->name) }}"
                                                     placeholder="Họ tên...">
                                                 <div style="color: red">
                                                     @if ($errors->has('username'))
@@ -288,7 +290,7 @@
                                             <b for="phone" class="col-sm-1 col-form-label">Số điện thoại</b>
                                             <div class="col-sm-15">
                                                 <input type="text" class="form-control" id="phone"
-                                                    name="phone" value="{{ old('phone') }}"
+                                                    name="phone" value="{{ old('phone', Auth::user()->phone) }}"
                                                     placeholder="Số điện thoại...">
                                                 <div style="color: red">
                                                     @if ($errors->has('phone'))
@@ -301,7 +303,7 @@
                                             <b for="email" class="col-sm-1 col-form-label">Email</b>
                                             <div class="col-sm-15">
                                                 <input type="text" class="form-control" id="email"
-                                                    name="email" value="{{ old('email') }}"
+                                                    name="email" value="{{ old('email', Auth::user()->email) }}"
                                                     placeholder="Email...">
                                                 <div style="color: red">
                                                     @if ($errors->has('email'))
@@ -426,7 +428,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-12">
-                                <div class="single-block">
+                                <div class="single-block" style="border: 1px solid #cacaca;>
                                     <div class="info-body">
                                         <h6 class="total-items-order">Tổng cộng {{ session('cartItemsCount', 0) }} sản
                                             phẩm</h6>
@@ -746,6 +748,12 @@
                 $('tr[data-rowid="' + rowId + '"]').remove();
             }
         });
+        //Tìm kiếm sản phẩm
+        function updateFormAction() {
+            const input = document.getElementById('search-input');
+            const form = document.getElementById('search-form');
+            form.action = "{{ url('/san-pham/search/keyword') }}/" + encodeURIComponent(input.value);
+        }
     </script>
 </body>
 

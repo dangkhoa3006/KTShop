@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>KTMobile.vn - Profile</title>
+    <title>KTMobile.vn - Thanh toán đơn hàng</title>
     <meta name="description" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -126,28 +126,22 @@
                         </a>
                     </div>
                     <div class="col-lg-5 col-md-7 d-xs-none">
-                        <div class="main-menu-search">
-                            <div class="navbar-search search-style-5">
-                                <div class="search-select">
-                                    <div class="select-position">
-                                        <select id="select1">
-                                            <option selected>All</option>
-                                            <option value="1">option 01</option>
-                                            <option value="2">option 02</option>
-                                            <option value="3">option 03</option>
-                                            <option value="4">option 04</option>
-                                            <option value="5">option 05</option>
-                                        </select>
+                        <form action="" method="GET" id="search-form">
+                            <div class="col-lg-5 col-md-7 d-xs-none" style="width: 100%;">
+                                {{-- Tìm kiếm sản phẩm --}}
+                                <div class="main-menu-search">
+                                    <div class="navbar-search search-style-5">
+                                        <div class="search-input">
+                                            <input type="text" id="search-input" name="query"
+                                                placeholder="Bạn muốn tìm gì ?" oninput="updateFormAction()">
+                                        </div>
+                                        <div class="search-btn">
+                                            <button type="submit"><i class="lni lni-search-alt"></i></button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="search-input">
-                                    <input type="text" placeholder="Search">
-                                </div>
-                                <div class="search-btn">
-                                    <button><i class="lni lni-search-alt"></i></button>
-                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="col-lg-4 col-md-8 col-2">
                         <div class="middle-right-area">
@@ -350,6 +344,12 @@
             }
             form.submit();
         });
+        //Tìm kiếm sản phẩm
+        function updateFormAction() {
+            const input = document.getElementById('search-input');
+            const form = document.getElementById('search-form');
+            form.action = "{{ url('/san-pham/search/keyword') }}/" + encodeURIComponent(input.value);
+        }
     </script>
 </body>
 

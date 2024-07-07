@@ -44,13 +44,21 @@
                     @endforeach
                     <br>
                 </div>
+            </div>
+            <h5 style="margin-top: 10px">Lọc sản phẩm theo: </h5>
+            <div class="text-left mt-4">
+                <button class="btn btn-warning" onclick="sortProducts('price_asc')">Giá tăng dần
+                    <i class="lni lni-arrow-up"></i>
+                </button>
+                <button class="btn btn-warning" onclick="sortProducts('price_desc')">Giá giảm dần
+                    <i class="lni lni-arrow-down"></i>
+                </button>
             </div><br>
-            <h5>Lọc sản phẩm theo giá: từ cao đến thấp, từ thấp đến cao, khuyến mãi</h5>
         </div>
     </section>
 
     <!-- Start Trending Product Area -->
-    <section class="trending-product section" style="top: 0">
+    <section class="trending-product section">
         <div class="container">
             <div class="row">
                 {{-- Thẻ sản phẩm --}}
@@ -99,234 +107,13 @@
                     </div>
                 @endforeach
 
-                {{-- Kết thúc thẻ sản phẩm --}}
-                <!-- End Single Product -->
-                {{-- Thẻ sản phẩm --}}
-                <!-- Start Single Product -->
-                <div class="col-lg-3 col-md-6 col-12">
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="../../assets_client/images/products/product-4.jpg" alt="#">
-                            <span class="sale-tag">Giảm 10%</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Thêm </a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <h4 class="title">
-                                <a href="product-grids.html">iPhone 15 Plus 256GB (VN/A)</a>
-                            </h4>
-                            <div class="price">
-                                <span>24.399.000đ</span>
-                                <span class="discount-price">27.699.000đ</span>
-                            </div>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                {{-- Kết thúc thẻ sản phẩm --}}
-                <!-- End Single Product -->
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="../../assets_client/images/products/product-4.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                    Cart</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">Phones</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">Samsung Galaxy S24 Plus 5G (12GB|256GB) (CTY)</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.0 Review(s)</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$400.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="../../assets_client/images/products/product-4.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                    Cart</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">Phones</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">iphone 6x plus</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.0 Review(s)</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$400.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        {{-- <div class="product-image">
-                            <img src="../../assets_client/images/products/product-4.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                    Cart</a>
-                            </div>
-                        </div> --}}
-                        <div class="product-info">
-                            {{-- <span class="category">Phones</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">iphone 6x plus</a>
-                            </h4> --}}
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.0 Review(s)</span></li>
-                            </ul>
-                            {{-- <div class="price">
-                                <span>$400.00</span>
-                            </div> --}}
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="../../assets_client/images/products/product-4.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                    Cart</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">Phones</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">iphone 6x plus</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.0 Review(s)</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$400.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="../../assets_client/images/products/product-4.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                    Cart</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">Phones</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">iphone 6x plus</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.0 Review(s)</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$400.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="../../assets_client/images/products/product-4.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                    Cart</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">Phones</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">iphone 6x plus</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.0 Review(s)</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$400.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                </div>
-
                 <div class="text-center mt-4">
                     <button class="btn btn-primary">Xem thêm 100 sản phẩm
                         <i class="lni lni-chevron-down"></i>
                     </button>
                 </div><br>
                 {{-- Bình luận sản phẩm --}}
-                <div class="col-lg-20 col-12 custom-padding-right">
-                    <!-- Start Single Product -->
+                {{-- <div class="col-lg-20 col-12 custom-padding-right">
                     <div class="single-product">
                         <h5 style="font-weight: bold">Hỏi và đáp</h5><br>
                         <div class="col-sm-20">
@@ -348,9 +135,7 @@
                         </div><br>
                     </div>
                 </div>
-                {{-- Hiển thị danh sách người bình luận --}}
                 <div class="col-lg-20 col-12 custom-padding-right">
-                    <!-- Start Single Product -->
                     <div class="single-product">
                         <div class="user" style="font-size: 15px; font-weight: bold">
                             <div style="display: flex; align-items: center;">
@@ -373,7 +158,7 @@
                             <p style="margin-top: 10px; margin-left: 10px">Còn hàng bạn nha</p>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>
@@ -424,36 +209,5 @@
             </ul>
         </div>
     </section>
-    <!-- End Shipping Info -->
-    {{-- <script>
-         $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $(document).ready(function() {
-            $('.add-to-cart-form').on('submit', function(e) {
-                e.preventDefault(); // Ngăn chặn hành vi submit mặc định
     
-                var form = $(this);
-                var url = form.attr('action');
-                var formData = form.serialize(); // Lấy tất cả dữ liệu từ form
-    
-                $.ajax({
-                    url: url,
-                    method: 'POST',
-                    data: formData,
-                    success: function(response) {
-                        if(response.success) {
-                            alert(response.success); // Hiển thị thông báo thành công
-                            $('.total-items-cart').text(response.totalItems); // Cập nhật số lượng sản phẩm trong giỏ hàng
-                        }
-                    },
-                    error: function(xhr) {
-                        console.log(xhr.responseText); // Xử lý lỗi
-                    }
-                });
-            });
-        });
-    </script> --}}
 @endsection

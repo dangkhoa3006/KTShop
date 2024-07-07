@@ -46,7 +46,7 @@
                 <a class="nav-link" href="{{ route('dashboard.index') }}">
                     {{-- <a class="nav-link" href="#"> --}}
 
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-fw fa-chart-area"></i>
                     <span>Báo cáo thống kê</span></a>
             </li>
             <hr class="sidebar-divider">
@@ -56,13 +56,13 @@
             </div>
             <li class="nav-item @yield('product-active')">
                 <a class="nav-link" href="{{ route('products.index') }}">
-                    <i class="fas fa-fw fa-palette"></i>
+                    <i class="fas fa-fw fa-mobile"></i>
                     <span>Quản lý sản phẩm</span>
                 </a>
             </li>
             <li class="nav-item @yield('subcategory-active')">
                 <a class="nav-link" href="{{ route('subcategories.index') }}">
-                    <i class="fas fa-fw fa-palette"></i>
+                    <i class="fas fa-fw fa-box-open"></i>
                     <span>Quản lý loại sản phẩm</span>
                 </a>
             </li>
@@ -73,13 +73,13 @@
             </div>
             <li class="nav-item @yield('category-active')">
                 <a class="nav-link" href="{{ route('categories.index') }}">
-                    <i class="fas fa-fw fa-palette"></i>
+                    <i class="fas fa-fw fa-briefcase"></i>
                     <span>Quản lý danh mục</span>
                 </a>
             </li>
             <hr class="sidebar-divider">
             {{-- Trang nhà cung cấp --}}
-            <div class="sidebar-heading">
+            {{-- <div class="sidebar-heading">
                 Slider, banner, logo
             </div>
             <li class="nav-item">
@@ -93,15 +93,15 @@
                     <i class="fas fa-fw fa-palette"></i>
                     <span>Quản lý logo</span>
                 </a>
-            </li>
-            <hr class="sidebar-divider">
+            </li> --}}
+            {{-- <hr class="sidebar-divider"> --}}
             {{-- Trang hóa đơn --}}
             <div class="sidebar-heading">
                 Hóa đơn
             </div>
-            <li class="nav-item">
-                <a class="nav-link" href="ui-colors.html">
-                    <i class="fas fa-fw fa-palette"></i>
+            <li class="nav-item @yield('invoice-active')">
+                <a class="nav-link" href="{{route('invoices.index')}}">
+                    <i class="fas fa-fw fa-file-invoice-dollar"></i>
                     <span>Quản lý hóa đơn</span>
                 </a>
             </li>
@@ -113,20 +113,20 @@
                 </div>
                 <li class="nav-item @yield('account-active')">
                     <a class="nav-link" href="{{ route('accounts.index') }}">
-                        <i class="fas fa-fw fa-palette"></i>
+                        <i class="fas fa-fw fa-user"></i>
                         <span>Quản lý tài khoản</span>
                     </a>
                 </li>
                 <li class="nav-item @yield('member-active')">
                     <a class="nav-link" href="{{ route('members.index') }}">
-                        <i class="fas fa-fw fa-palette"></i>
+                        <i class="fas fa-fw fa-user-friends"></i>
                         <span>Quản lý thành viên</span>
                     </a>
                 </li>
                 <hr class="sidebar-divider">
             @endif
             {{-- Bài viết --}}
-            <div class="sidebar-heading">
+            {{-- <div class="sidebar-heading">
                 Bài viết sản phẩm
             </div>
             <li class="nav-item">
@@ -135,9 +135,9 @@
                     <span>Quản lý bài viết</span>
                 </a>
             </li>
-            <hr class="sidebar-divider">
+            <hr class="sidebar-divider"> --}}
             {{-- Tin tức --}}
-            <div class="sidebar-heading">
+            {{-- <div class="sidebar-heading">
                 Tin tức
             </div>
             <li class="nav-item">
@@ -146,9 +146,9 @@
                     <span>Quản lý tin tức</span>
                 </a>
             </li>
-            <hr class="sidebar-divider">
+            <hr class="sidebar-divider"> --}}
             {{-- Trang ưu đãi và khuyến mãi --}}
-            <div class="sidebar-heading">
+            {{-- <div class="sidebar-heading">
                 Giảm giá và khuyến mãi
             </div>
             <li class="nav-item">
@@ -157,15 +157,21 @@
                     <span>Quản lý giảm giá và khuyến mãi</span>
                 </a>
             </li>
-            <hr class="sidebar-divider">
+            <hr class="sidebar-divider"> --}}
             {{-- Trang bình luận và đánh giá --}}
             <div class="sidebar-heading">
                 Bình luận và đánh giá
             </div>
-            <li class="nav-item">
-                <a class="nav-link" href="ui-colors.html">
-                    <i class="fas fa-fw fa-palette"></i>
-                    <span>Quản lý bình luận và đánh giá</span>
+            <li class="nav-item @yield('comment-active')">
+                <a class="nav-link" href="{{route('comments.index')}}">
+                    <i class="fas fa-fw fa-comment"></i>
+                    <span>Quản lý bình luận</span>
+                </a>
+            </li>
+            <li class="nav-item @yield('review-active')">
+                <a class="nav-link" href="{{route('reviews.index')}}">
+                    <i class="fas fa-fw fa-comment-dots"></i>
+                    <span>Quản lý đánh giá</span>
                 </a>
             </li>
         </ul>
@@ -550,6 +556,7 @@
         });
         CKEDITOR.replace('editor2');
     </script>
+    
 </body>
 
 </html>

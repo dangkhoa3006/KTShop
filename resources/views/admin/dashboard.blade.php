@@ -3,7 +3,7 @@
 @section('header-route')
     @parent <li class="breadcrumb-item active" aria-current="page">Báo cáo thống kê</li>
 @endsection
-@section('dashboard-active','active')
+@section('dashboard-active', 'active')
 @section('content-pages')
     <div class="row mb-3">
         <!-- Earnings (Monthly) Card Example -->
@@ -14,11 +14,12 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-uppercase mb-1">Tổng doanh thu
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">2,400,000 VND</div>
-                            <div class="mt-2 mb-0 text-muted text-xs">
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                {{ number_format($totalAmount, 0, ',', '.') }} VND</div>
+                            {{-- <div class="mt-2 mb-0 text-muted text-xs">
                                 <span class="text-success mr-2"><i class="fa fa-arrow-up"></i>
                                     3.48%</span>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-primary"></i>
@@ -35,11 +36,11 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-uppercase mb-1">Tổng đơn hàng
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">650 đơn</div>
-                            <div class="mt-2 mb-0 text-muted text-xs">
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $orderCount }} đơn</div>
+                            {{-- <div class="mt-2 mb-0 text-muted text-xs">
                                 <span class="text-success mr-2"><i class="fas fa-arrow-up"></i>
                                     12%</span>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-shopping-cart fa-2x text-success"></i>
@@ -54,13 +55,13 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <div class="text-xs font-weight-bold text-uppercase mb-1">Khách hàng mới
+                            <div class="text-xs font-weight-bold text-uppercase mb-1">Thành viên mới
                             </div>
-                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">366 khách</div>
-                            <div class="mt-2 mb-0 text-muted text-xs">
+                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $memberCount }} khách</div>
+                            {{-- <div class="mt-2 mb-0 text-muted text-xs">
                                 <span class="text-success mr-2"><i class="fas fa-arrow-up"></i>
                                     20.4%</span>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-users fa-2x text-info"></i>
@@ -78,10 +79,10 @@
                             <div class="text-xs font-weight-bold text-uppercase mb-1">Đơn hàng chưa
                                 duyệt
                             </div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">18 đơn</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $invoiceIncompleteCount }} đơn</div>
                             <div class="mt-2 mb-0 text-muted text-xs">
-                                <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i>
-                                    1.10%</span>
+                                {{-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i>
+                                    1.10%</span> --}}
                             </div>
                         </div>
                         <div class="col-auto">
@@ -97,21 +98,8 @@
             <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Báo cáo doanh thu theo tháng</h6>
-                    {{-- <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button"
-                        id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
-                        aria-expanded="false">
-                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                        aria-labelledby="dropdownMenuLink">
-                        <div class="dropdown-header">Dropdown Header:</div>
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown no-arrow">
                     </div>
-                </div> --}}
                 </div>
                 <div class="card-body">
                     <div class="chart-area">
@@ -124,8 +112,8 @@
         <div class="col-xl-4 col-lg-5">
             <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                    <h6 class="m-0 font-weight-bold text-primary">Sản phẩm bán chạy nhất</h6>
-                    <div class="dropdown no-arrow">
+                    <h6 class="m-0 font-weight-bold text-primary">Top 6 sản phẩm bán chạy nhất</h6>
+                    {{-- <div class="dropdown no-arrow">
                         <a class="dropdown-toggle btn btn-primary btn-sm" href="#" role="button"
                             id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Trong tháng <i class="fas fa-chevron-down"></i>
@@ -138,59 +126,26 @@
                             <a class="dropdown-item active" href="#">Trong tháng</a>
                             <a class="dropdown-item" href="#">Trong năm</a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="card-body">
-                    <div class="mb-3">
-                        <div class="small text-gray-500">Iphone 15 promax 128GB
-                            <div class="small float-right"><b>200 chiếc</b></div>
+                    @foreach ($bestSellingProducts as $product)
+                        <div class="mb-3">
+                            <div class="small text-gray-500">{{ $product->product->name }}
+                                <div class="small float-right"><b>{{ $product->total_quantity }} chiếc</b></div>
+                            </div>
+                            <div class="progress" style="height: 12px;">
+                                <div class="progress-bar bg-success" role="progressbar" style="width: {{ $product->total_quantity / 2 }}%"
+                                    aria-valuenow="{{ $product->total_quantity / 2 }}" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
                         </div>
-                        <div class="progress" style="height: 12px;">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 80%" aria-valuenow="80"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <div class="small text-gray-500">Samsung Galaxy S24 Ultra 5G 512GB
-                            <div class="small float-right"><b>150 chiếc</b></div>
-                        </div>
-                        <div class="progress" style="height: 12px;">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 70%" aria-valuenow="70"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <div class="small text-gray-500">Oppo Reno 11 F 5G
-                            <div class="small float-right"><b>90 chiếc</b></div>
-                        </div>
-                        <div class="progress" style="height: 12px;">
-                            <div class="progress-bar bg-info" role="progressbar" style="width: 55%" aria-valuenow="55"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <div class="small text-gray-500">vivo Y36
-                            <div class="small float-right"><b>50 chiếc</b></div>
-                        </div>
-                        <div class="progress" style="height: 12px;">
-                            <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
-                                aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <div class="small text-gray-500">Nokia 105 4G Pro
-                            <div class="small float-right"><b>20 chiếc</b></div>
-                        </div>
-                        <div class="progress" style="height: 12px;">
-                            <div class="progress-bar bg-danger" role="progressbar" style="width: 20%" aria-valuenow="30"
-                                aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
-                <div class="card-footer text-center">
+                
+                {{-- <div class="card-footer text-center">
                     <a class="m-0 medium text-primary card-link" href="#">Xem thêm <i
                             class="fas fa-chevron-right"></i></a>
-                </div>
+                </div> --}}
             </div>
         </div>
         <!-- Invoice Example -->
@@ -241,14 +196,7 @@
                                 <td><span class="badge badge-danger">Chưa duyệt</span></td>
                                 <td><a href="#" class="btn btn-sm btn-primary">Chi tiết</a></td>
                             </tr>
-
-                            {{-- <tr>
-                            <td><a href="#">RA1453</a></td>
-                            <td>Indri Junanda</td>
-                            <td>Hat Rounded</td>
-                            <td><span class="badge badge-info">Đang chuẩn bị hàng</span></td>
-                            <td><a href="#" class="btn btn-sm btn-primary">Chi tiết</a></td>
-                        </tr> --}}
+                            </tr>
                             <tr>
                                 <td><a href="#">RA1998</a></td>
                                 <td>Udin Cilok</td>
@@ -314,4 +262,8 @@
         </div>
     </div> --}}
     </div>
+    <script>
+        // Chuyển đổi dữ liệu PHP thành JSON để sử dụng trong JavaScript
+        var monthlyData = @json(array_values($monthlyData));
+    </script>
 @endsection

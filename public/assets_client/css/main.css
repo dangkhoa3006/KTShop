@@ -17,6 +17,8 @@ body {
   color: #888;
   overflow-x: hidden;
   font-size: 14px;
+  /* height: 100%;
+  margin: 0; */
 }
 
 p {
@@ -1015,7 +1017,7 @@ ol {
 }
 
 .section {
-  padding-top: 60px;
+  padding-top: 10px;
   padding-bottom: 20px;
   position: relative;
 }
@@ -4426,6 +4428,9 @@ ol {
 .footer {
   background-color: #081828;
   position: relative;
+  /* min-height: 100vh;
+  flex-direction: column;
+  display: flex; */
   /* Single Footer */
   /* End Single Footer */
 }

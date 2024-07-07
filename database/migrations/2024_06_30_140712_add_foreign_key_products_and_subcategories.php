@@ -9,23 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->decimal('price', 15, 2)->change();
-            $table->decimal('sale_price', 15, 2)->nullable()->change();
+            $table->unsignedBigInteger('subcategory_id')->change(); 
+            // Thêm khóa ngoại
+            $table->foreign('subcategory_id')->references('id')->on('subcategories')->onDelete('cascade');
         });
     }
 
     /**
      * Reverse the migrations.
      */
-    public function down()
+    public function down(): void
     {
         Schema::table('products', function (Blueprint $table) {
-            // Nếu muốn đảo ngược migration, trở lại định nghĩa cũ
-            $table->decimal('price', 10, 2)->change();
-            $table->decimal('sale_price', 10, 2)->nullable()->change();
+            $table->dropForeign(['subcategory_id']);
         });
     }
 };

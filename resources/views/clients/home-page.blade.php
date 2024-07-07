@@ -9,52 +9,39 @@
                 <div class="col-lg-15 col-12 custom-padding-right">
                     <div class="slider-head">
                         <div class="hero-slider">
-                            <!-- Slider sản phẩm -->
                             <div class="single-slider"
-                                style="background-image: url(../../assets_client/images/hero/slider-bg1.jpg);">
-                                <div class="content">
-                                    <h2><span>No restocking fee ($35 savings)</span>
-                                        M75 Sport Watch
-                                    </h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua.</p>
-                                    <h3><span>Now Only</span> $320.99</h3>
-                                    <div class="button">
-                                        <a href="product-grids.html" class="btn">Shop Now</a>
-                                    </div>
-                                </div>
+                                style="background-image: url(../../assets_client/images/slider/slider_15.png);">
                             </div>
                             <div class="single-slider"
-                                style="background-image: url(../../assets_admin/img/logo/icon_dashboard.png);">
-                                <div class="content">
-                                    <h2><span>No restocking fee ($35 savings)</span>
-                                        M75 Sport Watch
-                                    </h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua.</p>
-                                    <h3><span>Now Only</span> $320.99</h3>
-                                    <div class="button">
-                                        <a href="product-grids.html" class="btn">Shop Now</a>
-                                    </div>
-                                </div>
+                                style="background-image: url(../../assets_client/images/slider/slider_9.png);">
                             </div>
-                            <!-- End Single Slider -->
-                            <!-- Start Single Slider -->
                             <div class="single-slider"
-                                style="background-image: url(../../assets_client/images/hero/slider-bg2.jpg);">
-                                <div class="content">
-                                    <h2><span>Big Sale Offer</span>
-                                        Get the Best Deal on CCTV Camera
-                                    </h2>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna aliqua.</p>
-                                    <h3><span>Combo Only:</span> $590.00</h3>
-                                    <div class="button">
-                                        <a href="product-grids.html" class="btn">Shop Now</a>
-                                    </div>
-                                </div>
+                                style="background-image: url(../../assets_client/images/slider/slider_10.png);">
                             </div>
-                            <!-- End Single Slider -->
+                            <div class="single-slider"
+                                style="background-image: url(../../assets_client/images/slider/slider_14.png);">
+                            </div>
+                            <div class="single-slider"
+                                style="background-image: url(../../assets_client/images/slider/slider_11.png);">
+                            </div>
+                            <div class="single-slider"
+                                style="background-image: url(../../assets_client/images/slider/slider_12.png);">
+                            </div>
+                            <div class="single-slider"
+                                style="background-image: url(../../assets_client/images/slider/slider_13.png);">
+                            </div>
+                            <div class="single-slider"
+                                style="background-image: url(../../assets_client/images/slider/slider_1.png);">
+                            </div>
+                            <div class="single-slider"
+                                style="background-image: url(../../assets_client/images/slider/slider_2.png);">
+                            </div>
+                            <div class="single-slider"
+                                style="background-image: url(../../assets_client/images/slider/slider_3.png);">
+                            </div>
+                            <div class="single-slider"
+                                style="background-image: url(../../assets_client/images/slider/slider_4.png);">
+                            </div>
                         </div>
                         <!-- End Hero Slider -->
                     </div>
@@ -657,7 +644,6 @@
                     <!-- End Single Product -->
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
                     <div class="single-product">
                         <div class="product-image">
                             <img src="../../assets_client/images/products/product-6.jpg" alt="#">
@@ -684,10 +670,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- End Single Product -->
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
                     <div class="single-product">
                         <div class="product-image">
                             <img src="../../assets_client/images/products/product-7.jpg" alt="#">
@@ -716,10 +700,8 @@
                             </div>
                         </div>
                     </div>
-                    <!-- End Single Product -->
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
                     <div class="single-product">
                         <div class="product-image">
                             <img src="../../assets_client/images/products/product-8.jpg" alt="#">
@@ -746,7 +728,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- End Single Product -->
                 </div>
             </div>
         </div>
@@ -754,13 +735,13 @@
     <!-- End Trending Product Area -->
     {{-- Tiêu đề --}}
     <!-- Start Call Action Area -->
-    <div class="col-12">
+    {{-- <div class="col-12">
         <div class="section-title">
             <h2>KHÁCH HÀNG VÀ SỰ KIỆN</h2>
         </div>
-    </div>
+    </div> --}}
 
-    <section class="call-action section">
+    {{-- <section class="call-action section">
         <div class="container">
             <div class="row">
                 <div class="owl-carousel owl-theme">
@@ -801,17 +782,16 @@
 
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- End Call Action Area -->
     {{-- Tin tức và bài viết --}}
-    <section class="hero-area">
+    {{-- <section class="hero-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-8 col-12 custom-padding-right">
                     <section>
                         <div class="row gx-lg-5">
-                            {{-- Tin 1 --}}
                             <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
                                 <div class="bg-image hover-overlay shadow-1-strong ripple rounded-5 mb-4"
                                     data-mdb-ripple-color="light">
@@ -821,7 +801,6 @@
                                         </div>
                                     </a>
                                 </div>
-                                <!-- Article data -->
                                 <div class="row mb-3">
                                     <div class="col-6">
                                         <a href="" class="text-info">
@@ -833,7 +812,6 @@
                                         <u> 15.07.2020</u>
                                     </div>
                                 </div>
-                                <!-- Article title and description -->
                                 <a href="" class="text-dark">
                                     <h5>This is title of the news</h5>
                                     <p>
@@ -844,7 +822,6 @@
                                 </a>
                                 <hr />
                             </div>
-                            {{-- Tin 2 --}}
                             <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
                                 <div class="bg-image hover-overlay shadow-1-strong ripple rounded-5 mb-4"
                                     data-mdb-ripple-color="light">
@@ -854,7 +831,6 @@
                                         </div>
                                     </a>
                                 </div>
-                                <!-- Article data -->
                                 <div class="row mb-3">
                                     <div class="col-6">
                                         <a href="" class="text-info">
@@ -866,7 +842,6 @@
                                         <u> 15.07.2020</u>
                                     </div>
                                 </div>
-                                <!-- Article title and description -->
                                 <a href="" class="text-dark">
                                     <h5>This is title of the news</h5>
                                     <p>
@@ -877,7 +852,6 @@
                                 </a>
                                 <hr />
                             </div>
-                            {{-- Tin 3 --}}
                             <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
                                 <div class="bg-image hover-overlay shadow-1-strong ripple rounded-5 mb-4"
                                     data-mdb-ripple-color="light">
@@ -887,7 +861,6 @@
                                         </div>
                                     </a>
                                 </div>
-                                <!-- Article data -->
                                 <div class="row mb-3">
                                     <div class="col-6">
                                         <a href="" class="text-info">
@@ -899,7 +872,6 @@
                                         <u> 15.07.2020</u>
                                     </div>
                                 </div>
-                                <!-- Article title and description -->
                                 <a href="" class="text-dark">
                                     <h5>This is title of the news</h5>
                                     <p>
@@ -916,23 +888,7 @@
                 <div class="col-lg-4 col-12">
                     <h5>TIN TUC</h5>
                     <div class="row">
-                        {{-- <div class="col-lg-12 col-md-6 col-12 md-custom-padding">
-                            <!-- Start Small Banner -->
-                            <div class="hero-small-banner"
-                                style="background-image: url('../../assets_client/images/hero/slider-bnr.jpg');">
-                                <div class="content">
-                                    <h2>
-                                        <span>New line required</span>
-                                        iPhone 12 Pro Max
-                                    </h2>
-                                    <h3>$259.99</h3>
-                                </div>
-                            </div>
-
-                            <!-- End Small Banner -->
-                        </div> --}}
                         <div class="col-lg-12 col-md-6 col-12">
-                            <!-- Start Small Banner -->
                             <div class="hero-small-banner style2" style="height: 150px">
                                 <div class="content">
                                     <h2>Tin 1!</h2>
@@ -942,10 +898,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Start Small Banner -->
                         </div>
                         <div class="col-lg-12 col-md-6 col-12">
-                            <!-- Start Small Banner -->
                             <div class="hero-small-banner style2" style="height: 150px">
                                 <div class="content">
                                     <h2>Tin 2!</h2>
@@ -955,10 +909,8 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Start Small Banner -->
                         </div>
                         <div class="col-lg-12 col-md-6 col-12">
-                            <!-- Start Small Banner -->
                             <div class="hero-small-banner style2" style="height: 150px">
                                 <div class="content">
                                     <h2>Tin 3!</h2>
@@ -968,14 +920,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- Start Small Banner -->
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-    </section><br><br>
+    </section><br><br> --}}
     <script>
         $.ajaxSetup({
            headers: {

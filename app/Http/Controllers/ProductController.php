@@ -6,6 +6,7 @@ use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Comment;
 use App\Models\ProductImage;
 use App\Models\Specification;
 use App\Models\SubCategory;
@@ -133,7 +134,8 @@ class ProductController extends Controller
         $category = $product->category;
         $subcategory = $product->subcategory;
         $list = Category::with('subcategories')->get();
-        return view('product-pages.product-detail', compact('product', 'category', 'subcategory', 'list'));
+        $comment=Comment::where('product_id', $product->id)->where('status',1)->get();
+        return view('product-pages.product-detail', compact('product', 'category', 'subcategory','comment', 'list'));
     }
 
     /**
@@ -213,7 +215,7 @@ class ProductController extends Controller
                 $newSubCategory->product_count += 1;
                 $newSubCategory->save();
             }
-            
+
             // Xóa các thông số kỹ thuật cũ
             Specification::where('product_id', $product->id)->delete();
 
@@ -236,6 +238,14 @@ class ProductController extends Controller
         } catch (\Exception $e) {
             return redirect()->route('products.index')->with('error', 'Cập nhật sản phẩm không thành công!');
         }
+    }
+
+    public function search($keyword)
+    {
+        $products = Product::where('name', 'LIKE', "%$keyword%")->get();
+        $list = Category::with('subcategories')->get();
+
+        return view('search.search-result', compact('products', 'keyword', 'list'));
     }
 
     /**

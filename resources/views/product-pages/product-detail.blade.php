@@ -183,9 +183,6 @@
             </div>
             <div class="product-details-info">
                 <div class="row">
-                    <!-- Block 1 -->
-                    <!-- HTML -->
-                    <!-- HTML -->
                     <div class="col-lg-8 col-12">
                         <div class="single-block">
                             <div class="info-body custom-responsive-margin">
@@ -199,13 +196,10 @@
                             </div>
                         </div>
                     </div>
-
-                    <!-- Block 2 -->
                     <div class="col-lg-4 col-12">
                         <div class="single-block">
                             <div class="info-body">
                                 <h6>Cấu hình {{ $product->name }}</h6>
-                                {{-- <p>{!! $product->specification !!}</p> --}}
                                 <div class="table-responsive">
                                     <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                                         <thead class="thead-light">
@@ -241,55 +235,82 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-20 col-12 custom-padding-right">
-                        <!-- Start Single Product -->
-                        <div class="single-product">
-                            <h5 style="font-weight: bold">Hỏi đáp {{ $product->name }}</h5><br>
-                            <div class="col-sm-20">
-                                <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="5"
-                                    placeholder="Mời bạn thảo luận, vui lòng nhập tiếng việt có dấu"></textarea>
-                            </div>
-                            <h6 style="margin-top: 20px;margin-bottom: 5px;">Nhập thông tin của bạn</h6>
-                            <div class="col-sm-20">
-                                <input type="text" class="form-control" id="name" name="name"
-                                    value="{{ old('name') }}" placeholder="Họ tên...">
-                            </div>
-                            <div class="col-sm-20" style="margin-top: 10px">
-                                <input type="text" class="form-control" id="email" name="email"
-                                    value="{{ old('email') }}" placeholder="Email...">
-                            </div>
-                            <div class="text-right mt-4 b" style="text-align: right ">
-                                <button class="btn btn-warning"> <i class="lni lni-telegram-plane"></i> Gửi bình luận
-                                </button>
-                            </div><br>
-                        </div>
-                    </div>
-                    {{-- Hiển thị danh sách người bình luận --}}
-                    <div class="col-lg-20 col-12 custom-padding-right">
-                        <!-- Start Single Product -->
-                        <div class="single-product">
-                            <div class="user" style="font-size: 15px; font-weight: bold">
-                                <div style="display: flex; align-items: center;">
-                                    <img class="img-profile rounded-circle" src="../../../assets_admin/img/boy.png"
-                                        style="max-width: 40px;border: 1px solid black;">
-                                    <h6 style="margin:10px">Nguyen Van A</h6>
+                    <form method="POST" action="{{ route('storeComment', $product->id) }}">
+                        @csrf
+                        <div class="col-lg-20 col-12 custom-padding-right">
+                            <div class="single-product">
+                                <h5 style="font-weight: bold">Hỏi đáp {{ $product->name }}</h5><br>
+                                <div class="col-sm-20">
+                                    <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="5"
+                                        placeholder="Mời bạn thảo luận, vui lòng nhập tiếng việt có dấu"></textarea>
+                                    <div style="color: red">
+                                        @if ($errors->has('content'))
+                                            {{ $errors->first('content') }}<br>
+                                        @endif
+                                    </div>
                                 </div>
-                                <p style="margin-top: 10px">KTmobile chi nhánh ở quận 10 có sẵn ip15 pm 256gb màu Titan
-                                    trắng k
-                                    ạ</p>
+                                <h6 style="margin-top: 20px;margin-bottom: 5px;">Nhập thông tin của bạn</h6>
+                                <div class="col-sm-20">
+                                    <input type="text" class="form-control" id="name" name="name"
+                                        value="{{ old('name', Auth::check() ? Auth::user()->name : '') }}"
+                                        placeholder="Họ tên...">
+                                    <div style="color: red">
+                                        @if ($errors->has('name'))
+                                            {{ $errors->first('name') }}<br>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="col-sm-20" style="margin-top: 10px">
+                                    <input type="text" class="form-control" id="email" name="email"
+                                        value="{{ old('email', Auth::check() ? Auth::user()->email : '') }}"
+                                        placeholder="Email...">
+                                    <div style="color: red">
+                                        @if ($errors->has('email'))
+                                            {{ $errors->first('email') }}<br>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="text-right mt-4 b" style="text-align: right ">
+                                    <button class="btn btn-warning"> <i class="lni lni-telegram-plane"></i> Gửi bình luận
+                                    </button>
+                                </div><br>
                             </div>
-                            Ngày gửi: 04/06/2024
-                            <div class="user"
-                                style="font-size: 15px; font-weight: bold; margin-top: 10px;margin-left: 60px; background-color:rgb(224, 224, 224); border-radius: 10px;">
-                                <div style="display: flex; align-items: center;">
-                                    <img class="img-profile rounded-circle" src="../../../assets_admin/img/boy.png"
-                                        style="max-width: 40px;border: 1px solid black; margin-left: 10px;margin-top: 10px;">
-                                    <h6 style="margin-top:10px;margin-left:10px;">Quản trị viên</h6>
+                        </div>
+                    </form>
 
+                    {{-- Hiển thị bình luận đã duyệt --}}
+                    <div class="col-lg-20 col-12 custom-padding-right">
+                        <div class="single-product">
+                            @foreach ($comment as $cmt)
+                                <div class="user" style="font-size: 15px; font-weight: bold">
+                                    <div style="display: flex; align-items: center;">
+                                        <img class="img-profile rounded-circle" src="../../../image/user_default.png"
+                                            style="max-width: 40px;border: 1px solid black;">
+                                        <h6 style="margin:10px">{{ $cmt->name }}</h6>
+                                    </div>
+                                    <p style="margin-top: 10px">
+                                        {{ $cmt->content }}
+                                    </p>
                                 </div>
-                                <p style="margin-top: 10px; margin-left: 10px">Còn hàng bạn nha</p>
-                            </div>
+                                - Ngày gửi: 04/06/2024
+                                <div class="user"
+                                    style="font-size: 15px; font-weight: bold; margin-top: 10px; margin-bottom: 10px;margin-left: 60px; background-color:rgb(225, 223, 223); border-radius: 10px;">
+                                    <div style="display: flex; align-items: center;">
+                                        <img class="img-profile rounded-circle" src="../../../assets_admin/img/boy.png"
+                                            style="max-width: 40px;border: 1px solid black; margin-left: 10px;margin-top: 10px;">
+                                        <h6 style="margin-top:10px;margin-left:10px;">Quản trị viên</h6>
+
+                                    </div>
+                                    <p style="margin-top: 10px; margin-left: 10px">{{ $cmt->reply }}</p>
+                                    <p style="margin-top: 10px;margin-bottom: 10px; margin-left: 10px">- Ngày gửi:
+                                        04/06/2024
+                                    </p>
+                                </div>
+                                <hr style="color: black">
+                            @endforeach
                         </div>
+
+
                     </div>
                 </div>
             </div>

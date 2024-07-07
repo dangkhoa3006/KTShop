@@ -71,7 +71,7 @@ class LoginController extends Controller
         if ($user->role == 2) {
             return redirect('/');
         } elseif (in_array($user->role, [0, 1])) {
-            return redirect('/login');
+            return redirect('/');
         }
         return redirect('/login');
     }

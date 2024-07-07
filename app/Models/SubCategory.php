@@ -20,6 +20,18 @@ class SubCategory extends Model
     }
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class, 'subcategory_id');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::updating(function ($subCategory) {
+            if ($subCategory->isDirty('status')) {
+                //update status của products
+                $subCategory->products()->update(['status' => $subCategory->status]);
+            }
+        });
     }
 }

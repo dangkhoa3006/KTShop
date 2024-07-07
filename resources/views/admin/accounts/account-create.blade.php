@@ -176,7 +176,7 @@
                                     <option value="">----Chọn chức vụ----</option>
                                     <option value="1">Admin</option>
                                     <option value="0">Nhân viên</option>
-                                    <option value="2">Khách hàng</option>
+                                    {{-- <option value="2">Khách hàng</option> --}}
                                 </select>
                                 <div style="color: red;">
                                     @if ($errors->has('role'))
@@ -194,35 +194,5 @@
                 </div>
             </div>
         </div>
-
     </div>
-    {{-- <script>
-        $.ajaxSetup({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            }
-        });
-        $(document).ready(function() {
-            //select districts from provinces
-            $("#selectProvinces").change(function() {
-                var province_id = $(this).val();
-                $.ajax({
-                    url: '{{ url('/admin/fetch-districts/') }}/' + province_id,
-                    type: 'post',
-                    dataType: "json",
-                    success: function(response) {
-                        //console.log(response['districts'].length);
-                        $('#selectDistricts').find('option:not(:first)').remove();
-                        if (response['districts'].lenght > 0) {
-                            $.each(response['districts'], function(key, value) {
-                                $("#selectDistricts").append("<option id='" + value[
-                                    'id'] + "'>" + value['name'] + "</option>");
-                            });
-                        }
-                    }
-                });
-            })
-
-        });
-    </script> --}}
 @endsection

@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -67,7 +68,7 @@ class CategoryController extends Controller
             $p->image = '/image/no-pictures.png';
         }
     }
-    public function show($categorySlug)
+    public function show($categorySlug, Request $request)
     {
         // Lấy danh mục dựa trên slug
         $category = Category::where('slug', $categorySlug)->firstOrFail();
@@ -77,8 +78,20 @@ class CategoryController extends Controller
         $list = Category::with(['subcategories' => function ($query) {
             $query->where('status', 1);
         }])->where('status', 1)->get();
-        
-        $listProduct = $category->products()->where('status', 1)->get();
+
+        // Lấy sản phẩm theo danh mục và sắp xếp theo giá nếu có yêu cầu
+        $query = $category->products()->where('status', 1);
+
+        if ($request->has('sort')) {
+            if ($request->sort == 'price_asc') {
+                $query->orderBy('sale_price', 'asc');
+            } elseif ($request->sort == 'price_desc') {
+                $query->orderBy('sale_price', 'desc');
+            }
+        }
+
+        $listProduct = $query->get();
+
         foreach ($listProduct as $p) {
             $this->fixImage($p);
         }

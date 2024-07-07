@@ -8,12 +8,12 @@
     <meta name="description" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" type="image/x-icon" href="../../../assets_admin/img/logo/icon_dashboard.png" />
-    <link rel="stylesheet" href="../../assets_client/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="../../assets_client/css/LineIcons.3.0.css" />
-    <link rel="stylesheet" href="../../assets_client/css/tiny-slider.css" />
-    <link rel="stylesheet" href="../../assets_client/css/glightbox.min.css" />
-    <link rel="stylesheet" href="../../assets_client/css/main.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../../../assets_admin/img/logo/icon_dashboard.png" />
+    <link rel="stylesheet" href="../../../assets_client/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="../../../assets_client/css/LineIcons.3.0.css" />
+    <link rel="stylesheet" href="../../../assets_client/css/tiny-slider.css" />
+    <link rel="stylesheet" href="../../../assets_client/css/glightbox.min.css" />
+    <link rel="stylesheet" href="../../../assets_client/css/main.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"
         integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -114,34 +114,24 @@
                         <!-- End Header Logo -->
                     </div>
                     <div class="col-lg-5 col-md-7 d-xs-none">
-
-                        <!-- Start Main Menu Search -->
-                        <div class="main-menu-search">
-                            <!-- navbar search start -->
-                            <div class="navbar-search search-style-5">
-                                <div class="search-select">
-                                    <div class="select-position">
-                                        <select id="select1">
-                                            <option selected>All</option>
-                                            <option value="1">option 01</option>
-                                            <option value="2">option 02</option>
-                                            <option value="3">option 03</option>
-                                            <option value="4">option 04</option>
-                                            <option value="5">option 05</option>
-                                        </select>
+                        <form action="" method="GET" id="search-form">
+                            <div class="col-lg-5 col-md-7 d-xs-none" style="width: 100%;">
+                                {{-- Tìm kiếm sản phẩm --}}
+                                <div class="main-menu-search">
+                                    <div class="navbar-search search-style-5">
+                                        <div class="search-input">
+                                            <input type="text" id="search-input" name="query"
+                                                placeholder="Bạn muốn tìm gì ?" oninput="updateFormAction()">
+                                        </div>
+                                        <div class="search-btn">
+                                            <button type="submit"><i class="lni lni-search-alt"></i></button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="search-input">
-                                    <input type="text" placeholder="Search">
-                                </div>
-                                <div class="search-btn">
-                                    <button><i class="lni lni-search-alt"></i></button>
-                                </div>
                             </div>
-                            <!-- navbar search Ends -->
-                        </div>
-                        <!-- End Main Menu Search -->
+                        </form>
                     </div>
+
                     <div class="col-lg-4 col-md-8 col-2">
                         <div class="middle-right-area">
                             <div class="nav-hotline">
@@ -151,12 +141,8 @@
                                 </h3>
                             </div>
                             <div class="navbar-cart">
-                                <div class="wishlist">
-                                    <a href="#">
-                                        <i class="lni lni-heart"></i>
-                                        <span class="total-items-wishlist">0</span>
-                                    </a>
-                                </div>
+                                <a href="{{ route('formCheckOrder') }}" class="btn btn-outline-secondary mb-1"
+                                    style="margin-right: 10px;">Tra cứu đơn hàng</a>
                                 {{-- Shopping cart --}}
                                 <div class="cart-items">
                                     <a href="{{ route('indexCart') }}" class="main-btn">
@@ -164,13 +150,10 @@
                                         <span class="total-items-cart">{{ session('cartItemsCount', 0) }}</span>
                                     </a>
                                 </div>
-
                             </div>
-
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
         <!-- End Header Middle -->
@@ -307,6 +290,19 @@
                     </div>
                 </div>
             @endif
+
+            @if (session('alert-error'))
+                <div class="col-lg-6 col-md-6 col-12"></div>
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div id="error-alert" class="alert alert-danger alert-dismissible fade show" role="alert"
+                        style="background-color: #FF6969; font-size: 17px; color: #910909">
+                        <b>Không thành công</b>
+                        <br><span>{{ session('alert-error') }}</span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                    </div>
+                </div>
+            @endif
         </div>
     </div>
 
@@ -426,10 +422,10 @@
         <i class="lni lni-chevron-up"></i>
     </a>
 
-    <script src="../../assets_client/js/bootstrap.min.js"></script>
-    <script src="../../assets_client/js/tiny-slider.js"></script>
-    <script src="../../assets_client/js/glightbox.min.js"></script>
-    <script src="../../assets_client/js/main.js"></script>
+    <script src="../../../assets_client/js/bootstrap.min.js"></script>
+    <script src="../../../assets_client/js/tiny-slider.js"></script>
+    <script src="../../../assets_client/js/glightbox.min.js"></script>
+    <script src="../../../assets_client/js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"
         integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw=="
@@ -606,6 +602,18 @@
                 });
             });
         });
+        //Sắp xếp sản phẩm tăng dần và giảm dần thep giá tiền
+        function sortProducts(order) {
+            let url = new URL(window.location.href);
+            url.searchParams.set('sort', order);
+            window.location.href = url.toString();
+        }
+        //Tìm kiếm sản phẩm
+        function updateFormAction() {
+            const input = document.getElementById('search-input');
+            const form = document.getElementById('search-form');
+            form.action = "{{ url('/san-pham/search/keyword') }}/" + encodeURIComponent(input.value);
+        }
     </script>
 </body>
 

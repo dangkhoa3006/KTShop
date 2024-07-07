@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-    <title>KTMobile.vn - Profile</title>
+    <title>KTMobile.vn - Thanh toán đơn hàng</title>
     <meta name="description" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -126,28 +126,22 @@
                         </a>
                     </div>
                     <div class="col-lg-5 col-md-7 d-xs-none">
-                        <div class="main-menu-search">
-                            <div class="navbar-search search-style-5">
-                                <div class="search-select">
-                                    <div class="select-position">
-                                        <select id="select1">
-                                            <option selected>All</option>
-                                            <option value="1">option 01</option>
-                                            <option value="2">option 02</option>
-                                            <option value="3">option 03</option>
-                                            <option value="4">option 04</option>
-                                            <option value="5">option 05</option>
-                                        </select>
+                        <form action="" method="GET" id="search-form">
+                            <div class="col-lg-5 col-md-7 d-xs-none" style="width: 100%;">
+                                {{-- Tìm kiếm sản phẩm --}}
+                                <div class="main-menu-search">
+                                    <div class="navbar-search search-style-5">
+                                        <div class="search-input">
+                                            <input type="text" id="search-input" name="query"
+                                                placeholder="Bạn muốn tìm gì ?" oninput="updateFormAction()">
+                                        </div>
+                                        <div class="search-btn">
+                                            <button type="submit"><i class="lni lni-search-alt"></i></button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="search-input">
-                                    <input type="text" placeholder="Search">
-                                </div>
-                                <div class="search-btn">
-                                    <button><i class="lni lni-search-alt"></i></button>
-                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="col-lg-4 col-md-8 col-2">
                         <div class="middle-right-area">
@@ -184,7 +178,26 @@
         <div class="row align-items-center">
             {{-- error: #FF6969 || success: #74E291 --}}
             {{-- Success --}}
-
+            <div class="modal fade" id="cancelOrderModal" tabindex="-1" aria-labelledby="cancelOrderModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="cancelOrderModalLabel">Xác nhận hủy đơn hàng</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" style="font-size: 17px">
+                            Bạn có chắc chắn muốn hủy đơn hàng này không?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button type="button" class="btn btn-danger" id="confirmCancelOrder">Hủy đơn
+                                hàng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="payment" style="display:flex; justify-content: center">
                 <div class="col-lg-7 col-md-6 col-12">
                     <div id="success-alert"
@@ -296,20 +309,24 @@
 
                                 <div class="text-center">
                                     <button type="button" class="btn btn-primary" id="btn_payment"
-                                        style="margin-bottom: 50px;width: 100%;"><b>THANH TOÁN</b></button>
+                                        style="margin-bottom: 5px;width: 100%;"><b>THANH TOÁN</b></button>
+                                </div>
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-outline-danger" id="btn_cancel_payment"
+                                        style="margin-bottom: 50px;width: 100%;"><b>HỦY ĐƠN HÀNG</b></button>
                                 </div>
                                 <div class="text-center" id="vietqr_code_container" style="display: none;">
                                     <h3>QR Code</h3>
                                     <img id="vietqr_code" src="" alt="VietQR Code">
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
 
 
     <!-- ========================= scroll-top ========================= -->
@@ -350,7 +367,23 @@
             }
             form.submit();
         });
-        
+        $(document).ready(function() {
+            $('#btn_cancel_payment').click(function() {
+                $('#cancelOrderModal').modal('show');
+            });
+
+            $('#confirmCancelOrder').click(function() {
+                window.location.href = `{{ route('homepage') }}`;
+                $('#cancelOrderModal').modal('hide');
+            });
+        });
+
+        //Tìm kiếm sản phẩm
+        function updateFormAction() {
+            const input = document.getElementById('search-input');
+            const form = document.getElementById('search-form');
+            form.action = "{{ url('/san-pham/search/keyword') }}/" + encodeURIComponent(input.value);
+        }
     </script>
 </body>
 
