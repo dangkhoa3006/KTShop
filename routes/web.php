@@ -75,6 +75,7 @@ Route::group(['middleware' => 'auth.users'], function () {
 });
 //Trang bán hàng
 Route::get("/", [HomeController::class, 'Homepage'])->name('homepage');
+
 //Chức năng đăng nhập tài khoản
 Route::get("login", [LoginController::class, "showForm"])->name("login");
 Route::post("login", [LoginController::class, "authenticate"])->name("login");
@@ -104,6 +105,7 @@ Route::get('/tra-cuu-don-hang-online', [CheckOrderController::class, 'formCheckO
 Route::post('/tra-cuu-don-hang-online', [CheckOrderController::class, 'checkOrder'])->name('checkOrder');
 //Đánh giá
 Route::post('/submit-review', [ReviewController::class, 'store'])->name('submitReview');
+
 //Trang chi tiết giỏ hàng
 Route::get('/cart', [CartController::class, 'index'])->name('indexCart');
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
@@ -111,6 +113,8 @@ Route::post('/cart/remove/{rowId}', [CartController::class, 'removeFromCart'])->
 Route::post('/cart/update/{rowId}', [CartController::class, 'updateQuantity'])->name('cart.update');
 Route::post('/fetch-districts/{id}', [CartController::class, 'fetchDistricts']);
 Route::post('/fetch-wards/{id}', [CartController::class, 'fetchWards']);
+
+
 //Tạo đơn hàng
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');
 //Thanh toán

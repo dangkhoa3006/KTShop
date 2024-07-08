@@ -93,268 +93,102 @@
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>Điện thoại nổi bật</h2>
-                        <p>Hiển thị ra danh mục điện thoại nổi bật.</p>
-
+                        <h2>IPhone nổi bật</h2>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="../../assets_client/images/products/product-4.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                    Cart</a>
+                @foreach ($listIphone as $p)
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="single-product" style="width: 290px; height: auto;">
+                            <div class="product-image">
+                                <span class="new-tag">Mới</span>
+                                <a href="{{ route('showProduct', $p->slug) }}">
+                                    <img style="margin: 35px 30px; width: 220px; max-height: 220px; object-fit: contain;"
+                                        src="{{ $p->image }}" alt="#">
+                                </a>
+                                <div class="button">
+                                    <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $p->id }}">
+                                        <input type="hidden" name="name" value="{{ $p->name }}">
+                                        <input type="hidden" name="price" value="{{ $p->sale_price }}">
+                                        <input type="hidden" name="qty" value="1">
+                                        <!-- Mặc định là 1, bạn có thể tùy chỉnh -->
+                                        <input type="hidden" name="image" value="{{ $p->image }}">
+                                        <button type="submit" class="btn"><i class="lni lni-cart"></i> Thêm</button>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">Phones</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">iphone 6x plus</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.0 Review(s)</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$400.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="../../assets_client/images/products/product-4.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                    Cart</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">Phones</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">iphone 6x plus</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.0 Review(s)</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$400.00</span>
+                            <div class="product-info">
+                                <h4 class="title">
+                                    <a href="{{ route('showProduct', $p->slug) }}">{{ $p->name }}</a>
+                                </h4>
+                                <div class="price">
+                                    <span>{{ number_format($p->sale_price, 0, ',', '.') }} đ</span>
+                                    @if ($p->price && $p->price != 0)
+                                        <span class="discount-price">{{ number_format($p->price, 0, ',', '.') }} đ</span>
+                                    @endif
+                                </div>
+                                <ul class="review">
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <!-- End Single Product -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="../../assets_client/images/products/product-4.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                    Cart</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">Phones</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">iphone 6x plus</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.0 Review(s)</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$400.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="../../assets_client/images/products/product-4.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                    Cart</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">Phones</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">iphone 6x plus</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.0 Review(s)</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$400.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                </div>
+                @endforeach
             </div>
-            <br><br>
             <div class="row">
                 <div class="col-12">
                     <div class="section-title">
-                        <h2>Ipad nổi bật</h2>
-                        <p>Hiển thị ra danh mục Ipad nổi bật.</p>
+                        <h2>Samsung nổi bật</h2>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="../../assets_client/images/products/product-4.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                    Cart</a>
+                @foreach ($listSamsung as $p)
+                    <div class="col-lg-3 col-md-6 col-12">
+                        <div class="single-product" style="width: 290px; height: auto;">
+                            <div class="product-image">
+                                <span class="new-tag">Mới</span>
+                                <a href="{{ route('showProduct', $p->slug) }}">
+                                    <img style="margin: 35px 30px; width: 220px; max-height: 220px; object-fit: contain;"
+                                        src="{{ $p->image }}" alt="#">
+                                </a>
+                                <div class="button">
+                                    <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
+                                        @csrf
+                                        <input type="hidden" name="id" value="{{ $p->id }}">
+                                        <input type="hidden" name="name" value="{{ $p->name }}">
+                                        <input type="hidden" name="price" value="{{ $p->sale_price }}">
+                                        <input type="hidden" name="qty" value="1">
+                                        <!-- Mặc định là 1, bạn có thể tùy chỉnh -->
+                                        <input type="hidden" name="image" value="{{ $p->image }}">
+                                        <button type="submit" class="btn"><i class="lni lni-cart"></i> Thêm</button>
+                                    </form>
+                                </div>
                             </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">Phones</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">iphone 6x plus</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.0 Review(s)</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$400.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="../../assets_client/images/products/product-4.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                    Cart</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">Phones</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">iphone 6x plus</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.0 Review(s)</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$400.00</span>
+                            <div class="product-info">
+                                <h4 class="title">
+                                    <a href="{{ route('showProduct', $p->slug) }}">{{ $p->name }}</a>
+                                </h4>
+                                <div class="price">
+                                    <span>{{ number_format($p->sale_price, 0, ',', '.') }} đ</span>
+                                    @if ($p->price && $p->price != 0)
+                                        <span class="discount-price">{{ number_format($p->price, 0, ',', '.') }} đ</span>
+                                    @endif
+                                </div>
+                                <ul class="review">
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                    <li><i class="lni lni-star-filled"></i></li>
+                                </ul>
                             </div>
                         </div>
                     </div>
-                    <!-- End Single Product -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="../../assets_client/images/products/product-4.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                    Cart</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">Phones</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">iphone 6x plus</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.0 Review(s)</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$400.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <!-- Start Single Product -->
-                    <div class="single-product">
-                        <div class="product-image">
-                            <img src="../../assets_client/images/products/product-4.jpg" alt="#">
-                            <span class="new-tag">New</span>
-                            <div class="button">
-                                <a href="product-details.html" class="btn"><i class="lni lni-cart"></i> Add to
-                                    Cart</a>
-                            </div>
-                        </div>
-                        <div class="product-info">
-                            <span class="category">Phones</span>
-                            <h4 class="title">
-                                <a href="product-grids.html">iphone 6x plus</a>
-                            </h4>
-                            <ul class="review">
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><i class="lni lni-star-filled"></i></li>
-                                <li><span>5.0 Review(s)</span></li>
-                            </ul>
-                            <div class="price">
-                                <span>$400.00</span>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- End Single Product -->
-                </div>
+                @endforeach
             </div><br><br>
             <div class="row">
                 <div class="col-12">

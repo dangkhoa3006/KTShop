@@ -510,6 +510,8 @@
             setTimeout(function() {
                 $("#error-alert").alert('close'); // Đóng alert sau 3 giây
             }, 3000);
+
+            //Thêm sản phẩm vào giỏ hàng
             $('.add-to-cart-form').on('submit', function(e) {
                 e.preventDefault(); // Ngăn chặn hành vi submit mặc định
 
@@ -523,7 +525,7 @@
                     data: formData,
                     success: function(response) {
                         if (response.success) {
-                            // Xóa các thông báo cũ nếu có
+                            // Xóa các thông báo cũ
                             $('.notification').remove();
 
                             // Hiển thị thông báo thành công
@@ -575,6 +577,7 @@
                     }
                 });
             });
+            //Nút mua ngay sản phẩm
             $('#buy-now-btn').on('click', function(e) {
                 e.preventDefault(); // Ngăn chặn hành vi mặc định
 
@@ -602,6 +605,7 @@
                 });
             });
         });
+
         //Sắp xếp sản phẩm tăng dần và giảm dần thep giá tiền
         function sortProducts(order) {
             let url = new URL(window.location.href);

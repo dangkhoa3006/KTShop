@@ -277,7 +277,7 @@
                                             <b for="name" class="col-sm-1 col-form-label">Họ tên</b>
                                             <div class="col-sm-15">
                                                 <input type="text" class="form-control" id="name"
-                                                    name="username" value="{{ old('username', Auth::user()->name) }}"
+                                                    name="username" value="{{ old('username')}}"
                                                     placeholder="Họ tên...">
                                                 <div style="color: red">
                                                     @if ($errors->has('username'))
@@ -290,7 +290,7 @@
                                             <b for="phone" class="col-sm-1 col-form-label">Số điện thoại</b>
                                             <div class="col-sm-15">
                                                 <input type="text" class="form-control" id="phone"
-                                                    name="phone" value="{{ old('phone', Auth::user()->phone) }}"
+                                                    name="phone" value="{{ old('phone') }}"
                                                     placeholder="Số điện thoại...">
                                                 <div style="color: red">
                                                     @if ($errors->has('phone'))
@@ -303,7 +303,7 @@
                                             <b for="email" class="col-sm-1 col-form-label">Email</b>
                                             <div class="col-sm-15">
                                                 <input type="text" class="form-control" id="email"
-                                                    name="email" value="{{ old('email', Auth::user()->email) }}"
+                                                    name="email" value="{{ old('email') }}"
                                                     placeholder="Email...">
                                                 <div style="color: red">
                                                     @if ($errors->has('email'))

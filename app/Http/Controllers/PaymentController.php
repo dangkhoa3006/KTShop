@@ -144,7 +144,12 @@ class PaymentController extends Controller
 
         $result = $this->execPostRequest($endpoint, json_encode($data));
         $jsonResult = json_decode($result, true);
-
+        $resultCode = $jsonResult['resultCode'];
+        // dd($resultCode);
+        if ($resultCode == 22) {
+            // Người dùng nhấn nút quay về hoặc giao dịch bị hủy
+            return redirect()->route('viewPaymentFail', ['orderId' => $order->code])->with('cancel-payment', 'TỔNG TIỀN ĐƠN HÀNG VƯỢT QUÁ HẠN MỨC GIAO DỊCH CỦA MOMO QR!');
+        }
         if (isset($jsonResult['payUrl'])) {
             // Chuyển hướng đến trang thanh toán của MoMo
             return redirect()->away($jsonResult['payUrl']);
