@@ -1,9 +1,9 @@
 @extends('admin.app')
-@section('title', 'Admin - Quản lý hóa đơn')
+@section('title', 'Admin - Quản lý đơn hàng')
 @section('header-route')
     @parent
-    <li class="breadcrumb-item"><a href="{{ route('invoices.index') }}">Quản lý hóa đơn</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Chi tiết hóa đơn</li>
+    <li class="breadcrumb-item"><a href="{{ route('invoices.index') }}">Quản lý đơn hàng</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Chi tiết đơn hàng</li>
 @endsection
 @section('invoice-active', 'active')
 @section('content-pages')

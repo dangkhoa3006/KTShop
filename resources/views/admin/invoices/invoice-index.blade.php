@@ -1,11 +1,10 @@
 @extends('admin.app')
-@section('title', 'Admin - Quản lý hóa đơn')
+@section('title', 'Admin - Quản lý đơn hàng')
 @section('header-route')
-    @parent <li class="breadcrumb-item active" aria-current="page">Quản lý hóa đơn</li>
+    @parent <li class="breadcrumb-item active" aria-current="page">Quản lý đơn hàng</li>
 @endsection
 @section('invoice-active', 'active')
 @section('content-pages')
-    <!--Xuất thông báo sau khi tạo tài khoản-->
     @if (session('success'))
         <div id="success-alert" class="alert alert-success alert-dismissible" role="alert"
             style="position: fixed; top: 80px; left: 63%; width: 35%;">
@@ -26,16 +25,12 @@
             {{ session('error') }}
         </div>
     @endif
-
     <h5 class="h4 mb-2 text-gray-800">Danh sách hóa đơn</h5>
-
     <div class="row">
-        <!-- DataTable with Hover -->
         <div class="col-lg-12">
             <div class="card mb-4">
                 <div class="card-body">
                     <a href="{{ route('invoices.trash') }}" class="btn btn-primary float-left">
-                       
                         Đơn hàng đã hủy
                     </a>
                     <div class="clearfix"></div>
@@ -47,10 +42,9 @@
                                 <th>Mã hóa đơn</th>
                                 <th>Tên khách hàng</th>
                                 <th>Số điện thoại</th>
-                                {{-- <th>Địa chỉ nhận hàng</th> --}}
-                                <th>Thanh toán</th>
-                                <th>Trạng thái đơn hàng</th>
-                                <th>Trạng thái đơn hàng</th>
+                                <th>Hình thức thanh toán</th>
+                                <th>Trạng thái</th>
+                                <th>Tình trạng đơn hàng</th>
                                 <th></th>
                                 <th></th>
                             </tr>
@@ -61,26 +55,6 @@
                                     <td>#{{ $bill->code }}</td>
                                     <td>{{ $bill->username }}</td>
                                     <td>{{ $bill->phone }}</td>
-
-                                    {{-- <td>
-                                        @if (empty($order->address) && empty($bill->ward_name) && empty($user->district_name) && empty($user->province_name))
-                                            65 đường Huỳnh Thúc Kháng, Phường Bến Nghé, Quận 1, Thành phố Hồ Chí Minh
-                                        @else
-                                            @isset($bill->address)
-                                                {{ $bill->address }},
-                                            @endisset
-                                            @isset($bill->ward_name)
-                                                {{ $bill->ward_name }},
-                                            @endisset
-                                            @isset($bill->district_name)
-                                                {{ $bill->district_name }},
-                                            @endisset
-                                            @isset($bill->province_name)
-                                                {{ $bill->province_name }}.
-                                            @endisset
-                                        @endif
-                                    </td> --}}
-
                                     <td>
                                         @if ($bill->payment_method == 'momo')
                                             MoMo QR
@@ -95,7 +69,7 @@
                                             Chuyển khoản ngân hàng
                                         @endif
                                         @if ($bill->payment_method == null)
-                                            *Chưa thanh toán*
+                                            *Không có*
                                         @endif
                                     </td>
                                     <td>
@@ -114,43 +88,52 @@
                                     </td>
                                     <td>
                                         @if ($bill->delivery_status == 0)
-                                            <span class="badge badge-warning" style="font-size: 14px">Đang xác nhận đơn hàng</span>
+                                            <span class="badge badge-warning" style="font-size: 14px">Đang xác nhận đơn
+                                                hàng</span>
                                         @endif
                                         @if ($bill->delivery_status == 1)
-                                            <span class="badge badge-warning" style="font-size: 14px">Đã xác nhận đơn hàng</span>
+                                            <span class="badge badge-warning" style="font-size: 14px">Đã xác nhận đơn
+                                                hàng</span>
                                         @endif
                                         @if ($bill->delivery_status == 2)
-                                            <span class="badge badge-primary" style="font-size: 14px">Đang chuẩn bị hàng</span>
+                                            <span class="badge badge-primary" style="font-size: 14px">Đang chuẩn bị
+                                                hàng</span>
                                         @endif
                                         @if ($bill->delivery_status == 3)
-                                            <span class="badge badge-primary" style="font-size: 14px">Đơn hàng đã đến đơn vị vận chuyển</span>
+                                            <span class="badge badge-primary" style="font-size: 14px">Đơn hàng đã đến đơn vị
+                                                vận chuyển</span>
                                         @endif
                                         @if ($bill->delivery_status == 4)
-                                            <span class="badge badge-primary" style="font-size: 14px">Đơn hàng đang trên đường giao</span>
+                                            <span class="badge badge-primary" style="font-size: 14px">Đơn hàng đang trên
+                                                đường giao</span>
                                         @endif
                                         @if ($bill->delivery_status == 5)
-                                            <span class="badge badge-success" style="font-size: 14px">Giao hàng thành công</span>
+                                            <span class="badge badge-success" style="font-size: 14px">Giao hàng thành
+                                                công</span>
                                         @endif
                                         @if ($bill->delivery_status == 6)
                                             <span class="badge badge-danger" style="font-size: 14px">Đã hủy đơn</span>
                                         @endif
                                     </td>
                                     <td>
-                                        <form action="{{ route('invoices.destroy', $bill->id) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-icon-split">
-                                                <span class="icon text-white-50">
-                                                    <i class="fas fa-trash"></i>
-                                                </span>
-                                                <span class="text">
-                                                    Hủy đơn
-                                                </span>
-                                            </button>
-                                        </form>
+                                        @if (!($bill->status == 1 && $bill->delivery_status == 5))
+                                            <form action="{{ route('invoices.destroy', $bill->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-icon-split">
+                                                    <span class="icon text-white-50">
+                                                        <i class="fas fa-trash"></i>
+                                                    </span>
+                                                    <span class="text">
+                                                        Hủy đơn
+                                                    </span>
+                                                </button>
+                                            </form>
+                                        @endif
                                     </td>
                                     <td>
-                                        <a href="{{ route('invoices.show', $bill->id) }}" class="btn btn-primary btn-icon-split">
+                                        <a href="{{ route('invoices.show', $bill->id) }}"
+                                            class="btn btn-primary btn-icon-split">
                                             <span class="icon text-white-50">
                                                 <i class="fas fa-eye"></i>
                                             </span>
@@ -164,7 +147,6 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
     </div>

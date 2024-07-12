@@ -142,18 +142,13 @@
                                 </h3>
                             </div>
                             <div class="navbar-cart">
-                                <div class="wishlist">
-                                    <a href="#">
-                                        <i class="lni lni-heart"></i>
-                                        <span class="total-items-wishlist">0</span>
-                                    </a>
-                                </div>
+                                <a href="{{ route('formCheckOrder') }}" class="btn btn-outline-secondary mb-1"
+                                    style="margin-right: 10px;">Tra cứu đơn hàng</a>
                                 <div class="cart-items">
                                     <a href="{{ route('indexCart') }}" class="main-btn">
                                         <i class="lni lni-cart"></i>
                                         <span class="total-items-cart">{{ session('cartItemsCount', 0) }}</span>
                                     </a>
-
                                 </div>
                             </div>
                         </div>
@@ -277,7 +272,7 @@
                                             <b for="name" class="col-sm-1 col-form-label">Họ tên</b>
                                             <div class="col-sm-15">
                                                 <input type="text" class="form-control" id="name"
-                                                    name="username" value="{{ old('username')}}"
+                                                    name="username" value="{{ old('username', Auth::check() ? Auth::user()->name : '')}}"
                                                     placeholder="Họ tên...">
                                                 <div style="color: red">
                                                     @if ($errors->has('username'))
@@ -290,7 +285,7 @@
                                             <b for="phone" class="col-sm-1 col-form-label">Số điện thoại</b>
                                             <div class="col-sm-15">
                                                 <input type="text" class="form-control" id="phone"
-                                                    name="phone" value="{{ old('phone') }}"
+                                                    name="phone" value="{{ old('phone', Auth::check() ? Auth::user()->phone : '') }}"
                                                     placeholder="Số điện thoại...">
                                                 <div style="color: red">
                                                     @if ($errors->has('phone'))
@@ -303,7 +298,7 @@
                                             <b for="email" class="col-sm-1 col-form-label">Email</b>
                                             <div class="col-sm-15">
                                                 <input type="text" class="form-control" id="email"
-                                                    name="email" value="{{ old('email') }}"
+                                                    name="email" value="{{ old('email', Auth::check() ? Auth::user()->email : '') }}"
                                                     placeholder="Email...">
                                                 <div style="color: red">
                                                     @if ($errors->has('email'))

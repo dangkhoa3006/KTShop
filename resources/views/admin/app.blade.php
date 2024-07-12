@@ -100,9 +100,9 @@
                 Hóa đơn
             </div>
             <li class="nav-item @yield('invoice-active')">
-                <a class="nav-link" href="{{route('invoices.index')}}">
+                <a class="nav-link" href="{{ route('invoices.index') }}">
                     <i class="fas fa-fw fa-file-invoice-dollar"></i>
-                    <span>Quản lý hóa đơn</span>
+                    <span>Quản lý đơn hàng</span>
                 </a>
             </li>
             <hr class="sidebar-divider">
@@ -120,7 +120,7 @@
                 <li class="nav-item @yield('member-active')">
                     <a class="nav-link" href="{{ route('members.index') }}">
                         <i class="fas fa-fw fa-user-friends"></i>
-                        <span>Quản lý thành viên</span>
+                        <span>Quản lý khách hàng</span>
                     </a>
                 </li>
                 <hr class="sidebar-divider">
@@ -163,13 +163,13 @@
                 Bình luận và đánh giá
             </div>
             <li class="nav-item @yield('comment-active')">
-                <a class="nav-link" href="{{route('comments.index')}}">
+                <a class="nav-link" href="{{ route('comments.index') }}">
                     <i class="fas fa-fw fa-comment"></i>
                     <span>Quản lý bình luận</span>
                 </a>
             </li>
             <li class="nav-item @yield('review-active')">
-                <a class="nav-link" href="{{route('reviews.index')}}">
+                <a class="nav-link" href="{{ route('reviews.index') }}">
                     <i class="fas fa-fw fa-comment-dots"></i>
                     <span>Quản lý đánh giá</span>
                 </a>
@@ -300,13 +300,20 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <img class="img-profile rounded-circle" src="../../../assets_admin/img/boy.png"
-                                        style="max-width: 60px">
+                                    @if (Auth::user()->avatar)
+                                        <img class="img-profile rounded-circle"
+                                            src="{{ asset('storage/' . Auth::user()->avatar) }}" style="max-width: 60px">
+                                    @else
+                                        <img class="img-profile rounded-circle"
+                                            src="{{ asset('assets_admin/img/boy.png') }}" style="max-width: 60px">
+                                    @endif
+
+
                                     <span class="ml-2 d-none d-lg-inline text-white small">{{ Auth::user()->name }}</span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                                     aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#">
+                                    <a class="dropdown-item" href="{{ route('editAdminProfile') }}">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Thông tin tài khoản
                                     </a>
@@ -355,13 +362,13 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
+                                        <h5 class="modal-title" id="exampleModalLabelLogout">ĐĂNG XUẤT</h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Bạn muốn đăng xuất?</p>
+                                        <p>Bạn muốn đăng xuất tài khoản?</p>
                                     </div>
                                     <form method="POST" action="{{ route('logout') }}">
                                         @csrf
@@ -465,7 +472,7 @@
             //     maxboostedstep: 10,
             //     verticalbuttons: true,
             // });
-            
+
             //select districts from provinces
             $("#selectProvinces").change(function() {
                 var province_id = $(this).val();
@@ -556,7 +563,7 @@
         });
         CKEDITOR.replace('editor2');
     </script>
-    
+
 </body>
 
 </html>

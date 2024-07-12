@@ -107,11 +107,11 @@
                     </div>
                 @endforeach
 
-                <div class="text-center mt-4">
+                {{-- <div class="text-center mt-4">
                     <button class="btn btn-primary">Xem thêm 100 sản phẩm
                         <i class="lni lni-chevron-down"></i>
                     </button>
-                </div><br>
+                </div><br> --}}
             </div>
         </div>
     </section>

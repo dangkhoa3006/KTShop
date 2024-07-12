@@ -102,7 +102,7 @@
                         <div class="form-group row">
                             <label for="phone" class="col-sm-2 col-form-label">Số điện thoại</label>
                             <div class="col-sm-8">
-                                <input type="tel" class="form-control" name="phone" id="phone"
+                                <input type="number" class="form-control" name="phone" id="phone"
                                     value="{{ old('phone', $acc->phone) }}">
                                 <div style="color: red;">
                                     @if ($errors->has('phone'))

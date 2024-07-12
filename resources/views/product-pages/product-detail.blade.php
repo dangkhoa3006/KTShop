@@ -57,60 +57,57 @@
                                             đ</span>
                                     @endif
                                 </h3>
-                                {{-- <div class="row">
-                                <div class="col-lg-4 col-md-4 col-12">
-                                    <div class="form-group color-option">
-                                        <label class="title-label" for="size">Màu sắc</label>
-
-                                        <div class="item-variant-container">
-                                            <ul class="item-variant-list">
-                                                <li class="item-variant" style="margin-right: 10px">
-                                                    <a href="#" data-index="1" title="Titan Đen"
-                                                        class="button__change-color is-flex is-align-items-center">
-                                                        <div class="product-image-detail" >
-                                                            <img src="{{ $product->image }}"
-                                                                alt="Titan Đen">
-                                                        </div>
-                                                        <div class="product-info">
-                                                            <strong class="item-variant-name">Titan Đen</strong>
-                                                            <span class="product-price">29.790.000₫</span>
-                                                        </div>
-                                                    </a>
-                                                </li>
-
-                                                <li class="item-variant" style="margin-right: 10px">
-                                                    <a href="#" data-index="2" title="Titan Trắng"
-                                                        class="button__change-color is-flex is-align-items-center">
-                                                        <div class="product-image-detail">
-                                                            <img src="{{ $product->image }}" width="50" height="50"
-                                                                alt="iPhone 15 Pro Max 256GB | Chính hãng VN/A-Titan Trắng"
-                                                                loading="lazy">
-                                                        </div>
-                                                        <div class="product-info">
-                                                            <strong class="item-variant-name">Titan Trắng</strong>
-                                                            <span class="product-price">30.790.000₫</span>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li class="item-variant" style="margin-right: 10px">
-                                                    <a href="#" data-index="1" title="Titan Đen"
-                                                        class="button__change-color is-flex is-align-items-center">
-                                                        <div class="product-image-detail" >
-                                                            <img src="{{ $product->image }}"
-                                                                alt="Titan Đen">
-                                                        </div>
-                                                        <div class="product-info">
-                                                            <strong class="item-variant-name">Titan Đen</strong>
-                                                            <span class="product-price">29.790.000₫</span>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                
-                                            </ul>
+                                {{-- <p style="font-style: italic; font-size: 17px;"><b>Chọn màu bạn muốn xem: </b></p>
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-12">
+                                        <div id="color-vabriant"
+                                            style="font-size: 17px; color: black; display: flex; justify-content: center; align-items: center; margin-top: 10px; border: 2px solid #0098ac; border-radius: 10px;">
+                                            <img src="{{ $product->image }}"
+                                                style="height: 43px; margin-top:15px;" class="mb-3">
+                                            <div
+                                                style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                                <b>Màu hồng</b>
+                                                <b>{{ number_format($product->price, 0, ',', '.') }}</b>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div> --}}
+                                    <div class="col-lg-4">
+                                        <div id="color-vabriant"
+                                            style="font-size: 17px; color: black; display: flex; justify-content: center; align-items: center; margin-top: 10px; border: 2px solid #0098ac; border-radius: 10px;">
+                                            <img src="{{ $product->image }}"
+                                                style="height: 43px; margin-right: 5px;margin-top:15px;" class="mb-3">
+                                            <div
+                                                style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                                <b>Màu hồng</b>
+                                                <b>{{ number_format($product->price, 0, ',', '.') }}</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-12">
+                                        <div id="color-vabriant"
+                                            style="font-size: 17px; color: black; display: flex; justify-content: center; align-items: center; margin-top: 10px; border: 2px solid #0098ac; border-radius: 10px;">
+                                            <img src="{{ $product->image }}"
+                                                style="height: 43px; margin-top:15px;" class="mb-3">
+                                            <div
+                                                style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                                <b>Màu hồng</b>
+                                                <b>{{ number_format($product->price, 0, ',', '.') }}</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div id="color-vabriant"
+                                            style="font-size: 17px; color: black; display: flex; justify-content: center; align-items: center; margin-top: 10px; border: 2px solid #0098ac; border-radius: 10px;">
+                                            <img src="{{ $product->image }}"
+                                                style="height: 43px; margin-right: 5px;margin-top:15px;" class="mb-3">
+                                            <div
+                                                style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                                <b>Màu hồng</b>
+                                                <b>{{ number_format($product->price, 0, ',', '.') }}</b>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> --}}
                                 <div class="bottom-content">
                                     <div class="row align-items-end">
                                         <div class="col-lg-10 col-md-4 col-12">
@@ -160,7 +157,8 @@
                                         </div>
                                         <div class="col-lg-12 col-md-4 col-12" style="margin-top: 10px">
                                             <i class="lni lni-protection" style="font-size: 20px;"></i>
-                                            <span style="margin-left: 10px; font-size: 17px">Bảo hành 12 tháng tại trung tâm
+                                            <span style="margin-left: 10px; font-size: 17px">Bảo hành 12 tháng tại trung
+                                                tâm
                                                 bảo hành chính hãng</span>
                                         </div>
                                         <div class="col-lg-12 col-md-4 col-12" style="margin-top: 10px">

@@ -32,7 +32,7 @@ class DashboardController extends Controller
         foreach ($monthlyTotals as $month => $total) {
             $monthlyData[$month] = $total;
         }
-        // Lấy ra top 10 sản phẩm bán chạy nhất
+        // Lấy ra top 7 sản phẩm bán chạy nhất
         $bestSellingProducts = OrderDetail::select('product_id', DB::raw('SUM(quantity) as total_quantity'))
             ->groupBy('product_id')
             ->orderBy('total_quantity', 'desc')

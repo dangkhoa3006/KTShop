@@ -54,18 +54,6 @@
                                             <h1 class="h4 text-gray-900 mb-4">ĐỔI MẬT KHẨU</h1>
                                         </div>
                                         <input type="text" name="token" hidden value="{{$token}}">
-                                        {{-- <div class="form-group row">
-                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-                                            <div class="col-sm-10">
-                                                <input type="email" class="form-control" name="email"
-                                                    id="inputEmail3" placeholder="Email">
-                                                <div style="color: red;">
-                                                    @if ($errors->has('email'))
-                                                        {{ $errors->first('email') }}<br>
-                                                    @endif
-                                                </div>
-                                            </div>
-                                        </div> --}}
                                         <div class="form-group row">
                                             <label for="inputPassword3" class="col-sm-2 col-form-label">Mật
                                                 khẩu</label>

@@ -2,7 +2,7 @@
 Template Name: ShopGrids - Bootstrap 5 eCommerce HTML Template.
 Author: GrayGrids
 */
-
+import Swiper from 'swiper/bundle';
 (function () {
     //===== Prealoder
 

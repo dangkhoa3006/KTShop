@@ -133,7 +133,7 @@ class ProductController extends Controller
         $this->fixImage($product);
         $category = $product->category;
         $subcategory = $product->subcategory;
-        $list = Category::with('subcategories')->get();
+        $list = Category::with('subcategories')->where('status', 1)->get();
         $comment=Comment::where('product_id', $product->id)->where('status',1)->get();
         return view('product-pages.product-detail', compact('product', 'category', 'subcategory','comment', 'list'));
     }

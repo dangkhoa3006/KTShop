@@ -172,28 +172,22 @@
                         </a>
                     </div>
                     <div class="col-lg-5 col-md-7 d-xs-none">
-                        <div class="main-menu-search">
-                            <div class="navbar-search search-style-5">
-                                <div class="search-select">
-                                    <div class="select-position">
-                                        <select id="select1">
-                                            <option selected>All</option>
-                                            <option value="1">option 01</option>
-                                            <option value="2">option 02</option>
-                                            <option value="3">option 03</option>
-                                            <option value="4">option 04</option>
-                                            <option value="5">option 05</option>
-                                        </select>
+                        <form action="" method="GET" id="search-form">
+                            <div class="col-lg-5 col-md-7 d-xs-none" style="width: 100%;">
+                                {{-- Tìm kiếm sản phẩm --}}
+                                <div class="main-menu-search">
+                                    <div class="navbar-search search-style-5">
+                                        <div class="search-input">
+                                            <input type="text" id="search-input" name="query"
+                                                placeholder="Bạn muốn tìm gì ?" oninput="updateFormAction()">
+                                        </div>
+                                        <div class="search-btn">
+                                            <button type="submit"><i class="lni lni-search-alt"></i></button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="search-input">
-                                    <input type="text" placeholder="Search">
-                                </div>
-                                <div class="search-btn">
-                                    <button><i class="lni lni-search-alt"></i></button>
-                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="col-lg-4 col-md-8 col-2">
                         <div class="middle-right-area">
@@ -204,62 +198,13 @@
                                 </h3>
                             </div>
                             <div class="navbar-cart">
-                                <div class="wishlist">
-                                    <a href="#">
-                                        <i class="lni lni-heart"></i>
-                                        <span class="total-items">0</span>
-                                    </a>
-                                </div>
+                                <a href="{{ route('formCheckOrder') }}" class="btn btn-outline-secondary mb-1"
+                                    style="margin-right: 10px;">Tra cứu đơn hàng</a>
                                 <div class="cart-items">
-                                    <a href="javascript:void(0)" class="main-btn">
+                                    <a href="{{ route('indexCart') }}" class="main-btn">
                                         <i class="lni lni-cart"></i>
-                                        <span class="total-items">2</span>
+                                        <span class="total-items-cart">{{ session('cartItemsCount', 0) }}</span>
                                     </a>
-                                    <div class="shopping-item">
-                                        <div class="dropdown-cart-header">
-                                            <span>2 Items</span>
-                                            <a href="cart.html">View Cart</a>
-                                        </div>
-                                        <ul class="shopping-list">
-                                            <li>
-                                                <a href="javascript:void(0)" class="remove" title="Remove this item"><i
-                                                        class="lni lni-close"></i></a>
-                                                <div class="cart-img-head">
-                                                    <a class="cart-img" href="product-details.html"><img
-                                                            src="../../assets_client/images/header/cart-items/item1.jpg"
-                                                            alt="#"></a>
-                                                </div>
-
-                                                <div class="content">
-                                                    <h4><a href="product-details.html">
-                                                            Apple Watch Series 6</a></h4>
-                                                    <p class="quantity">1x - <span class="amount">$99.00</span></p>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <a href="javascript:void(0)" class="remove"
-                                                    title="Remove this item"><i class="lni lni-close"></i></a>
-                                                <div class="cart-img-head">
-                                                    <a class="cart-img" href="product-details.html"><img
-                                                            src="../../assets_client/images/header/cart-items/item2.jpg"
-                                                            alt="#"></a>
-                                                </div>
-                                                <div class="content">
-                                                    <h4><a href="product-details.html">Wi-Fi Smart Camera</a></h4>
-                                                    <p class="quantity">1x - <span class="amount">$35.00</span></p>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                        <div class="bottom">
-                                            <div class="total">
-                                                <span>Total</span>
-                                                <span class="total-amount">$134.00</span>
-                                            </div>
-                                            <div class="button">
-                                                <a href="checkout.html" class="btn animate">Checkout</a>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -360,9 +305,9 @@
                         <div class="col-lg-8 col-md-12 col-12" style="height: 600px">
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#home">Thông tin tài khoản</a></li>
-                                <li><a data-toggle="tab" href="#menu1">Sản phẩm đã mua</a></li>
+                                {{-- <li><a data-toggle="tab" href="#menu1">Sản phẩm đã mua</a></li>
                                 <li><a data-toggle="tab" href="#menu2">Hóa đơn đã hủy</a></li>
-                                <li><a data-toggle="tab" href="#menu3">Tích điểm</a></li>
+                                <li><a data-toggle="tab" href="#menu3">Tích điểm</a></li> --}}
                             </ul>
                             <div class="tab-content">
                                 <div id="home" class="tab-pane active">
@@ -514,7 +459,7 @@
                                         </div>
                                     </form>
                                 </div>
-                                <div id="menu1" class="tab-pane">
+                                {{-- <div id="menu1" class="tab-pane">
                                     <h3>Menu 1</h3>
                                     <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
                                         aliquip ex
@@ -531,7 +476,7 @@
                                     <p>Eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
                                         dicta
                                         sunt explicabo.</p>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                     </div>
@@ -657,9 +602,6 @@
                     type: 'post',
                     dataType: "json",
                     success: function(response) {
-                        //console.log(response['districts'].length);
-
-                        //console.log(response['districts'].length);
                         $('#selectDistricts').find('option:not(:first)').remove();
                         $('#selectWards').find('option:not(:first)').remove();
 
@@ -701,6 +643,12 @@
                 $("#error-alert").alert('close'); // Đóng alert sau 2 giây
             }, 2000);
         });
+        //Tìm kiếm sản phẩm
+        function updateFormAction() {
+            const input = document.getElementById('search-input');
+            const form = document.getElementById('search-form');
+            form.action = "{{ url('/san-pham/search/keyword') }}/" + encodeURIComponent(input.value);
+        }
     </script>
 </body>
 

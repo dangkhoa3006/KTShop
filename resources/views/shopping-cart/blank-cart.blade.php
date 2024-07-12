@@ -85,28 +85,22 @@
                         </a>
                     </div>
                     <div class="col-lg-5 col-md-7 d-xs-none">
-                        <div class="main-menu-search">
-                            <div class="navbar-search search-style-5">
-                                <div class="search-select">
-                                    <div class="select-position">
-                                        <select id="select1">
-                                            <option selected>All</option>
-                                            <option value="1">option 01</option>
-                                            <option value="2">option 02</option>
-                                            <option value="3">option 03</option>
-                                            <option value="4">option 04</option>
-                                            <option value="5">option 05</option>
-                                        </select>
+                        <form action="" method="GET" id="search-form">
+                            <div class="col-lg-5 col-md-7 d-xs-none" style="width: 100%;">
+                                {{-- Tìm kiếm sản phẩm --}}
+                                <div class="main-menu-search">
+                                    <div class="navbar-search search-style-5">
+                                        <div class="search-input">
+                                            <input type="text" id="search-input" name="query"
+                                                placeholder="Bạn muốn tìm gì ?" oninput="updateFormAction()">
+                                        </div>
+                                        <div class="search-btn">
+                                            <button type="submit"><i class="lni lni-search-alt"></i></button>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="search-input">
-                                    <input type="text" placeholder="Search">
-                                </div>
-                                <div class="search-btn">
-                                    <button><i class="lni lni-search-alt"></i></button>
-                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                     <div class="col-lg-4 col-md-8 col-2">
                         <div class="middle-right-area">
@@ -117,18 +111,13 @@
                                 </h3>
                             </div>
                             <div class="navbar-cart">
-                                <div class="wishlist">
-                                    <a href="#">
-                                        <i class="lni lni-heart"></i>
-                                        <span class="total-items-wishlist">0</span>
-                                    </a>
-                                </div>
+                                <a href="{{ route('formCheckOrder') }}" class="btn btn-outline-secondary mb-1"
+                                    style="margin-right: 10px;">Tra cứu đơn hàng</a>
                                 <div class="cart-items">
                                     <a href="{{ route('indexCart') }}" class="main-btn">
                                         <i class="lni lni-cart"></i>
                                         <span class="total-items-cart">{{ session('cartItemsCount', 0) }}</span>
                                     </a>
-
                                 </div>
                             </div>
                         </div>
@@ -160,6 +149,14 @@
     <script src="../../assets_client/js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        //Tìm kiếm sản phẩm
+        function updateFormAction() {
+            const input = document.getElementById('search-input');
+            const form = document.getElementById('search-form');
+            form.action = "{{ url('/san-pham/search/keyword') }}/" + encodeURIComponent(input.value);
+        }
+    </script>
 
 </body>
 

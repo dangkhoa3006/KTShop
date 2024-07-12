@@ -26,12 +26,20 @@ class HomeController extends Controller
         // Lấy sản phẩm theo danh mục và sắp xếp theo giá nếu có yêu cầu
         $query = Product::where('status', 1)->where('category_id', 1);
         $querySamsung = Product::where('status', 1)->where('category_id', 2);
+        $queryAccessory = Product::where('status', 1)->where('category_id', 11);
 
+        $queryPhone = Product::where('status', 1)->where('category_id', 8);
+        $queryPad = Product::where('status', 1)->where('category_id', 9);
+        $queryWatch = Product::where('status', 1)->where('category_id', 10);
 
         // Giới hạn số lượng sản phẩm là 8
         $listIphone = $query->take(8)->get();
         $listSamsung = $querySamsung->take(8)->get();
+        $listAccessory = $queryAccessory->take(8)->get();
 
+        $listPhone = $queryPhone->take(4)->get();
+        $listPad = $queryPad->take(4)->get();
+        $listWatch = $queryWatch->take(4)->get();
 
         foreach ($listIphone as $p) {
             $this->fixImage($p);
@@ -39,8 +47,19 @@ class HomeController extends Controller
         foreach ($listSamsung as $p) {
             $this->fixImage($p);
         }
-
-        return view('clients.home-page', compact('list', 'listIphone', 'listSamsung'));
+        foreach ($listAccessory as $p) {
+            $this->fixImage($p);
+        }
+        foreach ($listPhone as $p) {
+            $this->fixImage($p);
+        }
+        foreach ($listPad as $p) {
+            $this->fixImage($p);
+        }
+        foreach ($listWatch as $p) {
+            $this->fixImage($p);
+        }
+        return view('clients.home-page', compact('list', 'listIphone', 'listSamsung', 'listAccessory', 'listPhone', 'listPad', 'listWatch'));
     }
 
     public function showProduct($categorySlug, Request $request)

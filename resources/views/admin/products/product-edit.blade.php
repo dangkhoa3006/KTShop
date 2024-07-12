@@ -73,7 +73,7 @@
                     <div class="card-body">
                         <div class="form-group row">
                             <label for="name" class="col-sm-2 col-form-label">Tên sản phẩm</label>
-                            <div class="col-sm-8">
+                            <div class="col-sm-10">
                                 <input type="text" class="form-control" id="name" name="name"
                                     value="{{ old('name', $p->name) }}" placeholder="Tên sản phẩm...">
                                 <div style="color: red">

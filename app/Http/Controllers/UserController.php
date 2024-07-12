@@ -7,6 +7,7 @@ use App\Models\Members;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -26,7 +27,8 @@ class UserController extends Controller
     }
     public function index()
     {
-        $lst = User::whereNot('role', 2)->where('status', 1)->get();
+        $currentUserId = auth()->user()->id;
+        $lst = User::whereNot('role', 2)->where('status', 1)->where('id', '!=', $currentUserId)->get();
         return view('admin.accounts.account-index', ['lst' => $lst]);
     }
 
@@ -117,12 +119,62 @@ class UserController extends Controller
         return view('admin.accounts.account-show', ['acc' => $account, 'user' => $user]);
     }
 
+    public function editAdminProfile()
+    {
+        $user = auth()->user();
+        $provinces = DB::table('provinces')->orderBy('name', 'ASC')->get();
+        if ($user != null && $user->province_id != null) {
+            $districts = DB::table('districts')
+                ->where('province_id', $user->province_id)
+                ->orderBy('name', 'ASC')
+                ->get();
+        } else {
+            $districts = collect(); // Trả về collection rỗng
+        }
+        $wards = DB::table('wards')->where('district_id', $user->district_id)->orderBy('name', 'ASC')->get();
+
+        return view('admin.profile.profile-show', compact('user', 'provinces', 'districts', 'wards'));
+    }
+
+    public function updateAdminProfile(Request $request)
+    {
+        try
+        {
+            $user = auth()->user();
+            $path = $user->avatar;
+            if ($request->hasFile('avatar') && $request->file('avatar')->isValid()) {
+                // Xóa avatar cũ nếu có
+                if ($user->avatar) {
+                    Storage::disk('public')->delete($user->avatar);
+                }
+                // Lưu avatar mới
+                $path = $request->avatar->store('upload/avatar/' . $user->id, 'public');
+            }
+            // dd($request->name);
+            DB::table('users')
+                ->where('id', $user->id)
+                ->update([
+                    'avatar'=>$path,
+                    'name' => $request->name,
+                    'gender' => $request->gender,
+                    'birthday' => \DateTime::createFromFormat('d/m/Y', $request->birthday)->format('Y-m-d'),
+                    'phone' => $request->phone,
+                    'province_id' => $request->province_id,
+                    'district_id' => $request->district_id,
+                    'ward_id' => $request->ward_id,
+                    'address' => $request->address,
+                ]);
+            return redirect()->route('editAdminProfile')->with('success', 'Cập nhật tài khoản thành công!');
+        } catch (\Exception $e) {
+            return redirect()->route('editAdminProfile')->with('error', 'Cập nhật tài khoản không thành công!');
+        }
+    }
+
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-
         $account = User::find($id);
         $this->fixImage($account);
         $user = DB::table('users')
@@ -130,7 +182,7 @@ class UserController extends Controller
             ->join('districts', 'users.district_id', '=', 'districts.id')
             ->join('wards', 'users.ward_id', '=', 'wards.id')
             ->select('users.*', 'provinces.name as province_name', 'districts.name as district_name', 'wards.name as ward_name')
-            ->where('users.id', $id)->where('users.role','!=', 2)
+            ->where('users.id', $id)->where('users.role', '!=', 2)
             ->first();
         //dd($data);
         $provinces = DB::table('provinces')->orderBy('name', 'ASC')->get();
@@ -146,7 +198,7 @@ class UserController extends Controller
 
         $data['provinces'] = $provinces;
         //dd($provinces);
-        return view('admin.accounts.account-edit', ['acc' => $account, $user, 'provinces'=>$provinces, 'districts'=>$districts, 'wards'=>$wards]
+        return view('admin.accounts.account-edit', ['acc' => $account, $user, 'provinces' => $provinces, 'districts' => $districts, 'wards' => $wards]
         );
     }
 
@@ -165,7 +217,7 @@ class UserController extends Controller
                 $path = $request->avatar->store('upload/user/' . $account->id, 'public');
             }
             $account->update([
-                'avatar'=>$path,
+                'avatar' => $path,
                 'name' => $request->name,
                 'gender' => $request->gender,
                 'birthday' => \DateTime::createFromFormat('d/m/Y', $request->birthday)->format('Y-m-d'),
@@ -193,5 +245,4 @@ class UserController extends Controller
         //
     }
 
-    
 }

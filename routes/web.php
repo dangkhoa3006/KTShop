@@ -51,8 +51,9 @@ Route::group(['middleware' => 'auth.users'], function () {
         Route::prefix("admin")->group(function () {
             //Trang báo cáo thống kê
             Route::get("/dashboard", [DashboardController::class, "index"])->name("dashboard.index");
-
             Route::resource('/accounts', UserController::class);
+            Route::get('/profile/edit', [UserController::class, 'editAdminProfile'])->name('editAdminProfile');
+            Route::post('/profile/update', [UserController::class, 'updateAdminProfile'])->name('updateAdminProfile');
             Route::post('/fetch-districts/{id}', [UserController::class, 'fetchDistricts']);
             Route::post('/fetch-wards/{id}', [UserController::class, 'fetchWards']);
             Route::resource("/members", MembersController::class);
@@ -113,7 +114,6 @@ Route::post('/cart/remove/{rowId}', [CartController::class, 'removeFromCart'])->
 Route::post('/cart/update/{rowId}', [CartController::class, 'updateQuantity'])->name('cart.update');
 Route::post('/fetch-districts/{id}', [CartController::class, 'fetchDistricts']);
 Route::post('/fetch-wards/{id}', [CartController::class, 'fetchWards']);
-
 
 //Tạo đơn hàng
 Route::post('/order', [OrderController::class, 'store'])->name('order.store');

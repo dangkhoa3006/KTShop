@@ -1,13 +1,13 @@
 @extends('admin.app')
-@section('title', 'Admin - Quản lý hóa đơn')
+@section('title', 'Admin - Quản lý đơn hàng')
 @section('header-route')
     @parent
-    <li class="breadcrumb-item"><a href="{{ route('invoices.index') }}">Quản lý hóa đơn</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Cập nhật hóa đơn</li>
+    <li class="breadcrumb-item"><a href="{{ route('invoices.index') }}">Quản lý đơn hàng</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Cập nhật đơn hàng</li>
 @endsection
 @section('invoice-active', 'active')
 @section('content-pages')
-    <h5 class="h4 mb-2 text-gray-800">Cập nhật hóa đơn</h5>
+    <h5 class="h4 mb-2 text-gray-800">Cập nhật đơn hàng</h5>
     <div class="row">
         <div class="col-lg-6">
             <div class="card mb-4">
@@ -60,31 +60,9 @@
                             *Chưa thanh toán*
                         @endif
                     </p>
-                    {{-- <p><b>Tình trạng: </b>
-                        @if ($list -> status == 0)
-                            Chưa thanh toán
-                        @endif
-                        @if ($list -> status == 1)
-                            Đã thanh toán
-                        @endif
-                        @if ($list -> status == 2)
-                            Chờ xác nhận
-                        @endif
-                        @if ($list -> status == 3)
-                            Đã xác nhận
-                        @endif
-                    </p> --}}
-                    {{-- <a href="{{route('invoices.updateStatus', $invoice->id)}}" class="btn btn-success btn-icon-split float-right">
-                        <span class="icon text-white-50">
-                            <i class="fas fa-info-circle"></i>
-                        </span>
-                        <span class="text">Cập nhật trạng thái đơn hàng</span>
-                    </a> --}}
                     <form action="{{ route('invoices.updateStatus', $invoice->id) }}" method="POST">
                         @csrf
                         @method('PUT')
-                        
-                        <!-- Các trường input cho cập nhật trạng thái và delivery_status -->
                         <div class="form-group">
                             <label for="status"> <b>Trạng thái:</b></label>
                             <select name="status" id="status" class="form-control">
@@ -102,17 +80,12 @@
                                 <option value="2" {{ $invoice->delivery_status == 2 ? 'selected' : '' }}>Đang chuẩn bị hàng</option>
                                 <option value="3" {{ $invoice->delivery_status == 3 ? 'selected' : '' }}>Đơn hàng đã đến đơn vị vận chuyển</option>
                                 <option value="4" {{ $invoice->delivery_status == 4 ? 'selected' : '' }}>Đơn hàng đang trên đường giao</option>
-                                <option value="5" {{ $invoice->delivery_status == 5 ? 'selected' : '' }}>Đã nhận được hàng</option>
+                                <option value="5" {{ $invoice->delivery_status == 5 ? 'selected' : '' }}>Giao hàng thành công</option>
                                 <option value="6" {{ $invoice->delivery_status == 6 ? 'selected' : '' }}>Đã hủy đơn</option>
-
                             </select>
                         </div>
-                    
-                        <!-- Nút submit để gửi form -->
                         <button type="submit" class="btn btn-primary">Cập nhật</button>
                     </form>
-                    
-                   
                 </div>
             </div>
         </div>

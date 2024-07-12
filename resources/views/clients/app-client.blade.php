@@ -29,17 +29,6 @@
 </head>
 
 <body>
-    <!-- Preloader load trang -->
-    {{-- <div class="preloader">
-        <div class="preloader-inner">
-            <div class="preloader-icon">
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </div> --}}
-    <!-- /End Preloader -->
-
     <!-- Start Header Area -->
     <header class="header navbar-area">
         <!-- Đăng nhập & đăng ký -->
@@ -53,7 +42,7 @@
                                     @if (Auth::user()->avatar)
                                         {{-- dd({{Auth::user()->avatar}}) --}}
                                         <img style="width: 30px; border-radius: 20px;"
-                                            src="../../storage/{{ Auth::user()->avatar }}" alt="">
+                                            src="../../../storage/{{ Auth::user()->avatar }}" alt="">
 
                                         <img style="width: 30px; border-radius: 20px; margin-right: 5px"
                                             src="{{ Auth::user()->avatar }}" alt="">
@@ -62,7 +51,6 @@
                                     @endif
                                 @else
                                     <i class="lni lni-user"></i>
-
                                 @endauth
 
                                 @auth
@@ -164,7 +152,7 @@
                 <div class="col-lg-12 col-md-6 col-12">
                     <div class="nav-inner">
                         <!-- DAN MỤC SẢN PHẨM -->
-                        <div class="mega-category-menu">
+                        <div class="mega-category-menu" style="margin: 10px 0px;">
                             <span class="cat-button"><i class="lni lni-menu"></i>Danh mục sản phẩm</span>
                             <ul class="sub-category">
                                 @foreach ($list as $cate)
@@ -202,35 +190,57 @@
                             </button>
                             <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
                                 <ul id="nav" class="navbar-nav ms-auto">
+                                    @php
+                                        $subcategory = \App\Models\SubCategory::find(1);
+                                        $categorySlug = $subcategory->category->slug;
+                                        $subcategorySlug = $subcategory->slug;
+                                    @endphp
                                     <li class="nav-item">
-                                        <a href="index.html" class="active" aria-label="Toggle navigation">Iphone 15
-                                            Pro Max</a>
+                                        <a href="javascript:void(0);" aria-label="Toggle navigation"
+                                            onclick="redirectToSubcategory()">Iphone 15 series</a>
                                     </li>
+                                    @php
+                                        $subcategory12 = \App\Models\SubCategory::find(4); // Giả sử SubCategory là model của danh mục phụ
+                                        $categorySlug = $subcategory12->category->slug;
+                                        $subcategorySlug = $subcategory12->slug;
+                                    @endphp
                                     <li class="nav-item">
-                                        <a href="index.html" aria-label="Toggle navigation">Iphone 15 Plus</a>
+                                        <a href="{{ route('showSubCategory', ['categorySlug' => $categorySlug, 'subcategorySlug' => $subcategorySlug]) }}"
+                                            aria-label="Toggle navigation">Iphone 12 series</a>
                                     </li>
+                                    @php
+                                        $subcategorySS24 = \App\Models\SubCategory::find(17); // Giả sử SubCategory là model của danh mục phụ
+                                        $categorySlug = $subcategorySS24->category->slug;
+                                        $subcategorySlug = $subcategorySS24->slug;
+                                    @endphp
                                     <li class="nav-item">
-                                        <a href="index.html" aria-label="Toggle navigation">Galaxy S24 Ultra</a>
+                                        <a href="{{ route('showSubCategory', ['categorySlug' => $categorySlug, 'subcategorySlug' => $subcategorySlug]) }}"
+                                            aria-label="Toggle navigation">Galaxy S24 Ultra</a>
                                     </li>
+                                    @php
+                                        $subcategoryOppo = \App\Models\SubCategory::find(18); // Giả sử SubCategory là model của danh mục phụ
+                                        $categorySlug = $subcategoryOppo->category->slug;
+                                        $subcategorySlug = $subcategoryOppo->slug;
+                                    @endphp
                                     <li class="nav-item">
-                                        <a href="index.html" aria-label="Toggle navigation">Galaxy S23 Ultra</a>
+                                        <a href="{{ route('showSubCategory', ['categorySlug' => $categorySlug, 'subcategorySlug' => $subcategorySlug]) }}" aria-label="Toggle navigation">OPPO</a>
                                     </li>
+                                    @php
+                                        $subcategoryWatch = \App\Models\SubCategory::find(37); // Giả sử SubCategory là model của danh mục phụ
+                                        $categorySlug = $subcategoryWatch->category->slug;
+                                        $subcategorySlug = $subcategoryWatch->slug;
+                                    @endphp
                                     <li class="nav-item">
-                                        <a href="index.html" aria-label="Toggle navigation">Xiaomi giá rẻ</a>
+                                        <a href="{{ route('showSubCategory', ['categorySlug' => $categorySlug, 'subcategorySlug' => $subcategorySlug]) }}" aria-label="Toggle navigation">Apple Watch Series 9</a>
                                     </li>
                                 </ul>
                             </div> <!-- navbar collapse -->
                         </nav>
                         <!-- End Navbar -->
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
-
     </header>
     <br>
     <div class="container">
@@ -309,42 +319,6 @@
     <div class="container-pages">
         @yield('client-content-pages')
     </div>
-
-
-
-    <!-- Start Banner Area -->
-    {{-- <section class="banner section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-6 col-12">
-                    <div class="single-banner"
-                        style="background-image:url('../../assets_client/images/banner/banner-1-bg.jpg')">
-                        <div class="content">
-                            <h2>Smart Watch 2.0</h2>
-                            <p>Space Gray Aluminum Case with <br>Black/Volt Real Sport Band </p>
-                            <div class="button">
-                                <a href="product-grids.html" class="btn">View Details</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6 col-12">
-                    <div class="single-banner custom-responsive-margin"
-                        style="background-image:url('../../assets_client/images/banner/banner-2-bg.jpg')">
-                        <div class="content">
-                            <h2>Smart Headphone</h2>
-                            <p>Lorem ipsum dolor sit amet, <br>eiusmod tempor
-                                incididunt ut labore.</p>
-                            <div class="button">
-                                <a href="product-grids.html" class="btn">Shop Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
-    <!-- End Banner Area -->
     <!-- Start Footer Area -->
     <footer class="footer">
         <div class="footer-middle">
@@ -617,6 +591,13 @@
             const input = document.getElementById('search-input');
             const form = document.getElementById('search-form');
             form.action = "{{ url('/san-pham/search/keyword') }}/" + encodeURIComponent(input.value);
+        }
+
+        function redirectToSubcategory() {
+            var categorySlug = "{{ $categorySlug }}";
+            var subcategorySlug = "{{ $subcategorySlug }}";
+            var url = "{{ url('/') }}/" + categorySlug + "/" + subcategorySlug;
+            window.location.href = url;
         }
     </script>
 </body>

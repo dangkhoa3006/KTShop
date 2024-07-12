@@ -2,7 +2,7 @@
 @section('title', 'Admin - Thêm loại sản phẩm')
 @section('header-route')
     @parent
-    <li class="breadcrumb-item"><a href="{{ route('categories.index') }}">Quản lý loại sản phẩm</a></li>
+    <li class="breadcrumb-item"><a href="{{ route('subcategories.index') }}">Quản lý loại sản phẩm</a></li>
     <li class="breadcrumb-item active" aria-current="page">Thêm loại sản phẩm</li>
 @endsection
 @section('subcategory-active', 'active')

@@ -5,7 +5,7 @@
     Normalize CSS
 ========================================*/
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
-
+@import 'swiper/css/bundle';
 html {
   scroll-behavior: smooth;
 }
@@ -1052,8 +1052,8 @@ ol {
   text-transform: capitalize;
   position: relative;
   font-weight: 800;
-  padding-bottom: 20px;
-  margin-bottom: 20px;
+  padding-bottom: 10px;
+  margin-top: 20px;
   position: relative;
 }
 

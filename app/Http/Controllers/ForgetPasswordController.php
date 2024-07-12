@@ -79,13 +79,12 @@ class ForgetPasswordController extends Controller
         $updatePassword = DB::table('password_reset_tokens')->where([
             'token' => $request->token,
         ])->first();
-        //dd($updatePassword->email);
         //Lấy email thông qua token và so sánh với email trong bảng users
         $getUserMail = DB::table('users')->where('email', $updatePassword->email)->first();
+        
         if ($getUserMail == null) {
             return redirect()->route('login')->with('error', 'Email không tồn tại trong hệ thống.');
         }
-        //dd($updatePassword->email);
         if (!$updatePassword) {
             return redirect()->to(route('resetPassword', 'token'))->with('error', 'Đổi mật khẩu không thành công!');
         }

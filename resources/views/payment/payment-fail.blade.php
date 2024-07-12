@@ -152,18 +152,13 @@
                                 </h3>
                             </div>
                             <div class="navbar-cart">
-                                <div class="wishlist">
-                                    <a href="#">
-                                        <i class="lni lni-heart"></i>
-                                        <span class="total-items-wishlist">0</span>
-                                    </a>
-                                </div>
+                                <a href="{{ route('formCheckOrder') }}" class="btn btn-outline-secondary mb-1"
+                                style="margin-right: 10px;">Tra cứu đơn hàng</a>
                                 <div class="cart-items">
                                     <a href="{{ route('indexCart') }}" class="main-btn">
                                         <i class="lni lni-cart"></i>
                                         <span class="total-items-cart">{{ session('cartItemsCount', 0) }}</span>
                                     </a>
-
                                 </div>
                             </div>
                         </div>
@@ -178,6 +173,26 @@
         <div class="row align-items-center">
             {{-- error: #FF6969 || success: #74E291 --}}
             {{-- Success --}}
+            <div class="modal fade" id="cancelOrderModal" tabindex="-1" aria-labelledby="cancelOrderModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="cancelOrderModalLabel">Xác nhận hủy đơn hàng</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" style="font-size: 17px">
+                            Bạn có chắc chắn muốn hủy đơn hàng này không?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            <button type="button" class="btn btn-danger" id="confirmCancelOrder">Hủy đơn
+                                hàng</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="payment" style="display:flex; justify-content: center">
                 <div class="col-lg-7 col-md-6 col-12">
                     @if (session('cancel-payment'))
@@ -291,7 +306,11 @@
 
                                 <div class="text-center">
                                     <button type="button" class="btn btn-primary" id="btn_payment"
-                                        style="margin-bottom: 50px;width: 100%;"><b>THANH TOÁN</b></button>
+                                        style="margin-bottom: 10px;width: 100%;"><b>THANH TOÁN</b></button>
+                                </div>
+                                <div class="text-center">
+                                    <button type="button" class="btn btn-outline-danger" id="btn_cancel_payment"
+                                        style="margin-bottom: 50px;width: 100%;"><b>HỦY ĐƠN HÀNG</b></button>
                                 </div>
                                 <div class="text-center" id="vietqr_code_container" style="display: none;">
                                     <h3>QR Code</h3>
@@ -343,6 +362,16 @@
                 form.action = '{{ route('cashMoneyPayment') }}';
             }
             form.submit();
+        });
+        $(document).ready(function() {
+            $('#btn_cancel_payment').click(function() {
+                $('#cancelOrderModal').modal('show');
+            });
+
+            $('#confirmCancelOrder').click(function() {
+                window.location.href = `{{ route('homepage') }}`;
+                $('#cancelOrderModal').modal('hide');
+            });
         });
         //Tìm kiếm sản phẩm
         function updateFormAction() {

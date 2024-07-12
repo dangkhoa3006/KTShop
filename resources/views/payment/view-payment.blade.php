@@ -152,12 +152,8 @@
                                 </h3>
                             </div>
                             <div class="navbar-cart">
-                                <div class="wishlist">
-                                    <a href="#">
-                                        <i class="lni lni-heart"></i>
-                                        <span class="total-items-wishlist">0</span>
-                                    </a>
-                                </div>
+                                <a href="{{ route('formCheckOrder') }}" class="btn btn-outline-secondary mb-1"
+                                    style="margin-right: 10px;">Tra cứu đơn hàng</a>
                                 <div class="cart-items">
                                     <a href="{{ route('indexCart') }}" class="main-btn">
                                         <i class="lni lni-cart"></i>

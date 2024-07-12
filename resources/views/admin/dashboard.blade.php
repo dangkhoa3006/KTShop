@@ -81,8 +81,6 @@
                             </div>
                             <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $invoiceIncompleteCount }} đơn</div>
                             <div class="mt-2 mb-0 text-muted text-xs">
-                                {{-- <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i>
-                                    1.10%</span> --}}
                             </div>
                         </div>
                         <div class="col-auto">
@@ -113,20 +111,6 @@
             <div class="card mb-4">
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">Top 6 sản phẩm bán chạy nhất</h6>
-                    {{-- <div class="dropdown no-arrow">
-                        <a class="dropdown-toggle btn btn-primary btn-sm" href="#" role="button"
-                            id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Trong tháng <i class="fas fa-chevron-down"></i>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                            aria-labelledby="dropdownMenuLink">
-                            <div class="dropdown-header">Chọn khoảng thời gian</div>
-                            <a class="dropdown-item" href="#">Trong ngày</a>
-                            <a class="dropdown-item" href="#">Trong tuần</a>
-                            <a class="dropdown-item active" href="#">Trong tháng</a>
-                            <a class="dropdown-item" href="#">Trong năm</a>
-                        </div>
-                    </div> --}}
                 </div>
                 <div class="card-body">
                     @foreach ($bestSellingProducts as $product)
@@ -162,23 +146,30 @@
                             <tr>
                                 <th>Mã đơn hàng</th>
                                 <th>Tên khách hàng</th>
-                                <th>Sản phẩm</th>
+                                <th>Số điện thoại</th>
                                 <th>Trạng thái</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><a href="#">RA0449</a></td>
-                                <td>Udin Wayang</td>
-                                <td>Nasi Padang</td>
+                                <td><a href="#">#HNT0YLZSX5</a></td>
+                                <td>Lê Nguyễn Vinh Quang</td>
+                                <td>0896325144</td>
                                 <td><span class="badge badge-success">Đã duyệt</span></td>
                                 <td><a href="#" class="btn btn-sm btn-primary">Chi tiết</a></td>
                             </tr>
                             <tr>
-                                <td><a href="#">RA5324</a></td>
-                                <td>Jaenab Bajigur</td>
-                                <td>Gundam 90' Edition</td>
+                                <td><a href="#">#JUL394O0I1</a></td>
+                                <td>Trương Thanh An</td>
+                                <td>0963565677</td>
+                                <td><span class="badge badge-warning">Đang chờ duyệt</span></td>
+                                <td><a href="#" class="btn btn-sm btn-primary">Chi tiết</a></td>
+                            </tr>
+                            <tr>
+                                <td><a href="#">#L10U8TAIJF</a></td>
+                                <td>Phạm Thái Nguyên</td>
+                                <td>0977223616</td>
                                 <td><span class="badge badge-warning">Đang chờ duyệt</span></td>
                                 <td><a href="#" class="btn btn-sm btn-primary">Chi tiết</a></td>
                             </tr>
@@ -210,57 +201,6 @@
                 <div class="card-footer"></div>
             </div>
         </div>
-        <!-- Message From Customer-->
-        {{-- <div class="col-xl-4 col-lg-5 ">
-        <div class="card">
-            <div
-                class="card-header py-4 bg-primary d-flex flex-row align-items-center justify-content-between">
-                <h6 class="m-0 font-weight-bold text-light">Message From Customer</h6>
-            </div>
-            <div>
-                <div class="customer-message align-items-center">
-                    <a class="font-weight-bold" href="#">
-                        <div class="text-truncate message-title">Hi there! I am wondering if you
-                            can help me with a
-                            problem I've been having.</div>
-                        <div class="small text-gray-500 message-time font-weight-bold">Udin Cilok ·
-                            58m</div>
-                    </a>
-                </div>
-                <div class="customer-message align-items-center">
-                    <a href="#">
-                        <div class="text-truncate message-title">But I must explain to you how all
-                            this mistaken idea
-                        </div>
-                        <div class="small text-gray-500 message-time">Nana Haminah · 58m</div>
-                    </a>
-                </div>
-                <div class="customer-message align-items-center">
-                    <a class="font-weight-bold" href="#">
-                        <div class="text-truncate message-title">Lorem ipsum dolor sit amet,
-                            consectetur adipiscing elit
-                        </div>
-                        <div class="small text-gray-500 message-time font-weight-bold">Jajang
-                            Cincau · 25m</div>
-                    </a>
-                </div>
-                <div class="customer-message align-items-center">
-                    <a class="font-weight-bold" href="#">
-                        <div class="text-truncate message-title">At vero eos et accusamus et iusto
-                            odio dignissimos
-                            ducimus qui blanditiis
-                        </div>
-                        <div class="small text-gray-500 message-time font-weight-bold">Udin Wayang
-                            · 54m</div>
-                    </a>
-                </div>
-                <div class="card-footer text-center">
-                    <a class="m-0 small text-primary card-link" href="#">View More <i
-                            class="fas fa-chevron-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </div> --}}
     </div>
     <script>
         // Chuyển đổi dữ liệu PHP thành JSON để sử dụng trong JavaScript

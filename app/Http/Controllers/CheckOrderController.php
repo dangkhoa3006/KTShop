@@ -11,7 +11,7 @@ class CheckOrderController extends Controller
 {
     public function formCheckOrder()
     {
-        $list = Category::with('subcategories')->get();
+        $list = Category::with('subcategories')->where('status', 1)->get();
         return view('check-orders.form-check-order', compact('list'));
     }
     public function checkOrder(Request $request)
@@ -41,7 +41,7 @@ class CheckOrderController extends Controller
             ->first();
 
         if ($order) {
-            $list = Category::with('subcategories')->get();
+            $list = Category::with('subcategories')->where('status', 1)->get();
             $orderDetails = OrderDetail::where('order_id', $order->id)->get();
 
             // Nếu tìm thấy đơn hàng, chuyển hướng tới trang chi tiết đơn hàng

@@ -91,9 +91,9 @@
                                             <img src="../image/icon_google.png" alt="Login Google"
                                                 style="height: 20px; margin-right: 8px;"> Đăng nhập bằng Google
                                         </a>
-                                        <a href="{{route('authFacebook')}}" class="btn btn-facebook btn-block">
+                                        {{-- <a href="{{route('authFacebook')}}" class="btn btn-facebook btn-block">
                                             <i class="fab fa-facebook-f fa-fw"></i> Đăng nhập bằng Facebook
-                                        </a>
+                                        </a> --}}
                                         <hr>
                                         <div class="text-center">
                                             <a class="font-weight-bold medium" href="{{ route('register') }}">Tạo tài

@@ -67,12 +67,12 @@
                             Thành viên
                         @endif
                     </p>
-                    <a href="{{route('members.edit', $member)}}" class="btn btn-success btn-icon-split float-right">
+                    {{-- <a href="{{route('members.edit', $member)}}" class="btn btn-success btn-icon-split float-right">
                         <span class="icon text-white-50">
                             <i class="fas fa-info-circle"></i>
                         </span>
                         <span class="text">Cập nhật tài khoản</span>
-                    </a>
+                    </a> --}}
                 </div>
 
             </div>

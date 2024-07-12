@@ -109,58 +109,12 @@
                     </div>
                 @endforeach
 
-                <div class="text-center mt-4">
+                {{-- <div class="text-center mt-4">
                     <button class="btn btn-primary">Xem thêm 100 sản phẩm
                         <i class="lni lni-chevron-down"></i>
                     </button>
-                </div><br>
-                {{-- Bình luận sản phẩm --}}
-                {{-- <div class="col-lg-20 col-12 custom-padding-right">
-                    <div class="single-product">
-                        <h5 style="font-weight: bold">Hỏi và đáp</h5><br>
-                        <div class="col-sm-20">
-                            <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="5"
-                                placeholder="Mời bạn thảo luận, vui lòng nhập tiếng việt có dấu"></textarea>
-                        </div>
-                        <h6 style="margin-top: 20px;margin-bottom: 5px;">Nhập thông tin của bạn</h6>
-                        <div class="col-sm-20">
-                            <input type="text" class="form-control" id="name" name="name"
-                                value="{{ old('name') }}" placeholder="Họ tên...">
-                        </div>
-                        <div class="col-sm-20" style="margin-top: 10px">
-                            <input type="text" class="form-control" id="email" name="email"
-                                value="{{ old('email') }}" placeholder="Email...">
-                        </div>
-                        <div class="text-right mt-4 b" style="text-align: right; ">
-                            <button class="btn btn-warning"> <i class="lni lni-telegram-plane"></i> Gửi bình luận
-                            </button>
-                        </div><br>
-                    </div>
-                </div>
-                <div class="col-lg-20 col-12 custom-padding-right">
-                    <div class="single-product">
-                        <div class="user" style="font-size: 15px; font-weight: bold">
-                            <div style="display: flex; align-items: center;">
-                                <img class="img-profile rounded-circle" src="../../../assets_admin/img/boy.png"
-                                    style="max-width: 40px;border: 1px solid black;">
-                                <h6 style="margin:10px">Nguyen Van A</h6>
-                            </div>
-                            <p style="margin-top: 10px">KTmobile chi nhánh ở quận 10 có sẵn ip15 pm 256gb màu Titan trắng k
-                                ạ</p>
-                        </div>
-                        Ngày gửi: 04/06/2024
-                        <div class="user"
-                            style="font-size: 15px; font-weight: bold; margin-top: 10px;margin-left: 60px; background-color:rgb(224, 224, 224); border-radius: 10px;">
-                            <div style="display: flex; align-items: center;">
-                                <img class="img-profile rounded-circle" src="../../../assets_admin/img/boy.png"
-                                    style="max-width: 40px;border: 1px solid black; margin-left: 10px;margin-top: 10px;">
-                                <h6 style="margin-top:10px;margin-left:10px;">Quản trị viên</h6>
+                </div><br> --}}
 
-                            </div>
-                            <p style="margin-top: 10px; margin-left: 10px">Còn hàng bạn nha</p>
-                        </div>
-                    </div>
-                </div> --}}
             </div>
         </div>
     </section>

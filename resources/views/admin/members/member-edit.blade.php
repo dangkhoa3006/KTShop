@@ -91,7 +91,6 @@
                                     value="{{ old('birthday', Carbon::parse($member->user->birthday)->format('d/m/Y')) }}"
                                     id="decadeView" name="birthday">
                                 <br>
-
                             </div>
                             <div style="color: red; margin-left: 18%">
                                 @if ($errors->has('birthday'))
@@ -102,7 +101,7 @@
                         <div class="form-group row">
                             <label for="phone" class="col-sm-2 col-form-label">Số điện thoại</label>
                             <div class="col-sm-8">
-                                <input type="tel" class="form-control" name="phone" id="phone"
+                                <input type="number" class="form-control" name="phone" id="phone"
                                     value="{{ old('phone', $member->user->phone) }}">
                                 <div style="color: red;">
                                     @if ($errors->has('phone'))
