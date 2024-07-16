@@ -175,7 +175,7 @@
                                         src="{{ $p->image }}" alt="#">
                                 </a>
                                 <div class="button">
-                                    <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
+                                    {{-- <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $p->id }}">
                                         <input type="hidden" name="name" value="{{ $p->name }}">
@@ -184,7 +184,7 @@
                                         <!-- Mặc định là 1, bạn có thể tùy chỉnh -->
                                         <input type="hidden" name="image" value="{{ $p->image }}">
                                         <button type="submit" class="btn"><i class="lni lni-cart"></i> Thêm</button>
-                                    </form>
+                                    </form> --}}
                                 </div>
                             </div>
                             <div class="product-info">
@@ -225,7 +225,7 @@
                                         src="{{ $p->image }}" alt="#">
                                 </a>
                                 <div class="button">
-                                    <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
+                                    {{-- <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $p->id }}">
                                         <input type="hidden" name="name" value="{{ $p->name }}">
@@ -234,7 +234,7 @@
                                         <!-- Mặc định là 1, bạn có thể tùy chỉnh -->
                                         <input type="hidden" name="image" value="{{ $p->image }}">
                                         <button type="submit" class="btn"><i class="lni lni-cart"></i> Thêm</button>
-                                    </form>
+                                    </form> --}}
                                 </div>
                             </div>
                             <div class="product-info">
@@ -275,7 +275,7 @@
                                         src="{{ $p->image }}" alt="#">
                                 </a>
                                 <div class="button">
-                                    <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
+                                    {{-- <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $p->id }}">
                                         <input type="hidden" name="name" value="{{ $p->name }}">
@@ -284,7 +284,7 @@
                                         <!-- Mặc định là 1, bạn có thể tùy chỉnh -->
                                         <input type="hidden" name="image" value="{{ $p->image }}">
                                         <button type="submit" class="btn"><i class="lni lni-cart"></i> Thêm</button>
-                                    </form>
+                                    </form> --}}
                                 </div>
                             </div>
                             <div class="product-info">
@@ -325,7 +325,7 @@
                                         src="{{ $p->image }}" alt="#">
                                 </a>
                                 <div class="button">
-                                    <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
+                                    {{-- <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
                                         @csrf
                                         <input type="hidden" name="id" value="{{ $p->id }}">
                                         <input type="hidden" name="name" value="{{ $p->name }}">
@@ -334,7 +334,7 @@
                                         <!-- Mặc định là 1, bạn có thể tùy chỉnh -->
                                         <input type="hidden" name="image" value="{{ $p->image }}">
                                         <button type="submit" class="btn"><i class="lni lni-cart"></i> Thêm</button>
-                                    </form>
+                                    </form> --}}
                                 </div>
                             </div>
                             <div class="product-info">

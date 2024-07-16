@@ -17,15 +17,6 @@
                 <div class="card-body">
                     <form>
                         @csrf
-                        {{-- <div class="form-group row">
-                                <label for="inputEmail3" class="col-sm-2 col-form-label">Ảnh đại diện</label>
-
-                                <div class="custom-file col-sm-8">
-                                <input type="file" accept="image/*" name="image" class="custom-file-input" id="customFile">
-                                <label class="custom-file-label" for="customFile">Chọn ảnh</label>
-                                </div>
-                              
-                          </div> --}}
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Họ tên</label>
                             <div class="col-sm-8">

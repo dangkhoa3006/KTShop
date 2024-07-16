@@ -72,25 +72,12 @@
                                     <img style="margin: 35px 30px; width: 220px; max-height: 220px; object-fit: contain;"
                                         src="{{ $p->image }}" alt="#">
                                 </a>
-                                {{-- <div class="button">
-                                    <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
-                                        @csrf
-                                        <input type="hidden" name="id" value="{{ $p->id }}">
-                                        <input type="hidden" name="name" value="{{ $p->name }}">
-                                        <input type="hidden" name="price" value="{{ $p->sale_price }}">
-                                        <input type="hidden" name="qty" value="1">
-                                        <!-- Mặc định là 1, bạn có thể tùy chỉnh -->
-                                        <input type="hidden" name="image" value="{{ $p->image }}">
-                                        <button type="submit" class="btn"><i class="lni lni-cart"></i> Thêm</button>
-                                    </form>
-                                </div> --}}
                             </div>
                             <div class="product-info">
                                 <h4 class="title">
                                     <a href="{{ route('showProduct', $p->slug) }}">{{ $p->name }}</a>
                                 </h4>
                                 <div class="price">
-                                    {{-- <span>{{ number_format($p->sale_price, 0, ',', '.') }} đ</span> --}}
                                     @if ($p->details->isNotEmpty())
                                         <span>{{ number_format($p->details->first()->sale_price, 0, ',', '.') }}</span>
                                     @endif
@@ -109,12 +96,6 @@
                         </div>
                     </div>
                 @endforeach
-
-                {{-- <div class="text-center mt-4">
-                    <button class="btn btn-primary">Xem thêm 100 sản phẩm
-                        <i class="lni lni-chevron-down"></i>
-                    </button>
-                </div><br> --}}
             </div>
         </div>
     </section>

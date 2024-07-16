@@ -84,18 +84,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="form-group row">
-                            <label for="touchSpin1" class="col-sm-2 col-form-label">Số lượng</label>
-                            <div class="col-sm-8">
-                                <input id="touchSpin1" type="text" name="quantity"
-                                    value="{{ old('quantity', $p->quantity) }}" class="form-control">
-                                <div style="color: red">
-                                    @if ($errors->has('quantity'))
-                                        {{ $errors->first('quantity') }}<br>
-                                    @endif
-                                </div>
-                            </div>
-                        </div> --}}
                         <div class="form-group row">
                             <label for="touchSpin3" class="col-sm-2 col-form-label">Giá bán</label>
                             <div class="col-sm-10">
@@ -108,18 +96,6 @@
                                 </div>
                             </div>
                         </div>
-                        {{-- <div class="form-group row">
-                            <label for="touchSpin3" class="col-sm-2 col-form-label">Giá khuyến mãi</label>
-                            <div class="col-sm-8">
-                                <input id="touchSpin3" type="number" name="sale_price"
-                                    value="{{ old('sale_price', $p->sale_price) }}" class="form-control" max="100000000">
-                                <div style="color: red">
-                                    @if ($errors->has('sale_price'))
-                                        {{ $errors->first('sale_price') }}<br>
-                                    @endif
-                                </div>
-                            </div>
-                        </div> --}}
                         <div class="form-group row">
                             <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">Danh mục</label>
                             <div class="col-sm-10">
