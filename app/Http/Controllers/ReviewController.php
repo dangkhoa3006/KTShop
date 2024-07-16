@@ -43,7 +43,6 @@ class ReviewController extends Controller
             'phone' => $request->phone,
             'content' => $request->content,
             'order_id' => $request->order_id,
-            'user_id' => $userId
         ]);
 
         // Chuyển hướng về trang chi tiết đơn hàng với thông báo thành công

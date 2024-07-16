@@ -335,7 +335,7 @@ class ProductController extends Controller
     public function search($keyword)
     {
         $products = Product::where('name', 'LIKE', "%$keyword%")->get();
-        $list = Category::with('subcategories')->get();
+        $list = Category::with('subcategories')->where('status',1)->get();
 
         return view('search.search-result', compact('products', 'keyword', 'list'));
     }

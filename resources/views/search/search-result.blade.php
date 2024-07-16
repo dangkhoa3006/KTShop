@@ -16,7 +16,7 @@
                                 <img style="margin: 35px 30px; width: 220px; max-height: 220px; object-fit: contain;"
                                     src="{{ asset('storage/' . $product->image) }}" alt="#">
                             </a>
-                            <div class="button">
+                            {{-- <div class="button">
                                 <form action="{{ route('cart.add') }}" method="POST" class="add-to-cart-form">
                                     @csrf
                                     <input type="hidden" name="id" value="{{ $product->id }}">
@@ -27,14 +27,14 @@
                                     <input type="hidden" name="image" value="{{ $product->image }}">
                                     <button type="submit" class="btn"><i class="lni lni-cart"></i> Thêm</button>
                                 </form>
-                            </div>
+                            </div> --}}
                         </div>
                         <div class="product-info">
                             <h4 class="title">
                                 <a href="{{ route('showProduct', $product->slug) }}">{{ $product->name }}</a>
                             </h4>
                             <div class="price">
-                                <span>{{ number_format($product->sale_price, 0, ',', '.') }} đ</span>
+                                <span>{{ number_format($product->details->first()->sale_price, 0, ',', '.') }} đ</span>
                                 @if ($product->price && $product->price != 0)
                                     <span class="discount-price">{{ number_format($product->price, 0, ',', '.') }} đ</span>
                                 @endif
