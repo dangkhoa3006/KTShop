@@ -192,7 +192,9 @@
                                     <a href="{{ route('showProduct', $p->slug) }}">{{ $p->name }}</a>
                                 </h4>
                                 <div class="price">
-                                    <span>{{ number_format($p->sale_price, 0, ',', '.') }} đ</span>
+                                    @if ($p->details->isNotEmpty())
+                                        <span>{{ number_format($p->details->first()->sale_price, 0, ',', '.') }}</span>
+                                    @endif
                                     @if ($p->price && $p->price != 0)
                                         <span class="discount-price">{{ number_format($p->price, 0, ',', '.') }} đ</span>
                                     @endif
@@ -242,7 +244,9 @@
                                     <a href="{{ route('showProduct', $p->slug) }}">{{ $p->name }}</a>
                                 </h4>
                                 <div class="price">
-                                    <span>{{ number_format($p->sale_price, 0, ',', '.') }} đ</span>
+                                    @if ($p->details->isNotEmpty())
+                                        <span>{{ number_format($p->details->first()->sale_price, 0, ',', '.') }}</span>
+                                    @endif
                                     @if ($p->price && $p->price != 0)
                                         <span class="discount-price">{{ number_format($p->price, 0, ',', '.') }} đ</span>
                                     @endif
@@ -292,7 +296,9 @@
                                     <a href="{{ route('showProduct', $p->slug) }}">{{ $p->name }}</a>
                                 </h4>
                                 <div class="price">
-                                    <span>{{ number_format($p->sale_price, 0, ',', '.') }} đ</span>
+                                    @if ($p->details->isNotEmpty())
+                                        <span>{{ number_format($p->details->first()->sale_price, 0, ',', '.') }}</span>
+                                    @endif
                                     @if ($p->price && $p->price != 0)
                                         <span class="discount-price">{{ number_format($p->price, 0, ',', '.') }} đ</span>
                                     @endif
@@ -342,7 +348,9 @@
                                     <a href="{{ route('showProduct', $p->slug) }}">{{ $p->name }}</a>
                                 </h4>
                                 <div class="price">
-                                    <span>{{ number_format($p->sale_price, 0, ',', '.') }} đ</span>
+                                    @if ($p->details->isNotEmpty())
+                                        <span>{{ number_format($p->details->first()->sale_price, 0, ',', '.') }}</span>
+                                    @endif
                                     @if ($p->price && $p->price != 0)
                                         <span class="discount-price">{{ number_format($p->price, 0, ',', '.') }} đ</span>
                                     @endif
