@@ -49,65 +49,34 @@
                                     <li><i class="lni lni-star-filled"></i></li>
                                     <li><span>(4.6/5) đánh giá</span></li>
                                 </ul>
-                                <h3 class="price" style="color: darkblue">
-                                    {{ number_format($product->sale_price, 0, ',', '.') }}
+                                <h3 class="price" id="selected-variant-price" style="color: darkblue">
+                                    {{ number_format($product->details->first()->sale_price, 0, ',', '.') }}
                                     đ
                                     @if ($product->price && $product->price != 0)
                                         <span style="font-size: 15px">{{ number_format($product->price, 0, ',', '.') }}
                                             đ</span>
                                     @endif
                                 </h3>
-                                {{-- <p style="font-style: italic; font-size: 17px;"><b>Chọn màu bạn muốn xem: </b></p>
+                                <p style="font-style: italic; font-size: 17px;"><b>Chọn màu bạn muốn xem: </b></p>
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-12">
-                                        <div id="color-vabriant"
-                                            style="font-size: 17px; color: black; display: flex; justify-content: center; align-items: center; margin-top: 10px; border: 2px solid #0098ac; border-radius: 10px;">
-                                            <img src="{{ $product->image }}"
-                                                style="height: 43px; margin-top:15px;" class="mb-3">
-                                            <div
-                                                style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                                                <b>Màu hồng</b>
-                                                <b>{{ number_format($product->price, 0, ',', '.') }}</b>
+                                    @foreach ($product->details as $index => $variant)
+                                        <div class="col-lg-4 col-md-4 col-12">
+                                            <div id="color-variant-{{ $index }}" class="color-variant"
+                                                style="font-size: 17px; color: black; display: flex; justify-content: center; align-items: center; margin-top: 10px; border: {{ $index === 0 ? '2px solid #019fb3' : '2px solid rgb(228, 228, 228)' }}; border-radius: 10px; cursor: pointer;"
+                                                onclick="selectVariant('{{ $variant->id }}', '{{ $variant->color }}', '{{ $variant->sale_price }}', '{{ asset('storage/' . $variant->attribute_image) }}', '{{ $product->name }}')">
+
+                                                <img src="{{ asset('storage/' . $variant->attribute_image) }}"
+                                                    style="height: 43px; margin-top: 15px;" class="mb-3">
+                                                <div
+                                                    style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                                                    <b>{{ $variant->color }}</b>
+                                                    <b>{{ number_format($variant->sale_price, 0, ',', '.') }}</b>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div id="color-vabriant"
-                                            style="font-size: 17px; color: black; display: flex; justify-content: center; align-items: center; margin-top: 10px; border: 2px solid #0098ac; border-radius: 10px;">
-                                            <img src="{{ $product->image }}"
-                                                style="height: 43px; margin-right: 5px;margin-top:15px;" class="mb-3">
-                                            <div
-                                                style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                                                <b>Màu hồng</b>
-                                                <b>{{ number_format($product->price, 0, ',', '.') }}</b>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-12">
-                                        <div id="color-vabriant"
-                                            style="font-size: 17px; color: black; display: flex; justify-content: center; align-items: center; margin-top: 10px; border: 2px solid #0098ac; border-radius: 10px;">
-                                            <img src="{{ $product->image }}"
-                                                style="height: 43px; margin-top:15px;" class="mb-3">
-                                            <div
-                                                style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                                                <b>Màu hồng</b>
-                                                <b>{{ number_format($product->price, 0, ',', '.') }}</b>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4">
-                                        <div id="color-vabriant"
-                                            style="font-size: 17px; color: black; display: flex; justify-content: center; align-items: center; margin-top: 10px; border: 2px solid #0098ac; border-radius: 10px;">
-                                            <img src="{{ $product->image }}"
-                                                style="height: 43px; margin-right: 5px;margin-top:15px;" class="mb-3">
-                                            <div
-                                                style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                                                <b>Màu hồng</b>
-                                                <b>{{ number_format($product->price, 0, ',', '.') }}</b>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div> --}}
+                                    @endforeach
+                                </div>
+                                {{-- Mua hàng --}}
                                 <div class="bottom-content">
                                     <div class="row align-items-end">
                                         <div class="col-lg-10 col-md-4 col-12">
@@ -122,12 +91,16 @@
                                                     class="add-to-cart-form">
                                                     @csrf
                                                     <input type="hidden" name="id" value="{{ $product->id }}">
-                                                    <input type="hidden" name="name" value="{{ $product->name }}">
-                                                    <input type="hidden" name="price"
-                                                        value="{{ $product->sale_price }}">
+                                                    <input type="hidden" name="name"
+                                                        value="{{ $product->name }} - {{ $product->details->first()->color }}">
+                                                    @if ($product->details->isNotEmpty())
+                                                        <input type="hidden" name="price"
+                                                            id="selected-variant-price-input"
+                                                            value="{{ $product->details->first()->sale_price }}">
+                                                    @endif
                                                     <input type="hidden" name="qty" value="1">
-                                                    <!-- Mặc định là 1, bạn có thể tùy chỉnh -->
-                                                    <input type="hidden" name="image" value="{{ $product->image }}">
+                                                    <input type="hidden" name="image" id="selected-variant-image"
+                                                        value="{{ asset('storage/' . $product->details->first()->attribute_image) }}">
                                                     <button type="submit" class="btn"><i class="lni lni-cart"></i>
                                                         Thêm vào giỏ hàng</button>
                                                 </form>
@@ -147,8 +120,7 @@
                                         </div>
                                         <div class="col-lg-10 col-md-4 col-12" style="margin-top: 10px">
                                             <i class="lni lni-delivery" style="font-size: 20px;"></i>
-                                            <span style="margin-left: 10px; font-size: 17px">Giao hàng miễn phí nội thành
-                                                TP.HCM</span>
+                                            <span style="margin-left: 10px; font-size: 17px">Giao hàng miễn phí</span>
                                         </div>
                                         <div class="col-lg-12 col-md-4 col-12" style="margin-top: 10px">
                                             <i class="lni lni-dropbox" style="font-size: 20px;"></i>
@@ -314,6 +286,15 @@
             </div>
         </div>
     </section>
+    <style>
+        .color-variant {
+            border: 2px solid rgb(228, 228, 228);
+        }
+
+        .color-variant.selected {
+            border: 2px solid #019fb3;
+        }
+    </style>
     <script type="text/javascript">
         const current = document.getElementById("current");
         const opacity = 0.6;
@@ -402,6 +383,44 @@
                     alert('Có lỗi xảy ra. Vui lòng thử lại.');
                 });
         });
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const variants = document.querySelectorAll('.color-variant');
+
+            variants.forEach(variant => {
+                variant.addEventListener('click', () => {
+                    // Xóa viền khỏi tất cả các phần tử
+                    variants.forEach(v => v.style.border = '2px solid rgb(228, 228, 228)');
+                    // Thêm viền vào phần tử được chọn
+                    variant.style.border = '2px solid #019fb3';
+                });
+            });
+        });
+
+        function selectVariant(id, color, price, image, productName) {
+            // Cập nhật hình ảnh chính với ảnh thuộc tính
+            $('#current').attr('src', image);
+            // Gọi Ajax để cập nhật thông tin sản phẩm
+            $.ajax({
+                url: '{{ route('product.variant') }}',
+                type: 'GET',
+                data: {
+                    id: id,
+                    productName: productName
+                },
+                success: function(response) {
+                    // Cập nhật thông tin sản phẩm dựa trên phản hồi từ Ajax
+                    $('#selected-variant-price').html(response.price);
+                    $('#selected-variant-image-file').html(response.image);
+
+                    $('#selected-variant-price-input').val(response.raw_price);
+                    $('#selected-variant-image').val(response.image);
+                    $('input[name="name"]').val(response.name);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Ajax request failed');
+                }
+            });
+        }
     </script>
 
 

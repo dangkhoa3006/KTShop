@@ -66,13 +66,18 @@
                                     <td>{{ $p->name }}</td>
                                     <td>{{ $p->subcategory->name }}</td>
                                     <td>{{ number_format($p->price, 0, ',', '.') }} đ</td>
-                                    <td>{{ number_format($p->sale_price, 0, ',', '.') }} đ</td>
-                                    <td>{{ $p->quantity }}</td>
-                                    
                                     <td>
-                                        @if ($p->quantity > 0)
+                                        @if ($p->details->isNotEmpty())
+                                            {{ number_format($p->details->first()->sale_price, 0, ',', '.') }} đ
+                                        @else
+                                            Không có
+                                        @endif
+                                    </td>
+                                    <td>{{ $p->details->sum('quantity') }}</td>
+                                    <td>
+                                        @if ($p->details->sum('quantity') > 0)
                                             <span class="badge badge-success" style="font-size: 14px">Còn hàng</span>
-                                        @elseif ($p->quantity == 0)
+                                        @else
                                             <span class="badge badge-warning" style="font-size: 14px">Hết hàng</span>
                                         @endif
                                     </td>
@@ -85,7 +90,6 @@
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </div>
     </div>

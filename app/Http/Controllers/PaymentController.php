@@ -12,7 +12,6 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-
 class PaymentController extends Controller
 {
     /**
@@ -276,12 +275,17 @@ class PaymentController extends Controller
             $vnpSecureHash = hash_hmac('sha512', $hashdata, $vnp_HashSecret); //
             $vnp_Url .= 'vnp_SecureHash=' . $vnpSecureHash;
         }
+        // $vnp_ResponseCode = $request->input('vnp_ResponseCode');
+        // dd($vnp_ResponseCode);
+        // dd($vnp_Url);
+
         // Chuyển hướng đến URL thanh toán
         return redirect($vnp_Url);
     }
 
     public function vnpayReturn(Request $request)
     {
+        // dd($request->all());
         $order = DB::table('orders')
             ->leftJoin('provinces', 'orders.province_id', '=', 'provinces.id')
             ->leftJoin('districts', 'orders.district_id', '=', 'districts.id')
@@ -293,6 +297,8 @@ class PaymentController extends Controller
         $vnp_ResponseCode = $request->input('vnp_ResponseCode');
         $vnp_TxnRef = $request->input('vnp_TxnRef');
         $vnp_Amount = $request->input('vnp_Amount');
+
+       // dd($vnp_ResponseCode);
 
         // Kiểm tra mã phản hồi
         if ($vnp_ResponseCode == '00') {

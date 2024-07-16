@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Models\Category;
-use App\Models\Product;
 use App\Models\Comment;
+use App\Models\Product;
+use App\Models\ProductDetail;
 use App\Models\ProductImage;
 use App\Models\Specification;
 use App\Models\SubCategory;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -30,7 +32,7 @@ class ProductController extends Controller
     public function index()
     {
         //Truy vấn theo quan hệ subcategory để lấy tên loại sản phẩm lên giao diện
-        $listProduct = Product::where('status', 1)->with('subcategory')->get();
+        $listProduct = Product::where('status', 1)->with(['subcategory', 'details'])->get();
         foreach ($listProduct as $p) {
             $this->fixImage($p);
         }
@@ -63,21 +65,23 @@ class ProductController extends Controller
     {
         try
         {
+
             $slug = $this->generateSlug($request->name);
             $getCategory = Category::findOrFail($request->category_id);
             $getSubCategory = SubCategory::findOrFail($request->subcategory_id);
             $p = Product::create([
                 'name' => $request->name,
                 'slug' => $slug,
-                'quantity' => $request->quantity,
+                //'quantity' => $request->quantity,
                 'price' => $request->price,
-                'sale_price' => $request->sale_price,
+                //'sale_price' => $request->sale_price,
                 'category_id' => $request->category_id,
                 'subcategory_id' => $request->subcategory_id,
                 'description' => $request->description,
                 'specification' => $request->specification,
                 'image' => '',
             ]);
+            // dd($request->image);
             $path = $request->image->store('upload/product/' . $p->id, 'public');
             $p->image = $path;
             $p->save();
@@ -116,6 +120,29 @@ class ProductController extends Controller
                     }
                 }
             }
+            // Lưu các thuộc tính sản phẩm
+            $attributes = $request->input('attributes');
+            $attributeFiles = $request->file('attributes');
+
+            if (is_array($attributes) && !empty($attributes)) {
+                foreach ($attributes as $index => $attribute) {
+                    // Xử lý lưu hình ảnh của thuộc tính sản phẩm
+                    $attributeImage = null;
+                    if (isset($attributeFiles[$index]['attribute_image'])) {
+                        $attributeImage = $attributeFiles[$index]['attribute_image']->store('upload/product-attributes/' . $p->id, 'public');
+                    }
+
+                    // Lưu thông tin chi tiết thuộc tính sản phẩm
+                    ProductDetail::create([
+                        'product_id' => $p->id,
+                        'color' => $attribute['color'],
+                        'quantity' => $attribute['quantity'],
+                        'sale_price' => $attribute['sale_price'],
+                        'attribute_image' => $attributeImage,
+                    ]);
+                }
+            }
+
             DB::commit();
             return redirect()->route('products.index')->with('success', 'Thêm sản phẩm thành công!');
         } catch (\Exception $e) {
@@ -134,19 +161,37 @@ class ProductController extends Controller
         $category = $product->category;
         $subcategory = $product->subcategory;
         $list = Category::with('subcategories')->where('status', 1)->get();
-        $comment=Comment::where('product_id', $product->id)->where('status',1)->get();
-        return view('product-pages.product-detail', compact('product', 'category', 'subcategory','comment', 'list'));
+        $comment = Comment::where('product_id', $product->id)->where('status', 1)->get();
+        return view('product-pages.product-detail', compact('product', 'category', 'subcategory', 'comment', 'list'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
+    // public function edit(Product $product)
+    // {
+    //     $listCategory = Category::all();
+    //     $listSubcategory = Subcategory::where('category_id', $product->category_id)->get();
+    //     $this->fixImage($product);
+    //     return view('admin.products.product-edit', ['p' => $product, 'listCategory' => $listCategory, 'listSubcategory' => $listSubcategory]);
+    // }
     public function edit(Product $product)
     {
         $listCategory = Category::all();
         $listSubcategory = Subcategory::where('category_id', $product->category_id)->get();
+        $specifications = $product->specifications; // Lấy thông số kỹ thuật của sản phẩm
+        $attributes = $product->details; // Lấy thuộc tính của sản phẩm
+        //dd( $attributes);
+        // Gọi phương thức để xử lý hình ảnh sản phẩm nếu cần
         $this->fixImage($product);
-        return view('admin.products.product-edit', ['p' => $product, 'listCategory' => $listCategory, 'listSubcategory' => $listSubcategory]);
+
+        return view('admin.products.product-edit', [
+            'p' => $product,
+            'listCategory' => $listCategory,
+            'listSubcategory' => $listSubcategory,
+            'specifications' => $specifications,
+            'attributes' => $attributes,
+        ]);
     }
 
     /**
@@ -168,9 +213,9 @@ class ProductController extends Controller
                 'image' => $path,
                 'name' => $request->name,
                 'slug' => $slug,
-                'quantity' => $request->quantity,
+                // 'quantity' => $request->quantity,
                 'price' => $request->price,
-                'sale_price' => $request->sale_price,
+                // 'sale_price' => $request->sale_price,
                 'category_id' => $request->category_id,
                 'subcategory_id' => $request->subcategory_id,
                 'description' => $request->description,
@@ -234,9 +279,56 @@ class ProductController extends Controller
                     }
                 }
             }
+
+            // Xóa các thuộc tính sản phẩm cũ
+            ProductDetail::where('product_id', $product->id)->delete();
+
+            // Lưu các thuộc tính mới và xử lý ảnh
+            $attributes = $request->input('attributes', []);
+            $attributeFiles = $request->file('attributes', []);
+
+            if (is_array($attributes) && !empty($attributes)) {
+                foreach ($attributes as $index => $attribute) {
+                    $attributeImage = $attribute['current_image'] ?? null;
+
+                    if (isset($attributeFiles[$index]['attribute_image']) && $attributeFiles[$index]['attribute_image']->isValid()) {
+                        // Xóa ảnh cũ nếu có
+                        if ($attributeImage) {
+                            Storage::disk('public')->delete($attributeImage);
+                        }
+                        $attributeImage = $attributeFiles[$index]['attribute_image']->store('upload/product-attributes/' . $product->id, 'public');
+                    }
+
+                    // Lưu thông tin chi tiết thuộc tính sản phẩm
+                    ProductDetail::create([
+                        'product_id' => $product->id,
+                        'color' => $attribute['color'],
+                        'quantity' => $attribute['quantity'],
+                        'sale_price' => $attribute['sale_price'],
+                        'attribute_image' => $attributeImage,
+                    ]);
+                }
+            }
+
+            // Xử lý các thông số kỹ thuật (giữ nguyên hoặc cập nhật nếu cần)
+            Specification::where('product_id', $product->id)->delete();
+            $specifications = $request->input('specifications', []);
+            if (!empty($specifications)) {
+                foreach ($specifications as $specification) {
+                    $title = $specification['title'] ?? null;
+                    $content = $specification['content'] ?? null;
+                    if ($title !== null || $content !== null) {
+                        Specification::create([
+                            'product_id' => $product->id,
+                            'title' => $title,
+                            'content' => $content,
+                        ]);
+                    }
+                }
+            }
             return redirect()->route('products.index')->with('success', 'Cập nhật sản phẩm thành công!');
         } catch (\Exception $e) {
-            return redirect()->route('products.index')->with('error', 'Cập nhật sản phẩm không thành công!');
+            return redirect()->route('products.index')->with('error', 'Cập nhật sản phẩm không thành công!' . $e);
         }
     }
 
@@ -254,5 +346,24 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+    public function getVariant(Request $request)
+    {
+        $id = $request->input('id');
+        $variant = ProductDetail::find($id);
+        $productName = $request->input('productName');
+
+        if ($variant) {
+            $response = [
+                'price' => number_format($variant->sale_price, 0, ',', '.') . ' đ',
+                'raw_price' => $variant->sale_price,
+                'image' => asset('storage/' . $variant->attribute_image),
+                'name' => $productName . ' - ' . $variant->color
+            ];
+
+            return response()->json($response);
+        }
+
+        return response()->json(['error' => 'Variant not found'], 404);
     }
 }

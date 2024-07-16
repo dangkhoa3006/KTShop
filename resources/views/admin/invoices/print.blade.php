@@ -91,7 +91,7 @@
             </tr>
             @foreach ($order->details as $detail)
                 <tr class="item">
-                    <td>{{ $detail->product->name }}</td>
+                    <td>{{ $detail->product_name }}</td>
                     <td>{{ $detail->quantity }}</td>
                 </tr>
             @endforeach

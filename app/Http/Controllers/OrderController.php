@@ -58,6 +58,8 @@ class OrderController extends Controller
                 OrderDetail::create([
                     'order_id' => $order->id,
                     'product_id' => $item->id,
+                    'product_name'=> $item->name,
+                    'product_image'=> $item->options->image,
                     'quantity' => $item->qty,
                     'price' => $item->price,
                     'total' => $item->subtotal, //Tổng giá trị của từng sản phẩm

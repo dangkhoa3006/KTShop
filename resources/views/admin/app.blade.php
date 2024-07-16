@@ -529,7 +529,7 @@
             }, 2000);
             setTimeout(function() {
                 $("#stop-alert").alert('close'); // Đóng alert sau 2 giây
-            }, 2000);
+            }, 10000);
 
             //select subcategories from categories
             $("#selectCategories").change(function() {

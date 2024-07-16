@@ -224,7 +224,6 @@
                                     <tbody id="cart-items">
                                         @foreach (Cart::content() as $item)
                                             <tr data-rowid="{{ $item->rowId }}">
-
                                                 <td>
                                                     @if ($item->options->image && File::exists(public_path('storage/' . $item->options->image)))
                                                         <img src="{{ asset('storage/' . $item->options->image) }}"

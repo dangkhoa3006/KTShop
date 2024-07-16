@@ -60,6 +60,7 @@ Route::group(['middleware' => 'auth.users'], function () {
             Route::resource('/categories', CategoryController::class);
             Route::resource('/subcategories', SubCategoryController::class);
             Route::resource('/products', ProductController::class);
+
             Route::post('/fetch-subcategories/{id}', [ProductController::class, 'fetchSubCategories']);
             Route::resource('/specifications', Specification::class);
             Route::post('invoices/{invoice}/restore', [InvoiceController::class, 'restore'])->name('invoices.restore');
@@ -133,6 +134,8 @@ Route::get('/updateOrderStatus/{orderId}', [PaymentController::class, 'updateOrd
 Route::post('/payment/cash-money', [PaymentController::class, 'CashMoney'])->name('cashMoneyPayment');
 //Trang chi tiết sản phẩm
 Route::get('/sanpham/{productSlug}', [ProductController::class, 'show'])->name('showProduct');
+Route::get('/product/variant', [ProductController::class, 'getVariant'])->name('product.variant');
+
 //Hiển thị tất cả sản phẩm trong danh mục
 Route::get('/{categorySlug}', [CategoryController::class, 'show'])->name('showCategory');
 //Bình luận sản phẩm

@@ -251,12 +251,12 @@
                                 @foreach ($orderDetails as $detail)
                                     <div style="display: flex; align-items: center; margin-bottom: 5px;">
                                         <!-- Ảnh sản phẩm -->
-                                        <img src="{{ asset($detail->product->image) }}"
+                                        <img src="{{ asset($detail->product_image) }}"
                                             style="height: 50px; width: 50px; object-fit: cover; margin-right: 10px;margin-top: 15px;"
                                             class="mb-3">
                                         <!-- Phần thông tin -->
                                         <div>
-                                            {{ $detail->product->name }} <br>
+                                            {{ $detail->product_name }} <br>
                                             <b>Số lượng:</b> {{ $detail->quantity }}
 
                                         </div>

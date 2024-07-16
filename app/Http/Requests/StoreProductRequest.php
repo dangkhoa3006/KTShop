@@ -26,8 +26,8 @@ class StoreProductRequest extends FormRequest
             'name' => ['required', 'max:100','unique:products,name'],
             'description' => ['required'],
             // 'price' => ['required'],
-            'sale_price' => ['required'],
-            'quantity' => ['required'],
+            //'sale_price' => ['required'],
+            //'quantity' => ['required'],
             'category_id' => ['required'],
             'subcategory_id' => ['required'],
         ];
@@ -41,8 +41,8 @@ class StoreProductRequest extends FormRequest
             'name.unique' => 'Sản phẩm đã tồn tại.',
             'description.required' => 'Mô tả sản phẩm không được bỏ trống.',
             // 'price.required' => 'Giá bán không được bỏ trống.',
-            'sale_price.required' => 'Giá khuyến mãi không được bỏ trống.',
-            'quantity.required' => 'Số lượng sản phẩm không được bỏ trống.',
+            //'sale_price.required' => 'Giá khuyến mãi không được bỏ trống.',
+            //'quantity.required' => 'Số lượng sản phẩm không được bỏ trống.',
             'category_id.required' => 'Bắt buộc chọn danh mục.',
             'subcategory_id.required' => 'Bắt buộc chọn loại sản phẩm.',
         ];

@@ -19,8 +19,6 @@ return new class extends Migration
             $table->string('slug',100);
             $table->text('description');
             $table->decimal('price', 15, 2)->nullable();
-            $table->decimal('sale_price', 15, 2)->nullable();
-            $table->integer('quantity');
             $table->integer('category_id');
             $table->integer('subcategory_id');
             $table->integer('status')->default(1);

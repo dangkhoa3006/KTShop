@@ -152,7 +152,7 @@
                 <div class="col-lg-12 col-md-6 col-12">
                     <div class="nav-inner">
                         <!-- DAN MỤC SẢN PHẨM -->
-                        <div class="mega-category-menu" style="margin: 10px 0px;">
+                        <div class="mega-category-menu">
                             <span class="cat-button"><i class="lni lni-menu"></i>Danh mục sản phẩm</span>
                             <ul class="sub-category">
                                 @foreach ($list as $cate)

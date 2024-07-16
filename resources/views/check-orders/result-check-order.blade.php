@@ -151,7 +151,7 @@
                         <p><b>Sản phẩm: </b>
                             @foreach ($orderDetails as $detail)
                                 <tr>
-                                    <td>{{ $detail->product->name }}</td>
+                                    <td>{{ $detail->product_name }}</td>
                                     <td> - Số lượng: {{ $detail->quantity }}</td><br>
                                 </tr>
                             @endforeach

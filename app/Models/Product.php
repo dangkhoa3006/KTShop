@@ -11,7 +11,9 @@ class Product extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $fillable = ['image','name','slug','description','price','sale_price','quantity','category_id','subcategory_id','status'];
+    protected $fillable = ['image','name','slug','description','price','category_id','subcategory_id','status'];
+    // protected $fillable = ['image','name','slug','description','price','sale_price','quantity','category_id','subcategory_id','status'];
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -36,9 +38,9 @@ class Product extends Model
     {
         return $this->hasMany(Comment::class);
     }
-    public function carts()
+    public function details()
     {
-        return $this->hasMany(Cart::class);
+        return $this->hasMany(ProductDetail::class);
     }
     
 }

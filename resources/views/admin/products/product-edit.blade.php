@@ -20,7 +20,8 @@
                             <div class="frame-pd">
                                 <div class="center-pd">
                                     <div class="dropzone-product">
-                                        <img id="preview" src="{{ $p->image ? $p->image : asset('/image/no-pictures.png') }}"
+                                        <img id="preview"
+                                            src="{{ $p->image ? $p->image : asset('/image/no-pictures.png') }}"
                                             class="upload-icon-product" />
                                         <input type="file" accept="image/*" name="image" id="image"
                                             class="upload-input-product" onchange="previewImage()" />
@@ -83,7 +84,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="touchSpin1" class="col-sm-2 col-form-label">Số lượng</label>
                             <div class="col-sm-8">
                                 <input id="touchSpin1" type="text" name="quantity"
@@ -94,10 +95,10 @@
                                     @endif
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="form-group row">
                             <label for="touchSpin3" class="col-sm-2 col-form-label">Giá bán</label>
-                            <div class="col-sm-8">
+                            <div class="col-sm-10">
                                 <input id="touchSpin3" type="number" name="price" value="{{ old('price', $p->price) }}"
                                     class="form-control" max="100000000">
                                 <div style="color: red">
@@ -107,7 +108,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group row">
+                        {{-- <div class="form-group row">
                             <label for="touchSpin3" class="col-sm-2 col-form-label">Giá khuyến mãi</label>
                             <div class="col-sm-8">
                                 <input id="touchSpin3" type="number" name="sale_price"
@@ -118,10 +119,10 @@
                                     @endif
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                         <div class="form-group row">
                             <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">Danh mục</label>
-                            <div class="col-sm-8">
+                            <div class="col-sm-10">
                                 <select class="form-control" name="category_id" id="selectCategories">
                                     <option value="">----Danh mục sản phẩm----</option>
                                     @if (!@empty($listCategory))
@@ -142,7 +143,7 @@
                         </div>
                         <div class="form-group row">
                             <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">Loại sản phẩm</label>
-                            <div class="col-sm-8">
+                            <div class="col-sm-10">
                                 <select class="form-control" name="subcategory_id" id="selectSubCategories">
                                     <option value="">----Loại sản phẩm----</option>
                                     @foreach ($listSubcategory as $subcate)
@@ -173,7 +174,7 @@
                         </div>
                         <div class="form-group row">
                             <label for="exampleFormControlSelect1" class="col-sm-2 col-form-label">Tình trạng</label>
-                            <div class="col-sm-8">
+                            <div class="col-sm-10">
                                 <select class="form-control" name="status" id="exampleFormControlSelect1">
                                     <option value="">----Tình trạng----</option>
                                     <option value="1" {{ old('status', $p->status) == 1 ? 'selected' : '' }}>Còn hàng
@@ -193,25 +194,25 @@
             </div>
             <div class="col-lg-4">
                 <div class="card mb-4">
-                    <div class="card-body" style="height: 54em; max-height: 54em; overflow-y: auto;">
+                    <div class="card-body" style="height: 50em; max-height: 54em; overflow-y: auto;">
                         <div class="card-header py-1 d-flex flex-row align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">Cấu hình sản phẩm</h6>
                         </div>
                         <div id="specifications-wrapper">
                             <div class="d-flex justify-content-end mt-3">
                                 <button type="button" id="add-specification" class="btn btn-primary">Thêm thông số</button>
-                            </div> <br>
-                            @foreach ($p->specifications as $index => $specification)
+                            </div>
+                            <br>
+                            @foreach ($specifications as $index => $specification)
                                 <div class="specification-item">
                                     <div class="form-group row">
-                                        <label for="title" class="col-sm-2 col-form-label">Tiêu đề</label>
+                                        <label for="specifications[{{ $index }}][title]" class="col-sm-2 col-form-label">Tiêu đề</label>
                                         <div class="col-sm-10">
-                                            <input type="text" name="specifications[{{ $index }}][title]"
-                                                class="form-control" value="{{ $specification->title }}">
+                                            <input type="text" name="specifications[{{ $index }}][title]" class="form-control" value="{{ $specification->title }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <label for="content" class="col-sm-2 col-form-label">Nội dung</label>
+                                        <label for="specifications[{{ $index }}][content]" class="col-sm-2 col-form-label">Nội dung</label>
                                         <div class="col-sm-10">
                                             <textarea name="specifications[{{ $index }}][content]" class="form-control">{{ $specification->content }}</textarea>
                                         </div>
@@ -223,7 +224,73 @@
                                 </div>
                             @endforeach
                         </div>
-                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-12">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <div class="card-header py-1 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Thuộc tính sản phẩm</h6>
+                        </div>
+                        <div class="panel-group" id="attributes-wrapper">
+                            <div class="d-flex justify-content-end mt-3">
+                                <button type="button" id="add-attribute" class="btn btn-primary">Thêm thuộc tính</button>
+                            </div>
+                            <br>
+                            @foreach ($attributes as $index => $attribute)
+                                <div class="panel panel-default attribute-item" style="border: 2px solid #0098ac; border-radius: 10px;margin-bottom: 20px;">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" href="#collapse{{ $index }}" style="margin-left: 5px;">
+                                                <i class="fa fa-plus-circle" style="margin-top: 10px;"> Chi tiết sản phẩm</i>
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapse{{ $index }}" class="panel-collapse collapse" style="margin: 0 5%;">
+                                        <div class="panel-body">
+                                            <input type="hidden" name="attributes[{{ $index }}][current_image]" value="{{ $attribute->attribute_image }}">
+                                            <div class="form-group">
+                                                <label for="attributes[{{ $index }}][attribute_image]" class="col-sm-2 col-form-label">Hình ảnh sản phẩm</label>
+                                                <div class="col-sm-10">
+                                                    <div class="frame-pd">
+                                                        <div class="center-pd">
+                                                            <div class="dropzone-product">
+                                                                <img id="attribute-preview-{{ $index }}" src="{{ asset('storage/' . $attribute->attribute_image) }}" class="upload-icon-product">
+                                                                <input type="file" accept="image/*" name="attributes[{{ $index }}][attribute_image]" id="attribute-image-{{ $index }}" class="upload-input-product" onchange="previewImage(event, {{ $index }})">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="attributes[{{ $index }}][color]" class="col-sm-2 col-form-label">Màu sắc</label>
+                                                <div class="col-sm-10">
+                                                    <input type="text" name="attributes[{{ $index }}][color]" class="form-control" value="{{ $attribute->color }}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="attributes[{{ $index }}][quantity]" class="col-sm-2 col-form-label">Số lượng</label>
+                                                <div class="col-sm-10">
+                                                    <input type="number" name="attributes[{{ $index }}][quantity]" class="form-control" value="{{ $attribute->quantity }}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="attributes[{{ $index }}][sale_price]" class="col-sm-2 col-form-label">Giá khuyến mãi</label>
+                                                <div class="col-sm-10">
+                                                    <input type="number" name="attributes[{{ $index }}][sale_price]" class="form-control" value="{{ $attribute->sale_price }}">
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-end">
+                                        <button type="button" class="btn btn-danger remove-attribute">Xóa thuộc tính</button>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
@@ -291,6 +358,79 @@
     `;
             specWrapper.appendChild(specItem);
         }
+
+        // Thêm thuộc tính mới
+    document.getElementById('add-attribute').addEventListener('click', function () {
+        var index = document.querySelectorAll('.attribute-item').length;
+        var wrapper = document.getElementById('attributes-wrapper');
+        var attributeHTML = `
+        <div class="panel panel-default attribute-item" style="border: 2px solid #0098ac; border-radius: 10px; margin-bottom: 20px;">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" href="#collapse${index}" style="margin-left: 5px;">
+                        <i class="fa fa-plus-circle" style="margin-top: 10px;"> Chi tiết sản phẩm</i>
+                    </a>
+                </h4>
+            </div>
+            <div id="collapse${index}" class="panel-collapse collapse" style="margin: 0 5%;">
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="attributes[${index}][attribute_image]" class="col-sm-2 col-form-label">Hình ảnh sản phẩm</label>
+                    <div class="col-sm-10">
+                        <div class="frame-pd">
+                            <div class="center-pd">
+                                <div class="dropzone-product">
+                                    <img id="attribute-preview-${index}" src="{{ asset('/image/no-pictures.png') }}" class="upload-icon-product" />
+                                    <input type="file" accept="image/*" name="attributes[${index}][attribute_image]" id="attribute-image-${index}" class="upload-input-product" onchange="previewImage(event, ${index})" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="attributes[${index}][color]" class="col-sm-2 col-form-label">Màu sắc</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="attributes[${index}][color]" class="form-control" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="attributes[${index}][quantity]" class="col-sm-2 col-form-label">Số lượng</label>
+                        <div class="col-sm-10">
+                            <input type="number" name="attributes[${index}][quantity]" class="form-control" value="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="attributes[${index}][sale_price]" class="col-sm-2 col-form-label">Giá khuyến mãi</label>
+                        <div class="col-sm-10">
+                            <input type="number" name="attributes[${index}][sale_price]" class="form-control" value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button type="button" class="btn btn-danger remove-attribute">Xóa thuộc tính</button>
+            </div>
+        </div>
+    `;
+        wrapper.insertAdjacentHTML('beforeend', attributeHTML);
+    });
+
+    // Xóa thuộc tính
+    document.addEventListener('click', function (event) {
+        if (event.target.classList.contains('remove-attribute')) {
+            event.target.closest('.attribute-item').remove();
+        }
+    });
+    // Hàm xem trước hình ảnh
+    function previewImage(event, index) {
+        var input = event.target;
+        var reader = new FileReader();
+        reader.onload = function () {
+            var imgElement = document.getElementById('attribute-preview-' + index);
+            imgElement.src = reader.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
 
         //Cập nhật danh sách ảnh sản phẩm
         var imgUpload = document.getElementById('upload-img'),
