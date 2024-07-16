@@ -152,9 +152,9 @@
                 <div class="col-lg-12 col-md-6 col-12">
                     <div class="nav-inner">
                         <!-- DAN MỤC SẢN PHẨM -->
-                        <div class="mega-category-menu">
-                            <span class="cat-button"><i class="lni lni-menu"></i>Danh mục sản phẩm</span>
-                            <ul class="sub-category">
+                        <div class="mega-category-menu" style="margin-top: 10px; margin-bottom: 15px" >
+                            <span class="cat-button"><i class="lni lni-menu" ></i> Danh mục sản phẩm</span>
+                            <ul class="sub-category"> 
                                 @foreach ($list as $cate)
                                     {{-- Dựa vào quan hệ 2 bảng để lấy ra loại sản phẩm theo danh mục --}}
                                     @if ($cate->subCategories->where('status', 1)->isNotEmpty())
@@ -177,66 +177,6 @@
                                 @endforeach
                             </ul>
                         </div>
-                        <!-- End Mega Category Menu -->
-                        <!-- Start Navbar -->
-                        <nav class="navbar navbar-expand-lg">
-                            <span style="margin-right: 20px"><b>Sản phẩm hot: </b></span>
-                            <button class="navbar-toggler mobile-menu-btn" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                                aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="toggler-icon"></span>
-                                <span class="toggler-icon"></span>
-                                <span class="toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse sub-menu-bar" id="navbarSupportedContent">
-                                <ul id="nav" class="navbar-nav ms-auto">
-                                    @php
-                                        $subcategory = \App\Models\SubCategory::find(1);
-                                        $categorySlug = $subcategory->category->slug;
-                                        $subcategorySlug = $subcategory->slug;
-                                    @endphp
-                                    <li class="nav-item">
-                                        <a href="javascript:void(0);" aria-label="Toggle navigation"
-                                            onclick="redirectToSubcategory()">Iphone 15 series</a>
-                                    </li>
-                                    @php
-                                        $subcategory12 = \App\Models\SubCategory::find(4); // Giả sử SubCategory là model của danh mục phụ
-                                        $categorySlug = $subcategory12->category->slug;
-                                        $subcategorySlug = $subcategory12->slug;
-                                    @endphp
-                                    <li class="nav-item">
-                                        <a href="{{ route('showSubCategory', ['categorySlug' => $categorySlug, 'subcategorySlug' => $subcategorySlug]) }}"
-                                            aria-label="Toggle navigation">Iphone 12 series</a>
-                                    </li>
-                                    @php
-                                        $subcategorySS24 = \App\Models\SubCategory::find(17); // Giả sử SubCategory là model của danh mục phụ
-                                        $categorySlug = $subcategorySS24->category->slug;
-                                        $subcategorySlug = $subcategorySS24->slug;
-                                    @endphp
-                                    <li class="nav-item">
-                                        <a href="{{ route('showSubCategory', ['categorySlug' => $categorySlug, 'subcategorySlug' => $subcategorySlug]) }}"
-                                            aria-label="Toggle navigation">Galaxy S24 Ultra</a>
-                                    </li>
-                                    @php
-                                        $subcategoryOppo = \App\Models\SubCategory::find(18); // Giả sử SubCategory là model của danh mục phụ
-                                        $categorySlug = $subcategoryOppo->category->slug;
-                                        $subcategorySlug = $subcategoryOppo->slug;
-                                    @endphp
-                                    <li class="nav-item">
-                                        <a href="{{ route('showSubCategory', ['categorySlug' => $categorySlug, 'subcategorySlug' => $subcategorySlug]) }}" aria-label="Toggle navigation">OPPO</a>
-                                    </li>
-                                    @php
-                                        $subcategoryWatch = \App\Models\SubCategory::find(37); // Giả sử SubCategory là model của danh mục phụ
-                                        $categorySlug = $subcategoryWatch->category->slug;
-                                        $subcategorySlug = $subcategoryWatch->slug;
-                                    @endphp
-                                    <li class="nav-item">
-                                        <a href="{{ route('showSubCategory', ['categorySlug' => $categorySlug, 'subcategorySlug' => $subcategorySlug]) }}" aria-label="Toggle navigation">Apple Watch Series 9</a>
-                                    </li>
-                                </ul>
-                            </div> <!-- navbar collapse -->
-                        </nav>
-                        <!-- End Navbar -->
                     </div>
                 </div>
             </div>
@@ -593,12 +533,6 @@
             form.action = "{{ url('/san-pham/search/keyword') }}/" + encodeURIComponent(input.value);
         }
 
-        function redirectToSubcategory() {
-            var categorySlug = "{{ $categorySlug }}";
-            var subcategorySlug = "{{ $subcategorySlug }}";
-            var url = "{{ url('/') }}/" + categorySlug + "/" + subcategorySlug;
-            window.location.href = url;
-        }
     </script>
 </body>
 
