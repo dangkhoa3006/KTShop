@@ -97,7 +97,7 @@
                         <!-- Start Header Logo -->
                         <a class="navbar-brand" href="{{ route('homepage') }}">
                             {{-- <img src="../../assets_client/images/logo/logo.svg" alt="Logo"> --}}
-                            <h3>KTMobile Shop</h3>
+                            <h3>KShop</h3>
                         </a>
                         <!-- End Header Logo -->
                     </div>
@@ -154,7 +154,7 @@
                         <!-- DAN MỤC SẢN PHẨM -->
                         <div class="mega-category-menu" style="margin-top: 10px; margin-bottom: 15px" >
                             <span class="cat-button"><i class="lni lni-menu" ></i> Danh mục sản phẩm</span>
-                            <ul class="sub-category"> 
+                            <ul class="sub-category">
                                 @foreach ($list as $cate)
                                     {{-- Dựa vào quan hệ 2 bảng để lấy ra loại sản phẩm theo danh mục --}}
                                     @if ($cate->subCategories->where('status', 1)->isNotEmpty())
@@ -346,7 +346,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script type="text/javascript">
-        //========= Hero Slider 
+        //========= Hero Slider
         tns({
             container: '.hero-slider',
             slideBy: 'page',
@@ -445,7 +445,7 @@
                             // Hiển thị thông báo thành công
                             var successAlert = `
                     <div id="success-alert" class="notification alert alert-success alert-dismissible fade show" role="alert"
-                        style="position: fixed; top: 20px; right: 20px; z-index: 9999; background-color: #74E291; 
+                        style="position: fixed; top: 20px; right: 20px; z-index: 9999; background-color: #74E291;
                         font-size: 17px; color: #059212">
                         <b>Thành công</b>
                         <br><span>${response.success}</span>
@@ -475,7 +475,7 @@
                             // Hiển thị thông báo lỗi
                             var errorAlert = `
                 <div id="error-alert" class="notification alert alert-danger alert-dismissible fade show" role="alert"
-                    style="position: fixed; top: 20px; right: 20px; z-index: 9999; background-color: #F8D7DA; 
+                    style="position: fixed; top: 20px; right: 20px; z-index: 9999; background-color: #F8D7DA;
                     font-size: 17px; color: #842029">
                     <b>Không thành công</b>
                     <br><span>${response.error}</span>
