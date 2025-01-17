@@ -52,6 +52,7 @@ class ForgetPasswordController extends Controller
         Mail::send("send-mail", ['token' => $token], function ($message) use ($request) {
             $message->to($request->email);
             $message->subject("Đổi mật khẩu - KTMobile Shop");
+            $message->from('your-email@gmail.com', 'KTMobile Shop');
         });
         return redirect()->route('forgetPassword')->with('success', 'Vui lòng kiểm tra email của bạn!');
 
@@ -81,7 +82,7 @@ class ForgetPasswordController extends Controller
         ])->first();
         //Lấy email thông qua token và so sánh với email trong bảng users
         $getUserMail = DB::table('users')->where('email', $updatePassword->email)->first();
-        
+
         if ($getUserMail == null) {
             return redirect()->route('login')->with('error', 'Email không tồn tại trong hệ thống.');
         }
