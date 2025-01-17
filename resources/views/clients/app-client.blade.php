@@ -97,7 +97,7 @@
                         <!-- Start Header Logo -->
                         <a class="navbar-brand" href="{{ route('homepage') }}">
                             {{-- <img src="../../assets_client/images/logo/logo.svg" alt="Logo"> --}}
-                            <h3>KShop</h3>
+                            <h3>KTMobile Shop</h3>
                         </a>
                         <!-- End Header Logo -->
                     </div>
@@ -125,7 +125,7 @@
                             <div class="nav-hotline">
                                 <i class="lni lni-phone"></i>
                                 <h3>Hotline:
-                                    <span>(+84) 779 621 333</span>
+                                    <span>(+84) 336 730 183</span>
                                 </h3>
                             </div>
                             <div class="navbar-cart">
