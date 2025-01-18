@@ -322,9 +322,9 @@
                     <div class="row align-items-center">
                         <p style="text-align: center">
                             Copyright © 2024 KTMobile. Giấy chứng nhận ĐKKD số 41J8021261 do UBND Quận 1 cấp ngày
-                            04/05/2024. Bản quyền ktmobile.vn Địa chỉ: 65 đường Huỳnh Thúc Kháng, Phường Bến Nghé, Quận
+                            01/01/2025. Bản quyền ktmobile.vn Địa chỉ: 65 đường Huỳnh Thúc Kháng, Phường Bến Nghé, Quận
                             1, TP. Hồ Chí Minh, Việt Nam.
-                            Điện thoại liên hệ: 0779621333. Email: lecongthinh24062002@gmail.com.
+                            Điện thoại liên hệ: 0336730183. Email: khoanguyen15112002@gmail.com.
                         </p>
                     </div>
                 </div>
